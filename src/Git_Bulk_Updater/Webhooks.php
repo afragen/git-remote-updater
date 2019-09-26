@@ -39,19 +39,48 @@ class Webhooks {
 	 * Process bulk-updates.json.
 	 *
 	 * @param string $dir Directory path.
+	 *
+	 * @return \stdClass $configs
 	 */
 	public function process_json( string $dir ) {
-		if ( file_exists( $dir . '/bulk-updates.json' ) ) {
-			$config = file_get_contents( $dir . '/bulk-updates.json' );
-			if ( empty( $config ) ||
+		$jsons        = $this->list_directory( $dir );
+		$configs      = [];
+		$site_configs = [];
+		foreach ( $jsons as $json ) {
+			$config = null;
+			if ( file_exists( $dir . $json ) ) {
+				$config = file_get_contents( $dir . $json );
+				if ( empty( $config ) ||
 				null === ( $config = json_decode( $config ) )
-			) {
-				return;
+				) {
+					continue;
+				}
 			}
-			return $config;
+			$site_configs = array_merge( $site_configs, $config->sites );
 		}
+
+		foreach ( $site_configs as $site ) {
+			$configs['site'][] = $site;
+		}
+
+		return (object) $configs;
 	}
 
+	/**
+	 * Get directory listing of JSON files.
+	 *
+	 * @param string $dir Directory path the JSON files.
+	 *
+	 * @return array $arr_dir
+	 */
+	private function list_directory( $dir ) {
+		$arr_dir = array();
+		foreach ( glob( $dir . '*.{json}', GLOB_BRACE ) as $file ) {
+			array_push( $arr_dir, basename( $file ) );
+		}
+
+		return $arr_dir;
+	}
 	/**
 	 * Create array of webhooks (supports multiple instances).
 	 *

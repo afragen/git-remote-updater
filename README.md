@@ -18,7 +18,7 @@ Allows you to easily update GitHub Updater repositories in bulk via RESTful endp
 
 ## Setup
 
-You must have a file `bulk-updates.json` at the root of this plugin in the following format.
+You must have one or more JSON files in the `\jsons\` directory of this plugin in the following format.
 
 ```json
 {
@@ -35,19 +35,6 @@ You must have a file `bulk-updates.json` at the root of this plugin in the follo
                     "slug": "test-bitbucket-child",
                     "type": "theme",
                     "branch": "master"
-                }
-            ]
-        },
-        {
-            "restful_start": "http://webhook2.test/wp-admin/admin-ajax.php?action=github-updater-update&key=eabd2f85088619eb9f77a6b5b42b428c",
-            "slugs": [
-                {
-                    "slug": "test-bitbucket-plugin",
-                    "type": "plugin"
-                },
-                {
-                    "slug": "sd-child",
-                    "type": "theme"
                 }
             ]
         }
