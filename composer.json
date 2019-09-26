@@ -1,0 +1,44 @@
+{
+    "name": "afragen/git-bulk-updater",
+    "description": "Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.",
+    "type": "wordpress-plugin",
+    "keywords": [
+        "github-updater",
+        "bulk",
+        "update",
+        "webhook"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andy Fragen",
+            "email": "andy@thefragens.com",
+            "homepage": "https://thefragens.com",
+            "role": "Developer"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/afragen/git-bulk-updater"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/afragen/git-bulk-updater/issues",
+        "source": "https://github.com/afragen/git-bulk-updater"
+    },
+    "prefer-stable": true,
+    "require": {
+        "php": ">=7.1"
+    },
+    "autoload": {
+        "classmap": [
+            "src/"
+        ]
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "wp i18n make-pot . languages/git-bulk-updater.pot"
+        ]
+    }
+}
