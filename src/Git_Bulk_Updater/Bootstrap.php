@@ -39,6 +39,7 @@ class Bootstrap {
 	 * Constructor.
 	 *
 	 * @param  string $file Main plugin file.
+	 *
 	 * @return void
 	 */
 	public function __construct( $file ) {

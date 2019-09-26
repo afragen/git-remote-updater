@@ -16,6 +16,8 @@
 
 Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.
 
+The **Git Bulk Updater** page allows updating via repository or site.
+
 ## Setup
 
 You must have one or more JSON files in the `\jsons\` directory of this plugin in the following format.

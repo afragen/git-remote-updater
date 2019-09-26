@@ -10,6 +10,9 @@
 
 namespace Fragen\Git_Bulk_Updater;
 
+use Fragen\Git_Bulk_Updater\Bootstrap;
+use Fragen\Git_Bulk_Updater\Action_Row;
+
 /*
  * Exit if called directly.
  * PHP version check and exit.
@@ -21,18 +24,40 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class Webhooks
  */
-class Webhooks {
+trait Webhooks {
+
+	/**
+	 * Holds data for sites.
+	 *
+	 * @var \stdClass
+	 */
+	public $sites;
+
+	/**
+	 * Holds data for repositories.
+	 *
+	 * @var \stdClass
+	 */
+	public $repos;
+
+	/**
+	 * Holds data for webhooks.
+	 *
+	 * @var \stdClass
+	 */
+	public $all_webhooks;
 
 	/**
 	 * Start processing JSON for webhooks.
 	 *
 	 * @param string $dir Directory path.
-	 * @return array $webhooks
+	 *
+	 * @return void
 	 */
-	public function run( string $dir ) {
-		$json     = $this->process_json( $dir );
-		$webhooks = $this->get_webhooks( $json );
-		return $webhooks;
+	public function init( string $dir ) {
+		$json = $this->process_json( $dir . '/jsons/' );
+		$this->get_webhooks( $json );
+		$this->get_all_webhooks();
 	}
 
 	/**
@@ -85,52 +110,63 @@ class Webhooks {
 	 * Create array of webhooks (supports multiple instances).
 	 *
 	 * @param \stdClass $config JSON config as string.
-	 * @return array $webhooks
+	 *
+	 * @return void
 	 */
 	public function get_webhooks( \stdClass $config ) {
-		$webhooks = [];
 		foreach ( $config as $sites ) {
+			$parsed_sites = [];
+			$repos        = [];
 			foreach ( $sites as $site ) {
-				foreach ( $site->slugs as $slug ) {
-					$host    = parse_url( "{$site->restful_start}", PHP_URL_HOST );
-					$webhook = "{$site->restful_start}";
-					$webhook = add_query_arg( $slug->type, $slug->slug, $webhook );
-					$webhook = isset( $slug->branch ) ? add_query_arg( 'tag', $slug->branch, $webhook ) : $webhook;
-					$webhook = add_query_arg( 'override', '', $webhook );
-					$webhooks[ $host ][ $slug->type ][ $slug->slug ] = $webhook;
+				foreach ( $site->slugs as $repo ) {
+					$parsed_sites[ $site->site ][ $repo->type ][ $repo->slug ] = $this->get_endpoint( $site, $repo );
+					$repos[ $repo->slug ][]                                    = [
+						'site' => $site->site,
+						'slug' => $repo->slug,
+						'type' => $repo->type,
+						'url'  => $this->get_endpoint( $site, $repo ),
+					];
+					$repos[ $repo->slug ]['sites'][]                           = $site->site;
 				}
 			}
-			return $webhooks;
+			$this->sites = $parsed_sites;
+			$this->repos = $repos;
 		}
+	}
+
+	/**
+	 * Get RESTful endpoint.
+	 *
+	 * @param \stdClass $site Object of site.
+	 * @param \stdClass $repo Object of repo.
+	 *
+	 * @return string $endpoint
+	 */
+	private function get_endpoint( $site, $repo ) {
+		$endpoint = add_query_arg( $repo->type, $repo->slug, "{$site->restful_start}" );
+		$endpoint = isset( $repo->branch ) ? add_query_arg( 'tag', $repo->branch, $endpoint ) : $endpoint;
+		$endpoint = add_query_arg( 'override', '', $endpoint );
+
+		return $endpoint;
 	}
 
 	/**
 	 * Parse the webhooks.
 	 *
-	 * @param array $webhooks Array of webhooks.
-	 *
-	 * @return array $parsed Array of parsed webhooks.
+	 * @return void
 	 */
-	public function parse_webhooks( array $webhooks ) {
-		$parsed = null;
-		foreach ( $webhooks as $site => $repos ) {
-			$all_webhooks    = null;
-			$parsed_webhooks = null;
-			foreach ( $repos['plugin'] as $repo => $plugin_webhook ) {
-				$parsed_webhooks[ $repo ] = [ 'plugin' => $plugin_webhook ];
-				$all_webhooks[]           = $plugin_webhook;
+	public function get_all_webhooks() {
+		$parsed          = null;
+		$all_webhooks    = null;
+		$parsed_webhooks = null;
+		foreach ( $this->sites as $site => $repos ) {
+			foreach ( $repos as $repo ) {
+				foreach ( $repo as $url ) {
+					$all_webhooks[ $site ][] = $url;
+				}
 			}
-			foreach ( $repos['theme'] as $repo => $theme_webhook ) {
-				$parsed_webhooks[ $repo ] = [ 'theme' => $theme_webhook ];
-				$all_webhooks[]           = $theme_webhook;
-			}
-			$parsed[ $site ] = [
-				'parsed' => $parsed_webhooks,
-				'all'    => $all_webhooks,
-			];
 		}
 
-		return $parsed;
+		$this->all_webhooks = $all_webhooks;
 	}
-
 }

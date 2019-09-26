@@ -22,31 +22,81 @@ if ( ! defined( 'WPINC' ) ) {
  * Class Actions_Row
  */
 class Actions_Row {
+	use Webhooks;
 
 	/**
-	 * Add row to Action page.
+	 * Constructor.
+	 */
+	public function __construct() {
+		$this->init( GIT_BULK_UPDATER_DIR );
+	}
+
+	/**
+	 * Add row to Action page for sites.
 	 *
 	 * @return void
 	 */
-	public function add_row() {
-		$webhooks = ( new Webhooks() )->run( GIT_BULK_UPDATER_DIR );
-		$sites    = ( new Webhooks() )->parse_webhooks( $webhooks );
-		foreach ( $sites as $site => $hooks ) {
+	public function add_site_row() {
+		echo '<tr><th>';
+		esc_html_e( 'Site', 'git-bulk-updater' );
+		echo '</th><th>';
+		esc_html_e( 'Repositories', 'git-bulk-updater' );
+		echo '</th><th>';
+		esc_html_e( 'Action', 'git-bulk-updater' );
+		echo '</th></tr>';
+
+		foreach ( $this->sites as $site => $elements ) {
 			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
 			echo '<tr valign="top">';
 			echo '<th scope="row">';
 			echo wp_kses_post( $site );
 			echo '</th><td>';
-			foreach ( $hooks['parsed'] as $slug => $type ) {
-				$type     = key( $type );
+
+			foreach ( $elements as $type => $repo ) {
 				$dashicon = 'plugin' === $type ? '<span class="dashicons dashicons-admin-plugins"></span>&nbsp;&nbsp;' : '&nbsp;';
 				$dashicon = 'theme' === $type ? '<span class="dashicons dashicons-admin-appearance"></span>&nbsp;&nbsp;' : $dashicon;
-				echo '<p>' . wp_kses_post( $dashicon . '&nbsp;' . $slug ) . '</p>';
+				foreach ( $repo as $slug => $url ) {
+					echo '<p>' . wp_kses_post( $dashicon . '&nbsp;' . $slug ) . '</p>';
+				}
 			}
+
 			echo '<td>';
 			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $site ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
 			echo '</td>';
 			echo '</tr>';
+		}
+	}
+
+	/**
+	 * Add row to Actions page for repositories.
+	 *
+	 * @return void
+	 */
+	public function add_repo_row() {
+		echo '<tr><th>';
+		esc_html_e( 'Repository', 'git-bulk-updater' );
+		echo '</th><th>';
+		esc_html_e( 'Sites', 'git-bulk-updater' );
+		echo '</th><th>';
+		esc_html_e( 'Action', 'git-bulk-updater' );
+		echo '</th></tr>';
+		foreach ( $this->repos as $slug => $elements ) {
+			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
+			$sites = $elements['sites'];
+			unset( $elements['sites'] );
+			$type     = $elements[0]['type'];
+			$dashicon = 'plugin' === $type ? '<span class="dashicons dashicons-admin-plugins"></span>&nbsp;&nbsp;' : '&nbsp;';
+			$dashicon = 'theme' === $type ? '<span class="dashicons dashicons-admin-appearance"></span>&nbsp;&nbsp;' : $dashicon;
+			echo '<tr valign="top">';
+			echo '<th scope="row">';
+			echo wp_kses_post( $dashicon . '&nbsp;' . $slug );
+			echo '</th><td>';
+			foreach ( $sites as $site ) {
+				echo '<p>' . wp_kses_post( $site ) . '</p>';
+			}
+			echo '</td><td>';
+			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $type ) . ' ' . esc_attr( $slug ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
+			echo '</td></tr>';
 		}
 	}
 }

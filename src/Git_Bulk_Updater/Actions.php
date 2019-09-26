@@ -23,6 +23,8 @@ if ( ! defined( 'WPINC' ) ) {
  * Class Actions
  */
 class Actions {
+	use Webhooks;
+
 	/**
 	 * Load hooks.
 	 *
@@ -68,22 +70,11 @@ class Actions {
 			<form method='post' action="<?php esc_attr_e( $action ); ?>">
 			<table class='form-table'>
 			<tbody>
-				<tr>
-				<th>
-				<?php esc_html_e( 'Site', 'git-bulk-updater' ); ?></th>
-				</th>
-				<th>
-				<?php esc_html_e( 'Repositories', 'git-bulk-updater' ); ?></th>
-				<th>
-				<?php esc_html_e( 'Action', 'git-bulk-updater' ); ?></th>
-				</th>
-				</tr>
 		<?php
-		$row = ( new Actions_Row() )->add_row();
-
+		( new Actions_Row() )->add_site_row();
+		( new Actions_Row() )->add_repo_row();
 		echo '</tbody></table></div>';
 		echo '</form>';
-
 	}
 
 	/**
