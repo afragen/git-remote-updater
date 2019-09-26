@@ -37,7 +37,7 @@ class Updater {
 			$webhooks = ( new Webhooks() )->run( GIT_BULK_UPDATER_DIR );
 			$sites    = ( new Webhooks() )->parse_webhooks( $webhooks );
 			foreach ( $sites[ $site ]['all'] as $webhook ) {
-				$response = wp_remote_get( $webhook );
+				wp_remote_get( $webhook );
 			}
 			( new Actions() )->redirect();
 		}

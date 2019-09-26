@@ -58,3 +58,5 @@ You must have a file `bulk-updates.json` at the root of this plugin in the follo
 The `restful_start` comes from you site's **GitHub Updater > Settings > Remote Management** tab.
 
 The **branch** setting is optional, it will default to `master`.
+
+Actions are currently populated in the `debug.log`.
