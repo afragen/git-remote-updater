@@ -69,7 +69,7 @@ trait Webhooks {
 	 */
 	public function process_json( string $dir ) {
 		$jsons        = $this->list_directory( $dir );
-		$configs      = [];
+		$configs      = new \stdClass();
 		$site_configs = [];
 		foreach ( $jsons as $json ) {
 			$config = null;
@@ -81,14 +81,10 @@ trait Webhooks {
 					continue;
 				}
 			}
-			$site_configs = array_merge( $site_configs, $config->sites );
+			$site_configs[] = $config;
 		}
 
-		foreach ( $site_configs as $site ) {
-			$configs['site'][] = $site;
-		}
-
-		return (object) $configs;
+		return (object) $site_configs;
 	}
 
 	/**
@@ -114,20 +110,35 @@ trait Webhooks {
 	 * @return void
 	 */
 	public function get_webhooks( \stdClass $config ) {
-		foreach ( $config as $sites ) {
 			$parsed_sites = [];
 			$repos        = [];
+		foreach ( $config as $sites ) {
 			foreach ( $sites as $site ) {
 				foreach ( $site->slugs as $repo ) {
+					$repo_sites = [];
+					$url        = [];
+
 					$parsed_sites[ $site->site ][ $repo->type ][ $repo->slug ] = $this->get_endpoint( $site, $repo );
-					$repos[ $repo->slug ][]                                    = [
-						'site' => $site->site,
+
+					$repos[ $repo->slug ] = [
 						'slug' => $repo->slug,
 						'type' => $repo->type,
 						'url'  => $this->get_endpoint( $site, $repo ),
 					];
-					$repos[ $repo->slug ]['sites'][]                           = $site->site;
+					if ( isset( $this->repos[ $repo->slug ] ) ) {
+						$repo_sites = $this->repos[ $repo->slug ]['sites'];
+						$url        = $this->repos[ $repo->slug ]['urls'];
+					}
+					$url[]        = $repos[ $repo->slug ]['url'];
+					$repo_sites[] = $site->site;
+					$repo_sites   = array_unique( $repo_sites );
+
+					$repos[ $repo->slug ]['urls']  = $url;
+					$repos[ $repo->slug ]['sites'] = isset( $repos[ $repo->slug ]['sites'] ) ? array_merge( (array) $repos[ $repo->slug ]['sites'], $repo_sites ) : $repo_sites;
+
 				}
+				$parsed_sites = array_merge( (array) $this->sites, $parsed_sites );
+				$repos        = array_merge( (array) $this->repos, $repos );
 			}
 			$this->sites = $parsed_sites;
 			$this->repos = $repos;

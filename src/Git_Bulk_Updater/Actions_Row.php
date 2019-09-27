@@ -84,7 +84,7 @@ class Actions_Row {
 			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
 			$sites = $elements['sites'];
 			unset( $elements['sites'] );
-			$type     = $elements[0]['type'];
+			$type     = $elements['type'];
 			$dashicon = 'plugin' === $type ? '<span class="dashicons dashicons-admin-plugins"></span>&nbsp;&nbsp;' : '&nbsp;';
 			$dashicon = 'theme' === $type ? '<span class="dashicons dashicons-admin-appearance"></span>&nbsp;&nbsp;' : $dashicon;
 			echo '<tr valign="top">';

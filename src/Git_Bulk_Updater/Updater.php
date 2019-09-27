@@ -50,10 +50,8 @@ class Updater {
 			$site     = null === $type ? str_replace( '_', '.', $update ) : null;
 			$webhooks = null !== $site ? $this->all_webhooks[ $site ] : $webhooks;
 			if ( null === $site ) {
-				$repos = $this->repos[ $update ];
-				unset( $repos['sites'] );
-				foreach ( $repos as $repo ) {
-					$webhooks[] = $repo['url'];
+				foreach ( $this->repos[ $update ]['urls'] as $url ) {
+					$webhooks[] = $url;
 				}
 			}
 

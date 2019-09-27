@@ -4,7 +4,6 @@
  * Plugin URI:        https://github.com/afragen/git-bulk-updater
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           0.0.1
  * License:           MIT
  * Domain Path:       /languages
  * Text Domain:       git-bulk-updater
@@ -20,32 +19,8 @@ The **Git Bulk Updater** page allows updating via repository or site.
 
 ## Setup
 
-You must have one or more JSON files in the `\jsons\` directory of this plugin in the following format.
+You must have one or more JSON files in the `git-bulk-updater/jsons/` directory of this plugin.
 
-```json
-{
-    "sites": [
-        {
-            "restful_start": "http://webhook1.test/wp-admin/admin-ajax.php?action=github-updater-update&key=99111ee0cc4876e473be9534b9d9d975",
-            "slugs": [
-                {
-                    "slug": "test-plugin2",
-                    "type": "plugin",
-                    "branch": "master"
-                },
-                {
-                    "slug": "test-bitbucket-child",
-                    "type": "theme",
-                    "branch": "master"
-                }
-            ]
-        }
-    ]
-}
-```
-
-The `restful_start` comes from you site's **GitHub Updater > Settings > Remote Management** tab.
-
-The **branch** setting is optional, it will default to `master`.
+You can download a JSON file from your `GitHub Updater > Remote Management > Make JSON file` button and then copy it to your plugin's `git-bulk-updater/jsons/` folder.
 
 Actions are currently populated in the `debug.log`.
