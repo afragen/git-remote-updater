@@ -60,7 +60,7 @@ class Actions_Row {
 				}
 			}
 
-			echo '<td>';
+			echo '<td style="vertical-align:top">';
 			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $site ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
 			echo '</td>';
 			echo '</tr>';
@@ -97,7 +97,7 @@ class Actions_Row {
 				echo '<p>' . wp_kses_post( $site ) . '</p>';
 			}
 
-			echo '</td><td>';
+			echo '</td><td style="vertical-align:top">';
 			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $type ) . ' ' . esc_attr( $slug ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
 			echo '</td></tr>';
 		}
