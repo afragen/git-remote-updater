@@ -2,3 +2,4 @@
 .idea
 .svnignore
 jsons/*
+!jsons/.gitkeep
