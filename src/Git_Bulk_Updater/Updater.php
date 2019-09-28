@@ -25,13 +25,6 @@ class Updater {
 	use Webhooks;
 
 	/**
-	 * Constructor.
-	 */
-	public function __construct() {
-		$this->init( GIT_BULK_UPDATER_DIR );
-	}
-
-	/**
 	 * Use wp_remote_get() on individual webhooks.
 	 *
 	 * @return void
@@ -41,6 +34,7 @@ class Updater {
 			if ( ! check_admin_referer( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' ) ) {
 				return;
 			}
+			$this->init( GIT_BULK_UPDATER_DIR );
 			$webhooks = [];
 			$update   = array_search( 'Update', $_POST, true );
 			$type     = false !== strpos( $update, 'plugin_' ) ? 'plugin' : null;
@@ -54,9 +48,9 @@ class Updater {
 					$webhooks[] = $url;
 				}
 			}
-
 			foreach ( $webhooks as $webhook ) {
-				$response = wp_remote_get( $webhook );
+				$response  = wp_remote_get( $webhook );
+				$message[] = wp_remote_retrieve_body( $response );
 			}
 			( new Actions() )->redirect();
 		}

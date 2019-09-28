@@ -80,6 +80,7 @@ class Actions_Row {
 		echo '</th><th>';
 		esc_html_e( 'Action', 'git-bulk-updater' );
 		echo '</th></tr>';
+
 		foreach ( $this->repos as $slug => $elements ) {
 			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
 			$sites = $elements['sites'];
@@ -91,9 +92,11 @@ class Actions_Row {
 			echo '<th scope="row">';
 			echo wp_kses_post( $dashicon . '&nbsp;' . $slug );
 			echo '</th><td>';
+
 			foreach ( $sites as $site ) {
 				echo '<p>' . wp_kses_post( $site ) . '</p>';
 			}
+
 			echo '</td><td>';
 			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $type ) . ' ' . esc_attr( $slug ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
 			echo '</td></tr>';

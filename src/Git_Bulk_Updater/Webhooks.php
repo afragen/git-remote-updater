@@ -10,7 +10,6 @@
 
 namespace Fragen\Git_Bulk_Updater;
 
-use Fragen\Git_Bulk_Updater\Bootstrap;
 use Fragen\Git_Bulk_Updater\Action_Row;
 
 /*
@@ -125,17 +124,16 @@ trait Webhooks {
 						'type' => $repo->type,
 						'url'  => $this->get_endpoint( $site, $repo ),
 					];
-					if ( isset( $this->repos[ $repo->slug ] ) ) {
-						$repo_sites = $this->repos[ $repo->slug ]['sites'];
-						$url        = $this->repos[ $repo->slug ]['urls'];
-					}
-					$url[]        = $repos[ $repo->slug ]['url'];
+
+					$url   = isset( $this->repos[ $repo->slug ]['urls'] ) ? $this->repos[ $repo->slug ]['urls'] : [];
+					$url[] = $repos[ $repo->slug ]['url'];
+
+					$repo_sites   = isset( $this->repos[ $repo->slug ]['sites'] ) ? $this->repos[ $repo->slug ]['sites'] : [];
 					$repo_sites[] = $site->site;
 					$repo_sites   = array_unique( $repo_sites );
 
 					$repos[ $repo->slug ]['urls']  = $url;
-					$repos[ $repo->slug ]['sites'] = isset( $repos[ $repo->slug ]['sites'] ) ? array_merge( (array) $repos[ $repo->slug ]['sites'], $repo_sites ) : $repo_sites;
-
+					$repos[ $repo->slug ]['sites'] = isset( $repos[ $repo->slug ]['sites'] ) ? array_merge( $repos[ $repo->slug ]['sites'], $repo_sites ) : $repo_sites;
 				}
 				$parsed_sites = array_merge( (array) $this->sites, $parsed_sites );
 				$repos        = array_merge( (array) $this->repos, $repos );
