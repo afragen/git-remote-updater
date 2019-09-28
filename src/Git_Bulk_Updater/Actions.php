@@ -123,13 +123,15 @@ class Actions {
 	 * @return void
 	 */
 	public function load_js() {
-		add_action(
-			'admin_enqueue_scripts',
-			function () {
-				wp_register_script( 'git-bulk-updater-actions', plugins_url( basename( GIT_BULK_UPDATER_DIR ) . '/js/git-bulk-updater-switcher.js' ), [], false, true );
-				wp_enqueue_script( 'git-bulk-updater-actions' );
-			}
-		);
+		if ( isset( $_GET['page'] ) && 'git-bulk-updater' === $_GET['page'] ) {
+			add_action(
+				'admin_enqueue_scripts',
+				function () {
+					wp_register_script( 'git-bulk-updater-actions', plugins_url( basename( GIT_BULK_UPDATER_DIR ) . '/js/git-bulk-updater-switcher.js' ), [], false, true );
+					wp_enqueue_script( 'git-bulk-updater-actions' );
+				}
+			);
+		}
 	}
 
 }
