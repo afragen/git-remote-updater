@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the Git Bulk Updater plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Bulk Updater 0.0.3\n"
+"Project-Id-Version: Git Bulk Updater 0.0.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-bulk-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-27T02:55:57+00:00\n"
+"POT-Creation-Date: 2019-09-28T20:41:45+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: git-bulk-updater\n"
 
 #. Plugin Name of the plugin
+#: src/Git_Bulk_Updater/Actions.php:51
 #: src/Git_Bulk_Updater/Actions.php:52
-#: src/Git_Bulk_Updater/Actions.php:53
-#: src/Git_Bulk_Updater/Actions.php:68
+#: src/Git_Bulk_Updater/Actions.php:66
 msgid "Git Bulk Updater"
 msgstr ""
 
@@ -37,6 +37,14 @@ msgstr ""
 msgid "https://github.com/afragen"
 msgstr ""
 
+#: src/Git_Bulk_Updater/Actions.php:89
+msgid "Show Repositories"
+msgstr ""
+
+#: src/Git_Bulk_Updater/Actions.php:90
+msgid "Show Sites"
+msgstr ""
+
 #: src/Git_Bulk_Updater/Actions_Row.php:41
 msgid "Site"
 msgstr ""
@@ -51,7 +59,7 @@ msgid "Action"
 msgstr ""
 
 #: src/Git_Bulk_Updater/Actions_Row.php:64
-#: src/Git_Bulk_Updater/Actions_Row.php:98
+#: src/Git_Bulk_Updater/Actions_Row.php:101
 msgid "Update"
 msgstr ""
 

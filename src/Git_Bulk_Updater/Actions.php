@@ -23,8 +23,6 @@ if ( ! defined( 'WPINC' ) ) {
  * Class Actions
  */
 class Actions {
-	// use Webhooks;
-
 	/**
 	 * Load hooks.
 	 *
@@ -62,7 +60,7 @@ class Actions {
 	 * Options page callback.
 	 */
 	public function create_admin_page() {
-			$action = is_multisite() ? 'edit.php?action=git-bulk-updater' : 'options.php';
+		$action = is_multisite() ? 'edit.php?action=git-bulk-updater' : 'options.php';
 
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Bulk Updater', 'git-bulk-updater' );
@@ -70,12 +68,15 @@ class Actions {
 		$this->repo_or_site_selector();
 		echo '<form method="post" action="' . esc_attr( $action ) . '">';
 		echo '<table class="form-table">';
+
 		echo '<tbody class="git-bulk-updater-repo">';
 		( new Actions_Row() )->add_repo_row();
 		echo '</tbody>';
+
 		echo '<tbody class="git-bulk-updater-site">';
 		( new Actions_Row() )->add_site_row();
 		echo '</tbody>';
+
 		echo '</table></div>';
 		echo '</form>';
 	}
@@ -84,7 +85,10 @@ class Actions {
 	 * Repo or Site option.
 	 */
 	public function repo_or_site_selector() {
-		$options = ['git-bulk-updater-repo' => 'Show Repos','git-bulk-updater-site'=>'Show Sites'];
+		$options = [
+			'git-bulk-updater-repo' => esc_html__( 'Show Repositories', 'git-bulk-updater' ),
+			'git-bulk-updater-site' => esc_html__( 'Show Sites', 'git-bulk-updater' ),
+		];
 		?>
 		<label for="git-bulk-updater">
 			<select id="git-bulk-updater" name="git-bulk-updater">
@@ -97,6 +101,7 @@ class Actions {
 		</label>
 		<?php
 	}
+
 	/**
 	 * Redirect to where we came from.
 	 *
@@ -112,7 +117,7 @@ class Actions {
 		exit();
 	}
 
-		/**
+	/**
 	 * Load javascript for Install.
 	 *
 	 * @return void

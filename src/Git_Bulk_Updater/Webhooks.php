@@ -10,8 +10,6 @@
 
 namespace Fragen\Git_Bulk_Updater;
 
-use Fragen\Git_Bulk_Updater\Action_Row;
-
 /*
  * Exit if called directly.
  * PHP version check and exit.
