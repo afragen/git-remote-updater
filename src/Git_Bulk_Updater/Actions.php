@@ -108,6 +108,10 @@ class Actions {
 	 * @return void
 	 */
 	public function redirect() {
+		$feedback = get_site_transient( 'git_bulk_updater_feedback' );
+		if ( $feedback ) {
+			// Do something here to create display page for feedback.
+		}
 		$redirect_url = is_multisite() ? network_admin_url( 'settings.php' ) : admin_url( 'tools.php' );
 		$location     = add_query_arg(
 			[ 'page' => 'git-bulk-updater' ],
