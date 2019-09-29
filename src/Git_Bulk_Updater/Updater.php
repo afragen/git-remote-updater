@@ -51,12 +51,35 @@ class Updater {
 			}
 			foreach ( $webhooks as $webhook ) {
 				$response  = wp_remote_get( $webhook );
-				$message[] = wp_remote_retrieve_body( $response );
+				$message[] = $this->parse_response( $response, $webhook );
 			}
 			if ( null !== $message ) {
 				set_site_transient( 'git_bulk_updater_feedback', $message, 10 );
 			}
 			( new Actions() )->redirect();
 		}
+	}
+
+	/**
+	 * Parse wp_remote_get() response for feedback reporting.
+	 *
+	 * @param string $response JSON response to wp_remote_get().
+	 * @param string $webhook URL of webhook.
+	 *
+	 * @return array $message
+	 */
+	private function parse_response( $response, $webhook ) {
+		$site = parse_url( $webhook, PHP_URL_HOST );
+		$site = "<strong>{$site}</strong>  ";
+		if ( is_wp_error( $response ) ) {
+			$error = $response->errors;
+			$error = isset( $error['http_request_failed'] ) ? $error['http_request_failed'] : null;
+		} else {
+			$message = wp_remote_retrieve_body( $response );
+			$message = json_decode( $message, true );
+			$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : null;
+		}
+		array_unshift( $message, $site );
+		return $message;
 	}
 }

@@ -65,7 +65,10 @@ class Actions {
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Bulk Updater', 'git-bulk-updater' );
 		echo '</h2>';
+
+		$this->show_feedback();
 		$this->repo_or_site_selector();
+
 		echo '<form method="post" action="' . esc_attr( $action ) . '">';
 		echo '<table class="form-table">';
 
@@ -82,9 +85,31 @@ class Actions {
 	}
 
 	/**
+	 * Display update feedback.
+	 *
+	 * @return void
+	 */
+	private function show_feedback() {
+		$feedback = get_site_transient( 'git_bulk_updater_feedback' );
+		if ( $feedback ) {
+			echo '<div>';
+			echo '<h3>' . esc_html__( 'Update Feedback', 'git-bulk-updater' ) . '</h3>';
+			foreach ( $feedback as $repo_feedback ) {
+					echo '<div><p>';
+				foreach ( $repo_feedback as $message ) {
+					echo wp_kses_post( $message ) . '<br>';
+				}
+					echo '</p></div>';
+			}
+			echo '</div>';
+		}
+
+	}
+
+	/**
 	 * Repo or Site option.
 	 */
-	public function repo_or_site_selector() {
+	private function repo_or_site_selector() {
 		$options = [
 			'git-bulk-updater-repo' => esc_html__( 'Show Repositories', 'git-bulk-updater' ),
 			'git-bulk-updater-site' => esc_html__( 'Show Sites', 'git-bulk-updater' ),
@@ -108,10 +133,6 @@ class Actions {
 	 * @return void
 	 */
 	public function redirect() {
-		$feedback = get_site_transient( 'git_bulk_updater_feedback' );
-		if ( $feedback ) {
-			// Do something here to create display page for feedback.
-		}
 		$redirect_url = is_multisite() ? network_admin_url( 'settings.php' ) : admin_url( 'tools.php' );
 		$location     = add_query_arg(
 			[ 'page' => 'git-bulk-updater' ],
