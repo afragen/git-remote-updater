@@ -73,11 +73,11 @@ class Actions {
 		echo '<table class="form-table">';
 
 		echo '<tbody class="git-bulk-updater-repo">';
-		( new Actions_Row() )->add_repo_row();
+		( new Actions_Row() )->add_repo_rows();
 		echo '</tbody>';
 
 		echo '<tbody class="git-bulk-updater-site">';
-		( new Actions_Row() )->add_site_row();
+		( new Actions_Row() )->add_site_rows();
 		echo '</tbody>';
 
 		echo '</table></div>';
@@ -103,7 +103,6 @@ class Actions {
 			}
 			echo '</div>';
 		}
-
 	}
 
 	/**

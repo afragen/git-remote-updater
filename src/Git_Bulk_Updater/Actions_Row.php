@@ -36,7 +36,7 @@ class Actions_Row {
 	 *
 	 * @return void
 	 */
-	public function add_site_row() {
+	public function add_site_rows() {
 		echo '<tr><th>';
 		esc_html_e( 'Site', 'git-bulk-updater' );
 		echo '</th><th>';
@@ -72,7 +72,7 @@ class Actions_Row {
 	 *
 	 * @return void
 	 */
-	public function add_repo_row() {
+	public function add_repo_rows() {
 		echo '<tr><th>';
 		esc_html_e( 'Repository', 'git-bulk-updater' );
 		echo '</th><th>';

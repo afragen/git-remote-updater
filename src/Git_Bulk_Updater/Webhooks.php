@@ -99,6 +99,7 @@ trait Webhooks {
 
 		return $arr_dir;
 	}
+
 	/**
 	 * Create array of webhooks (supports multiple instances).
 	 *
