@@ -82,7 +82,7 @@ class Updater {
 			default:
 				$message = wp_remote_retrieve_body( $response );
 				$message = json_decode( $message, true );
-				$message = $message['data']['messages'];
+				$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : [];
 				if ( 200 !== (int) $response['response']['code'] ) {
 					array_unshift( $message, "{$response['response']['code']} {$response['response']['message']}" );
 				}
