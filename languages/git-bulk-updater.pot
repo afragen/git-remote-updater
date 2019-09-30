@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Git Bulk Updater plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Bulk Updater 0.0.4\n"
+"Project-Id-Version: Git Bulk Updater 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-bulk-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-09-28T20:41:45+00:00\n"
+"POT-Creation-Date: 2019-09-30T15:06:49+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: git-bulk-updater\n"
@@ -37,11 +37,15 @@ msgstr ""
 msgid "https://github.com/afragen"
 msgstr ""
 
-#: src/Git_Bulk_Updater/Actions.php:89
+#: src/Git_Bulk_Updater/Actions.php:96
+msgid "Update Feedback"
+msgstr ""
+
+#: src/Git_Bulk_Updater/Actions.php:113
 msgid "Show Repositories"
 msgstr ""
 
-#: src/Git_Bulk_Updater/Actions.php:90
+#: src/Git_Bulk_Updater/Actions.php:114
 msgid "Show Sites"
 msgstr ""
 
@@ -69,4 +73,8 @@ msgstr ""
 
 #: src/Git_Bulk_Updater/Actions_Row.php:79
 msgid "Sites"
+msgstr ""
+
+#: src/Git_Bulk_Updater/Bootstrap.php:79
+msgid "Unable to create JSON storage folder for Git Bulk Updater."
 msgstr ""

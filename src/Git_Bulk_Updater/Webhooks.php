@@ -47,12 +47,10 @@ trait Webhooks {
 	/**
 	 * Start processing JSON for webhooks.
 	 *
-	 * @param string $dir Directory path.
-	 *
 	 * @return void
 	 */
-	public function init( string $dir ) {
-		$json = $this->process_json( $dir . '/jsons/' );
+	public function init() {
+		$json = $this->process_json( GIT_BULK_UPDATER_JSON_PATH );
 		$this->get_webhooks( $json );
 		$this->get_all_webhooks();
 	}

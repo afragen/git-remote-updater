@@ -36,6 +36,13 @@ class Bootstrap {
 	protected $dir;
 
 	/**
+	 * Holds JSON storage directory path.
+	 *
+	 * @var $storage
+	 */
+	protected $storage;
+
+	/**
 	 * Constructor.
 	 *
 	 * @param  string $file Main plugin file.
@@ -43,8 +50,9 @@ class Bootstrap {
 	 * @return void
 	 */
 	public function __construct( $file ) {
-		$this->file = $file;
-		$this->dir  = dirname( $file );
+		$this->file    = $file;
+		$this->dir     = dirname( $file );
+		$this->storage = WP_CONTENT_DIR . '/uploads/git-bulk-updater/';
 	}
 
 	/**
@@ -61,9 +69,16 @@ class Bootstrap {
 		);
 
 		define( 'GIT_BULK_UPDATER_DIR', $this->dir );
+		define( 'GIT_BULK_UPDATER_JSON_PATH', $this->storage );
 
 		// Load Autoloader.
 		require_once $this->dir . '/vendor/autoload.php';
+
+		// Check/create JSON storage location.
+		if ( ! wp_mkdir_p( $this->storage ) ) {
+			$error = __( 'Unable to create JSON storage folder for Git Bulk Updater.', 'git-bulk-updater' );
+			wp_die( esc_html( $error ) );
+		}
 
 		( new Actions() )->load_hooks();
 	}

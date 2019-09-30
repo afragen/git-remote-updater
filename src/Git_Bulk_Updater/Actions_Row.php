@@ -28,7 +28,7 @@ class Actions_Row {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->init( GIT_BULK_UPDATER_DIR );
+		$this->init();
 	}
 
 	/**

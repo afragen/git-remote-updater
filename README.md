@@ -19,8 +19,10 @@ The **Git Bulk Updater** page allows updating via repository or site.
 
 ## Setup
 
-You must have one or more JSON files in the `git-bulk-updater/jsons/` directory of this plugin.
+When the plugin is run it will create a directory at `wp-content/uploads/git-bulk-updater`. This is the storage location for your JSON config files.
 
-You can download a JSON file from your `GitHub Updater > Remote Management > Make JSON file` button and then copy it to your plugin's `git-bulk-updater/jsons/` folder.
+You must have one or more JSON files in the `wp-content/uploads/git-bulk-updater/` directory.
+
+You can download a JSON file from your `GitHub Updater > Remote Management > Make JSON file` button and then copy it to your `wp-content/uploads/git-bulk-updater` folder.
 
 Feedback will show at the top of the page and if you have debug logging set on your site it is also currently populated in the `debug.log`.
