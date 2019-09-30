@@ -72,14 +72,16 @@ class Updater {
 		$site = parse_url( $webhook, PHP_URL_HOST );
 		$site = "<strong>{$site}</strong>  ";
 		if ( is_wp_error( $response ) ) {
-			$error = $response->errors;
-			$error = isset( $error['http_request_failed'] ) ? $error['http_request_failed'] : null;
+			$error     = $response->errors;
+			$message[] = isset( $error['http_request_failed'] ) ? 'WP_Error: ' . $error['http_request_failed'][0] : [];
 		} else {
 			$message = wp_remote_retrieve_body( $response );
 			$message = json_decode( $message, true );
 			$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : [];
 		}
-		if ( isset( $response['response']['code'] ) && 200 !== (int) $response['response']['code'] ) {
+		if ( ! is_wp_error( $response ) &&
+			( isset( $response['response']['code'] ) && 200 !== (int) $response['response']['code'] )
+		) {
 			$message[] = "{$response['response']['code']} {$response['response']['message']}";
 		}
 		array_unshift( $message, $site );

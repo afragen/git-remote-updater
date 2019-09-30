@@ -7,3 +7,4 @@
 * add update feedback messaging
 * create JSON storage directory in `wp-content/uploads/git-bulk-updater`
 * sort repositories by name
+* more error checking during update process
