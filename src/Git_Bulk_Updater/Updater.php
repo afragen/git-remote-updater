@@ -69,8 +69,11 @@ class Updater {
 	 * @return array $message
 	 */
 	private function parse_response( $response, $webhook ) {
-		$site = parse_url( $webhook, PHP_URL_HOST );
-		$site = "<strong>{$site}</strong>  ";
+		$parsed = parse_url( $webhook );
+		$site   = $parsed['host'];
+		parse_str( $parsed['query'], $query );
+		$repo = isset( $query['plugin'] ) ? $query['plugin'] : $query['theme'];
+
 		if ( is_wp_error( $response ) ) {
 			$error     = $response->errors;
 			$message[] = isset( $error['http_request_failed'] ) ? 'WP_Error: ' . $error['http_request_failed'][0] : [];
@@ -84,7 +87,8 @@ class Updater {
 		) {
 			$message[] = "{$response['response']['code']} {$response['response']['message']}";
 		}
-		array_unshift( $message, $site );
+		array_unshift( $message, "<strong>{$site}: {$repo}</strong>" );
+
 		return $message;
 	}
 }
