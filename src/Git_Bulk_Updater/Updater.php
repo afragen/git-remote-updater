@@ -74,18 +74,19 @@ class Updater {
 		parse_str( $parsed['query'], $query );
 		$repo = isset( $query['plugin'] ) ? $query['plugin'] : $query['theme'];
 
-		if ( is_wp_error( $response ) ) {
-			$error     = $response->errors;
-			$message[] = isset( $error['http_request_failed'] ) ? 'WP_Error: ' . $error['http_request_failed'][0] : [];
-		} else {
-			$message = wp_remote_retrieve_body( $response );
-			$message = json_decode( $message, true );
-			$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : [];
-		}
-		if ( ! is_wp_error( $response ) &&
-			( isset( $response['response']['code'] ) && 200 !== (int) $response['response']['code'] )
-		) {
-			$message[] = "{$response['response']['code']} {$response['response']['message']}";
+		switch ( $response ) {
+			case is_wp_error( $response ):
+				$error     = $response->errors;
+				$message[] = isset( $error['http_request_failed'] ) ? 'WP_Error - ' . $error['http_request_failed'][0] : [];
+				break;
+			default:
+				$message = wp_remote_retrieve_body( $response );
+				$message = json_decode( $message, true );
+				$message = $message['data']['messages'];
+				if ( 200 !== (int) $response['response']['code'] ) {
+					array_unshift( $message, "{$response['response']['code']} {$response['response']['message']}" );
+				}
+				break;
 		}
 		array_unshift( $message, "<strong>{$site}: {$repo}</strong>" );
 
