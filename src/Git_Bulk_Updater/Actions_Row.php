@@ -81,6 +81,7 @@ class Actions_Row {
 		esc_html_e( 'Action', 'git-bulk-updater' );
 		echo '</th></tr>';
 
+		ksort( $this->repos );
 		foreach ( $this->repos as $slug => $elements ) {
 			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
 			$sites = $elements['sites'];
