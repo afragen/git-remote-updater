@@ -34,7 +34,7 @@ class Updater {
 			if ( ! check_admin_referer( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' ) ) {
 				return;
 			}
-			$this->init( GIT_BULK_UPDATER_DIR );
+			$this->init();
 			$message  = null;
 			$webhooks = [];
 			$update   = array_search( 'Update', $_POST, true );
