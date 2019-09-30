@@ -25,4 +25,6 @@ You must have one or more JSON files in the `wp-content/uploads/git-bulk-updater
 
 You can download a JSON file from your `GitHub Updater > Remote Management > Make JSON file` button and then copy it to your `wp-content/uploads/git-bulk-updater` folder.
 
-Feedback will show at the top of the page and if you have debug logging set on your site it is also currently populated in the `debug.log`.
+Update feedback will show at the top of the page. If you have debug logging set on your site, it is also added to the `debug.log`.
+
+I recommend running Git Bulk Updater from a local development environment installation of WordPress. It makes the collection and transfer of JSON files simpler, though you can run it from any WordPress site.
