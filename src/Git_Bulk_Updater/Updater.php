@@ -77,7 +77,10 @@ class Updater {
 		} else {
 			$message = wp_remote_retrieve_body( $response );
 			$message = json_decode( $message, true );
-			$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : null;
+			$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : [];
+		}
+		if ( isset( $response['response']['code'] ) && 200 !== (int) $response['response']['code'] ) {
+			$message[] = "{$response['response']['code']} {$response['response']['message']}";
 		}
 		array_unshift( $message, $site );
 		return $message;
