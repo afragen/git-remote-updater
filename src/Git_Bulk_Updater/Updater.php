@@ -84,6 +84,7 @@ class Updater {
 				$message = json_decode( $message, true );
 				$message = isset( $message['data']['messages'] ) ? $message['data']['messages'] : [];
 				if ( 200 !== (int) $response['response']['code'] ) {
+					$message = is_array( $message ) ? $message : (array) $message;
 					array_unshift( $message, "{$response['response']['code']} {$response['response']['message']}" );
 				}
 				break;
