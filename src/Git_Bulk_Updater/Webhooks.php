@@ -68,8 +68,8 @@ trait Webhooks {
 		$site_configs = [];
 		foreach ( $jsons as $json ) {
 			$config = null;
-			if ( file_exists( $dir . $json ) ) {
-				$config = file_get_contents( $dir . $json );
+			if ( file_exists( "{$dir}/{$json}" ) ) {
+				$config = file_get_contents( "{$dir}/{$json}" );
 				if ( empty( $config ) ||
 				null === ( $config = json_decode( $config ) )
 				) {
@@ -91,7 +91,7 @@ trait Webhooks {
 	 */
 	private function list_directory( $dir ) {
 		$arr_dir = array();
-		foreach ( glob( $dir . '*.{json}', GLOB_BRACE ) as $file ) {
+		foreach ( glob( "{$dir}/*.json" ) as $file ) {
 			array_push( $arr_dir, basename( $file ) );
 		}
 

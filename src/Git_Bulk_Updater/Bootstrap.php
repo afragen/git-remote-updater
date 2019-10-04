@@ -52,7 +52,7 @@ class Bootstrap {
 	public function __construct( $file ) {
 		$this->file    = $file;
 		$this->dir     = dirname( $file );
-		$this->storage = WP_CONTENT_DIR . '/uploads/git-bulk-updater/';
+		$this->storage = WP_CONTENT_DIR . '/uploads/git-bulk-updater';
 	}
 
 	/**
