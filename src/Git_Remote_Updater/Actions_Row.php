@@ -1,14 +1,14 @@
 <?php
 /**
- * Git Bulk Updater
+ * Git Remote Updater
  *
  * @author  Andy Fragen
  * @license MIT
- * @link    https://github.com/afragen/git-bulk-updater
- * @package git-bulk-updater
+ * @link    https://github.com/afragen/git-remote-updater
+ * @package git-remote-updater
  */
 
-namespace Fragen\Git_Bulk_Updater;
+namespace Fragen\Git_Remote_Updater;
 
 /*
  * Exit if called directly.
@@ -38,15 +38,15 @@ class Actions_Row {
 	 */
 	public function add_site_rows() {
 		echo '<tr><th>';
-		esc_html_e( 'Site', 'git-bulk-updater' );
+		esc_html_e( 'Site', 'git-remote-updater' );
 		echo '</th><th>';
-		esc_html_e( 'Repositories', 'git-bulk-updater' );
+		esc_html_e( 'Repositories', 'git-remote-updater' );
 		echo '</th><th>';
-		esc_html_e( 'Action', 'git-bulk-updater' );
+		esc_html_e( 'Action', 'git-remote-updater' );
 		echo '</th></tr>';
 
 		foreach ( $this->sites as $site => $elements ) {
-			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
+			wp_nonce_field( 'git_remote_updater_nonce', 'git_remote_updater_nonce' );
 			echo '<tr valign="top">';
 			echo '<th scope="row">';
 			echo wp_kses_post( $site );
@@ -61,7 +61,7 @@ class Actions_Row {
 			}
 
 			echo '<td style="vertical-align:top">';
-			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $site ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
+			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $site ) . '" value="' . esc_html__( 'Update', 'git-remote-updater' ) . '">';
 			echo '</td>';
 			echo '</tr>';
 		}
@@ -74,16 +74,16 @@ class Actions_Row {
 	 */
 	public function add_repo_rows() {
 		echo '<tr><th>';
-		esc_html_e( 'Repository', 'git-bulk-updater' );
+		esc_html_e( 'Repository', 'git-remote-updater' );
 		echo '</th><th>';
-		esc_html_e( 'Sites', 'git-bulk-updater' );
+		esc_html_e( 'Sites', 'git-remote-updater' );
 		echo '</th><th>';
-		esc_html_e( 'Action', 'git-bulk-updater' );
+		esc_html_e( 'Action', 'git-remote-updater' );
 		echo '</th></tr>';
 
 		ksort( $this->repos );
 		foreach ( $this->repos as $slug => $elements ) {
-			wp_nonce_field( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' );
+			wp_nonce_field( 'git_remote_updater_nonce', 'git_remote_updater_nonce' );
 			$sites = $elements['sites'];
 			unset( $elements['sites'] );
 			$type     = $elements['type'];
@@ -99,7 +99,7 @@ class Actions_Row {
 			}
 
 			echo '</td><td style="vertical-align:top">';
-			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $type ) . ' ' . esc_attr( $slug ) . '" value="' . esc_html__( 'Update', 'git-bulk-updater' ) . '">';
+			echo '<input type="submit" class="button button-secondary" name="' . esc_attr( $type ) . ' ' . esc_attr( $slug ) . '" value="' . esc_html__( 'Update', 'git-remote-updater' ) . '">';
 			echo '</td></tr>';
 		}
 	}

@@ -5,6 +5,7 @@
 * update for use with downloadable JSON files from GitHub Updater
 * add javascript to switch display from repos/sites
 * add update feedback messaging
-* create JSON storage directory in `wp-content/uploads/git-bulk-updater`
+* create JSON storage directory in `wp-content/uploads/git-remote-updater`
 * sort repositories by name
 * more error checking during update process
+* rebrand to Git Remote Updater

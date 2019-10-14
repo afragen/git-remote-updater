@@ -1,14 +1,14 @@
 <?php
 /**
- * Git Bulk Updater
+ * Git Remote Updater
  *
  * @author  Andy Fragen
  * @license MIT
- * @link    https://github.com/afragen/git-bulk-updater
- * @package git-bulk-updater
+ * @link    https://github.com/afragen/git-remote-updater
+ * @package git-remote-updater
  */
 
-namespace Fragen\Git_Bulk_Updater;
+namespace Fragen\Git_Remote_Updater;
 
 /*
  * Exit if called directly.
@@ -52,7 +52,7 @@ class Bootstrap {
 	public function __construct( $file ) {
 		$this->file    = $file;
 		$this->dir     = dirname( $file );
-		$this->storage = WP_CONTENT_DIR . '/uploads/git-bulk-updater';
+		$this->storage = WP_CONTENT_DIR . '/uploads/git-remote-updater';
 	}
 
 	/**
@@ -64,19 +64,19 @@ class Bootstrap {
 		add_action(
 			'init',
 			function() {
-				load_plugin_textdomain( 'git-bulk-updater' );
+				load_plugin_textdomain( 'git-remote-updater' );
 			}
 		);
 
-		define( 'GIT_BULK_UPDATER_DIR', $this->dir );
-		define( 'GIT_BULK_UPDATER_JSON_PATH', $this->storage );
+		define( 'GIT_REMOTE_UPDATER_DIR', $this->dir );
+		define( 'GIT_REMOTE_UPDATER_JSON_PATH', $this->storage );
 
 		// Load Autoloader.
 		require_once $this->dir . '/vendor/autoload.php';
 
 		// Check/create JSON storage location.
 		if ( ! wp_mkdir_p( $this->storage ) ) {
-			$error = __( 'Unable to create JSON storage folder for Git Bulk Updater.', 'git-bulk-updater' );
+			$error = __( 'Unable to create JSON storage folder for Git Remote Updater.', 'git-remote-updater' );
 			wp_die( esc_html( $error ) );
 		}
 

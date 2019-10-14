@@ -1,14 +1,14 @@
 <?php
 /**
- * Git Bulk Updater
+ * Git Remote Updater
  *
  * @author  Andy Fragen
  * @license MIT
- * @link    https://github.com/afragen/git-bulk-updater
- * @package git-bulk-updater
+ * @link    https://github.com/afragen/git-remote-updater
+ * @package git-remote-updater
  */
 
-namespace Fragen\Git_Bulk_Updater;
+namespace Fragen\Git_Remote_Updater;
 
 /*
  * Exit if called directly.
@@ -30,8 +30,8 @@ class Updater {
 	 * @return void
 	 */
 	public function update() {
-		if ( isset( $_POST['git_bulk_updater_nonce'] ) ) {
-			if ( ! check_admin_referer( 'git_bulk_updater_nonce', 'git_bulk_updater_nonce' ) ) {
+		if ( isset( $_POST['git_remote_updater_nonce'] ) ) {
+			if ( ! check_admin_referer( 'git_remote_updater_nonce', 'git_remote_updater_nonce' ) ) {
 				return;
 			}
 			$this->init();
@@ -54,7 +54,7 @@ class Updater {
 				$message[] = $this->parse_response( $response, $webhook );
 			}
 			if ( null !== $message ) {
-				set_site_transient( 'git_bulk_updater_feedback', $message, 10 );
+				set_site_transient( 'git_remote_updater_feedback', $message, 10 );
 			}
 			( new Actions() )->redirect();
 		}

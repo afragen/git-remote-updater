@@ -6,9 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Fragen\\Git_Bulk_Updater\\Actions' => $baseDir . '/src/Git_Bulk_Updater/Actions.php',
-    'Fragen\\Git_Bulk_Updater\\Actions_Row' => $baseDir . '/src/Git_Bulk_Updater/Actions_Row.php',
-    'Fragen\\Git_Bulk_Updater\\Bootstrap' => $baseDir . '/src/Git_Bulk_Updater/Bootstrap.php',
-    'Fragen\\Git_Bulk_Updater\\Updater' => $baseDir . '/src/Git_Bulk_Updater/Updater.php',
-    'Fragen\\Git_Bulk_Updater\\Webhooks' => $baseDir . '/src/Git_Bulk_Updater/Webhooks.php',
+    'Fragen\\Git_Remote_Updater\\Actions' => $baseDir . '/src/Git_Remote_Updater/Actions.php',
+    'Fragen\\Git_Remote_Updater\\Actions_Row' => $baseDir . '/src/Git_Remote_Updater/Actions_Row.php',
+    'Fragen\\Git_Remote_Updater\\Bootstrap' => $baseDir . '/src/Git_Remote_Updater/Bootstrap.php',
+    'Fragen\\Git_Remote_Updater\\Updater' => $baseDir . '/src/Git_Remote_Updater/Updater.php',
+    'Fragen\\Git_Remote_Updater\\Webhooks' => $baseDir . '/src/Git_Remote_Updater/Webhooks.php',
 );

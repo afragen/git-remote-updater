@@ -1,14 +1,14 @@
 <?php
 /**
- * Git Bulk Updater
+ * Git Remote Updater
  *
  * @author  Andy Fragen
  * @license MIT
- * @link    https://github.com/afragen/git-bulk-updater
- * @package git-bulk-updater
+ * @link    https://github.com/afragen/git-remote-updater
+ * @package git-remote-updater
  */
 
-namespace Fragen\Git_Bulk_Updater;
+namespace Fragen\Git_Remote_Updater;
 
 /*
  * Exit if called directly.
@@ -50,7 +50,7 @@ trait Webhooks {
 	 * @return void
 	 */
 	public function init() {
-		$json = $this->process_json( GIT_BULK_UPDATER_JSON_PATH );
+		$json = $this->process_json( GIT_REMOTE_UPDATER_JSON_PATH );
 		$this->get_webhooks( $json );
 		$this->get_all_webhooks();
 	}

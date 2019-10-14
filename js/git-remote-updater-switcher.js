@@ -2,29 +2,29 @@
  * Vanilla Javascript to show and hide the update choices.
  *
  * @access public
- * @package	git-bulk-updater
+ * @package	git-remote-updater
  */
 
 (function () {
 
 	// Hide non-default (Bitbucket & GitLab) settings on page load.
-	let nonDefault = ['git-bulk-updater-site'];
+	let nonDefault = ['git-remote-updater-site'];
 
 	nonDefault.forEach(function (item) {
 		displayNone(item);
 	});
 
 	// When the selector changes.
-	let selects = document.querySelector('select[ name="git-bulk-updater" ]');
+	let selects = document.querySelector('select[ name="git-remote-updater" ]');
 
 	// Only run when on proper tab.
 	selects.addEventListener('change', function () {
-		let defaults = ['git-bulk-updater-site', 'git-bulk-updater-repo'];
+		let defaults = ['git-remote-updater-site', 'git-remote-updater-repo'];
 
 		// Create difference array.
 		let hideMe = remove(defaults, this.value);
 
-		// Hide items with unselected api's classes.
+		// Hide items with unselected classes.
 		hideMe.forEach(function (item) {
 			displayNone(item);
 		});
