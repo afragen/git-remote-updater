@@ -1,62 +1,30 @@
-# Git Bulk Updater
+# Git Remote Updater
 
- * Plugin Name:       Git Bulk Updater
- * Plugin URI:        https://github.com/afragen/git-bulk-updater
+ * Plugin Name:       Git Remote Updater
+ * Plugin URI:        https://github.com/afragen/git-remote-updater
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           0.0.1
  * License:           MIT
  * Domain Path:       /languages
- * Text Domain:       git-bulk-updater
- * GitHub Plugin URI: https://github.com/afragen/git-bulk-updater
+ * Text Domain:       git-remote-updater
+ * GitHub Plugin URI: https://github.com/afragen/git-remote-updater
  * Requires PHP:      7.1
  * Requires WP:       5.1
 
 ## Description
 
-Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.
+Allows you to easily update GitHub Updater repositories in bulk via [RESTful endpoint updating](https://github.com/afragen/github-updater/wiki/Remote-Management---RESTful-Endpoints).
+
+The **Git Remote Updater** page allows updating via repository or site.
 
 ## Setup
 
-You must have a file `bulk-updates.json` at the root of this plugin in the following format.
+When the plugin is run it will create a directory at `wp-content/uploads/git-remote-updater`. This is the storage location for your JSON config files.
 
-```json
-{
-    "sites": [
-        {
-            "restful_start": "http://webhook1.test/wp-admin/admin-ajax.php?action=github-updater-update&key=99111ee0cc4876e473be9534b9d9d975",
-            "slugs": [
-                {
-                    "slug": "test-plugin2",
-                    "type": "plugin",
-                    "branch": "master"
-                },
-                {
-                    "slug": "test-bitbucket-child",
-                    "type": "theme",
-                    "branch": "master"
-                }
-            ]
-        },
-        {
-            "restful_start": "http://webhook2.test/wp-admin/admin-ajax.php?action=github-updater-update&key=eabd2f85088619eb9f77a6b5b42b428c",
-            "slugs": [
-                {
-                    "slug": "test-bitbucket-plugin",
-                    "type": "plugin"
-                },
-                {
-                    "slug": "sd-child",
-                    "type": "theme"
-                }
-            ]
-        }
-    ]
-}
-```
+You must have one or more JSON files in the `wp-content/uploads/git-remote-updater/` directory.
 
-The `restful_start` comes from you site's **GitHub Updater > Settings > Remote Management** tab.
+You can download a JSON file from your `GitHub Updater > Remote Management > Make JSON file` button and then copy it to your `wp-content/uploads/git-remote-updater` folder.
 
-The **branch** setting is optional, it will default to `master`.
+Update feedback will show at the top of the page. If you have debug logging set on your site, it is also added to the `debug.log`.
 
-Actions are currently populated in the `debug.log`.
+I recommend running Git Remote Updater from a local development environment installation of WordPress. It makes the collection and transfer of JSON files simpler, though you can run it from any WordPress site.

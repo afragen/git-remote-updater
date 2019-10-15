@@ -1,5 +1,5 @@
 {
-    "name": "afragen/git-bulk-updater",
+    "name": "afragen/git-remote-updater",
     "description": "Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.",
     "type": "wordpress-plugin",
     "keywords": [
@@ -20,12 +20,12 @@
     "repositories": [
         {
             "type": "vcs",
-            "url": "https://github.com/afragen/git-bulk-updater"
+            "url": "https://github.com/afragen/git-remote-updater"
         }
     ],
     "support": {
-        "issues": "https://github.com/afragen/git-bulk-updater/issues",
-        "source": "https://github.com/afragen/git-bulk-updater"
+        "issues": "https://github.com/afragen/git-remote-updater/issues",
+        "source": "https://github.com/afragen/git-remote-updater"
     },
     "prefer-stable": true,
     "require": {
@@ -38,7 +38,7 @@
     },
     "scripts": {
         "post-update-cmd": [
-            "wp i18n make-pot . languages/git-bulk-updater.pot"
+            "wp i18n make-pot . languages/git-remote-updater.pot"
         ]
     }
 }

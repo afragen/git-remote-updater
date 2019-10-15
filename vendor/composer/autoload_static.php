@@ -7,11 +7,11 @@ namespace Composer\Autoload;
 class ComposerStaticInit916525bb03247909b6809c3419155c61
 {
     public static $classMap = array (
-        'Fragen\\Git_Bulk_Updater\\Actions' => __DIR__ . '/../..' . '/src/Git_Bulk_Updater/Actions.php',
-        'Fragen\\Git_Bulk_Updater\\Actions_Row' => __DIR__ . '/../..' . '/src/Git_Bulk_Updater/Actions_Row.php',
-        'Fragen\\Git_Bulk_Updater\\Bootstrap' => __DIR__ . '/../..' . '/src/Git_Bulk_Updater/Bootstrap.php',
-        'Fragen\\Git_Bulk_Updater\\Updater' => __DIR__ . '/../..' . '/src/Git_Bulk_Updater/Updater.php',
-        'Fragen\\Git_Bulk_Updater\\Webhooks' => __DIR__ . '/../..' . '/src/Git_Bulk_Updater/Webhooks.php',
+        'Fragen\\Git_Remote_Updater\\Actions' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Actions.php',
+        'Fragen\\Git_Remote_Updater\\Actions_Row' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Actions_Row.php',
+        'Fragen\\Git_Remote_Updater\\Bootstrap' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Bootstrap.php',
+        'Fragen\\Git_Remote_Updater\\Updater' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Updater.php',
+        'Fragen\\Git_Remote_Updater\\Webhooks' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Webhooks.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
