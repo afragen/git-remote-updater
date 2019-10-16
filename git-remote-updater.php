@@ -14,8 +14,9 @@
  * Description:       Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           0.3.0
+ * Version:           0.3.1
  * License:           MIT
+ * Network:           true
  * Domain Path:       /languages
  * Text Domain:       git-remote-updater
  * GitHub Plugin URI: https://github.com/afragen/git-remote-updater

@@ -9,3 +9,4 @@
 * sort repositories by name
 * more error checking during update process
 * rebrand to Git Remote Updater
+* keep retrying if remote response is WP_Error

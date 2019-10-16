@@ -49,9 +49,13 @@ class Updater {
 					$webhooks[] = $url;
 				}
 			}
+
+			// Try again if response is WP_Error.
 			foreach ( $webhooks as $webhook ) {
-				$response  = wp_remote_get( $webhook );
-				$message[] = $this->parse_response( $response, $webhook );
+				do {
+					$response  = wp_remote_get( $webhook );
+					$message[] = $this->parse_response( $response, $webhook );
+				} while ( is_wp_error( $response ) );
 			}
 			if ( null !== $message ) {
 				set_site_transient( 'git_remote_updater_feedback', $message, 10 );
