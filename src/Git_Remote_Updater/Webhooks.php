@@ -22,7 +22,6 @@ if ( ! defined( 'WPINC' ) ) {
  * Class Webhooks
  */
 trait Webhooks {
-
 	/**
 	 * Holds data for sites.
 	 *
@@ -50,8 +49,9 @@ trait Webhooks {
 	 * @return void
 	 */
 	public function init() {
-		$json = $this->process_json( GIT_REMOTE_UPDATER_JSON_PATH );
-		$this->get_webhooks( $json );
+		$config = $this->process_json( GIT_REMOTE_UPDATER_JSON_PATH );
+		$config = $this->get_site_data( $config );
+		$this->get_webhooks( $config );
 		$this->get_all_webhooks();
 	}
 
@@ -66,6 +66,7 @@ trait Webhooks {
 		$jsons        = $this->list_directory( $dir );
 		$configs      = new \stdClass();
 		$site_configs = [];
+
 		foreach ( $jsons as $json ) {
 			$config = null;
 			if ( file_exists( "{$dir}/{$json}" ) ) {
@@ -90,12 +91,38 @@ trait Webhooks {
 	 * @return array $arr_dir
 	 */
 	private function list_directory( $dir ) {
-		$arr_dir = array();
+		$arr_dir = [];
 		foreach ( glob( "{$dir}/*.json" ) as $file ) {
 			array_push( $arr_dir, basename( $file ) );
 		}
 
 		return $arr_dir;
+	}
+
+	/**
+	 * Get remote site repo data via REST API endpoint.
+	 *
+	 * @param \stdClass $config Parsed JSON file created from GitHub Updater.
+	 *
+	 * @return \stdClass
+	 */
+	public function get_site_data( \stdClass $config ) {
+		$json = [];
+		foreach ( $config as $sites ) {
+			$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
+			$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
+			$response = wp_remote_get( $rest_url );
+			$code     = wp_remote_retrieve_response_code( $response );
+			if ( 200 !== $code ) {
+				continue;
+			}
+			$response = wp_remote_retrieve_body( $response );
+			$response = json_decode( $response );
+
+			$json[ $sites->site->host ] = $response;
+		}
+
+		return (object) $json;
 	}
 
 	/**
@@ -106,8 +133,8 @@ trait Webhooks {
 	 * @return void
 	 */
 	public function get_webhooks( \stdClass $config ) {
-			$parsed_sites = [];
-			$repos        = [];
+		$parsed_sites = [];
+		$repos        = [];
 		foreach ( $config as $sites ) {
 			foreach ( $sites as $site ) {
 				foreach ( $site->slugs as $repo ) {
@@ -150,7 +177,7 @@ trait Webhooks {
 	 */
 	private function get_endpoint( $site, $repo ) {
 		$endpoint = add_query_arg( $repo->type, $repo->slug, "{$site->restful_start}" );
-		$endpoint = isset( $repo->branch ) ? add_query_arg( 'tag', $repo->branch, $endpoint ) : $endpoint;
+		$endpoint = isset( $repo->branch ) ? add_query_arg( 'branch', $repo->branch, $endpoint ) : $endpoint;
 		$endpoint = add_query_arg( 'override', '', $endpoint );
 
 		return $endpoint;
