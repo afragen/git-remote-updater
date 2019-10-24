@@ -178,7 +178,7 @@ trait Webhooks {
 	private function get_endpoint( $site, $repo ) {
 		$endpoint = add_query_arg( $repo->type, $repo->slug, "{$site->restful_start}" );
 		$endpoint = isset( $repo->branch ) ? add_query_arg( 'branch', $repo->branch, $endpoint ) : $endpoint;
-		$endpoint = add_query_arg( 'override', '', $endpoint );
+		$endpoint = add_query_arg( 'override', true, $endpoint );
 
 		return $endpoint;
 	}
