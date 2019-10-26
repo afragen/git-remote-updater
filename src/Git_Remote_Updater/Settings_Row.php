@@ -21,7 +21,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class Actions_Row
  */
-class Actions_Row {
+class Settings_Row {
 	use Webhooks;
 
 	/**
@@ -29,6 +29,18 @@ class Actions_Row {
 	 */
 	public function __construct() {
 		$this->init();
+		$this->can_run();
+	}
+
+	/**
+	 * Are there basic data to run?
+	 *
+	 * @return void
+	 */
+	private function can_run() {
+		if ( empty( $this->sites ) || empty( $this->repos ) ) {
+			wp_die( esc_html__( 'Please add JSON config files to your JSON storage folder.', 'git-remote-updater' ) );
+		}
 	}
 
 	/**
@@ -37,6 +49,7 @@ class Actions_Row {
 	 * @return void
 	 */
 	public function add_site_rows() {
+		$this->can_run();
 		echo '<tr><th>';
 		esc_html_e( 'Site', 'git-remote-updater' );
 		echo '</th><th>';
@@ -73,6 +86,7 @@ class Actions_Row {
 	 * @return void
 	 */
 	public function add_repo_rows() {
+		$this->can_run();
 		echo '<tr><th>';
 		esc_html_e( 'Repository', 'git-remote-updater' );
 		echo '</th><th>';
