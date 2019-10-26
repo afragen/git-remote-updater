@@ -60,7 +60,7 @@ class Updater {
 			if ( null !== $message ) {
 				set_site_transient( 'git_remote_updater_feedback', $message, 10 );
 			}
-			( new Actions() )->redirect();
+			( new Settings() )->redirect();
 		}
 	}
 

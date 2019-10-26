@@ -192,7 +192,7 @@ trait Webhooks {
 		$parsed          = null;
 		$all_webhooks    = null;
 		$parsed_webhooks = null;
-		foreach ( $this->sites as $site => $repos ) {
+		foreach ( (array) $this->sites as $site => $repos ) {
 			foreach ( $repos as $repo ) {
 				foreach ( $repo as $url ) {
 					$all_webhooks[ $site ][] = $url;
