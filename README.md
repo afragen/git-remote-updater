@@ -19,6 +19,8 @@ The **Git Remote Updater** page allows updating via repository or site.
 
 ## Setup
 
+Requires [GitHub Updater](https://github.com/afragen/github-updater) v.9.0.0 or higher, or current `develop` branch, running on the sites you use with Git Remote Updater.
+
 When the plugin is run it will create a directory at `wp-content/uploads/git-remote-updater`. This is the storage location for your JSON config files.
 
 You must have one or more JSON files in the `wp-content/uploads/git-remote-updater/` directory.
