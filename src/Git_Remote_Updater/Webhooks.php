@@ -107,19 +107,23 @@ trait Webhooks {
 	 * @return \stdClass
 	 */
 	public function get_site_data( \stdClass $config ) {
-		$json = [];
-		foreach ( $config as $sites ) {
-			$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
-			$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
-			$response = wp_remote_get( $rest_url );
-			$code     = wp_remote_retrieve_response_code( $response );
-			if ( 200 !== $code ) {
-				continue;
-			}
-			$response = wp_remote_retrieve_body( $response );
-			$response = json_decode( $response );
+		$json = get_site_transient( 'git_remote_updater_repo_data' );
 
-			$json[ $sites->site->host ] = $response;
+		if ( ! $json ) {
+			foreach ( $config as $sites ) {
+				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
+				$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
+				$response = wp_remote_get( $rest_url );
+				$code     = wp_remote_retrieve_response_code( $response );
+				if ( 200 !== $code ) {
+					continue;
+				}
+				$response = wp_remote_retrieve_body( $response );
+				$response = json_decode( $response );
+
+				$json[ $sites->site->host ] = $response;
+			}
+			set_site_transient( 'git_remote_updater_repo_data', $json, 600 );
 		}
 
 		return (object) $json;
