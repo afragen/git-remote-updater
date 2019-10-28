@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the Git Remote Updater plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Remote Updater 0.3.0\n"
+"Project-Id-Version: Git Remote Updater 0.3.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-remote-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-14T22:11:28+00:00\n"
+"POT-Creation-Date: 2019-10-26T15:22:20+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.3.0\n"
 "X-Domain: git-remote-updater\n"
 
 #. Plugin Name of the plugin
-#: src/Git_Remote_Updater/Actions.php:51
-#: src/Git_Remote_Updater/Actions.php:52
-#: src/Git_Remote_Updater/Actions.php:66
+#: src/Git_Remote_Updater/Settings.php:51
+#: src/Git_Remote_Updater/Settings.php:52
+#: src/Git_Remote_Updater/Settings.php:66
 msgid "Git Remote Updater"
 msgstr ""
 
@@ -37,44 +37,48 @@ msgstr ""
 msgid "https://github.com/afragen"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions.php:96
+#: src/Git_Remote_Updater/Bootstrap.php:79
+msgid "Unable to create JSON storage folder for Git Remote Updater."
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:96
 msgid "Update Feedback"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions.php:113
+#: src/Git_Remote_Updater/Settings.php:113
 msgid "Show Repositories"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions.php:114
+#: src/Git_Remote_Updater/Settings.php:114
 msgid "Show Sites"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:41
+#: src/Git_Remote_Updater/Settings_Row.php:42
+msgid "Please add JSON config files to your JSON storage folder."
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings_Row.php:54
 msgid "Site"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:43
+#: src/Git_Remote_Updater/Settings_Row.php:56
 msgid "Repositories"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:45
-#: src/Git_Remote_Updater/Actions_Row.php:81
+#: src/Git_Remote_Updater/Settings_Row.php:58
+#: src/Git_Remote_Updater/Settings_Row.php:95
 msgid "Action"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:64
-#: src/Git_Remote_Updater/Actions_Row.php:102
+#: src/Git_Remote_Updater/Settings_Row.php:77
+#: src/Git_Remote_Updater/Settings_Row.php:116
 msgid "Update"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:77
+#: src/Git_Remote_Updater/Settings_Row.php:91
 msgid "Repository"
 msgstr ""
 
-#: src/Git_Remote_Updater/Actions_Row.php:79
+#: src/Git_Remote_Updater/Settings_Row.php:93
 msgid "Sites"
-msgstr ""
-
-#: src/Git_Remote_Updater/Bootstrap.php:79
-msgid "Unable to create JSON storage folder for Git Remote Updater."
 msgstr ""

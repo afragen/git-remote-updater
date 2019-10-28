@@ -80,7 +80,7 @@ class Bootstrap {
 			wp_die( esc_html( $error ) );
 		}
 
-		( new Actions() )->load_hooks();
+		( new Settings() )->load_hooks();
 	}
 
 }

@@ -22,7 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
 /**
  * Class Actions
  */
-class Actions {
+class Settings {
 	/**
 	 * Load hooks.
 	 *
@@ -30,7 +30,7 @@ class Actions {
 	 */
 	public function load_hooks() {
 		$this->load_js();
-		add_action( 'admin_menu', [ $this, 'add_plugin_menu' ] );
+		add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', [ $this, 'add_plugin_menu' ] );
 		add_action( 'admin_init', [ new Updater(), 'update' ] );
 	}
 
@@ -73,11 +73,11 @@ class Actions {
 		echo '<table class="form-table">';
 
 		echo '<tbody class="git-remote-updater-repo">';
-		( new Actions_Row() )->add_repo_rows();
+		( new Settings_Row() )->add_repo_rows();
 		echo '</tbody>';
 
 		echo '<tbody class="git-remote-updater-site">';
-		( new Actions_Row() )->add_site_rows();
+		( new Settings_Row() )->add_site_rows();
 		echo '</tbody>';
 
 		echo '</table></div>';
@@ -147,6 +147,7 @@ class Actions {
 	 * @return void
 	 */
 	public function load_js() {
+		// phpcs:ignore WordPress.Security.NonceVerification
 		if ( isset( $_GET['page'] ) && 'git-remote-updater' === $_GET['page'] ) {
 			add_action(
 				'admin_enqueue_scripts',

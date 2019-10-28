@@ -14,7 +14,7 @@
  * Description:       Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           0.3.1
+ * Version:           0.3.4
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
