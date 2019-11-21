@@ -123,7 +123,18 @@ trait Webhooks {
 
 				$json[ $sites->site->host ] = $response;
 			}
-			$json = $this->remove_slugs_from_json( $json );
+			/**
+			 * Filter to add slugs to be removed from updating.
+			 *
+			 * @since x.x.x
+			 *
+			 * @param array Array of slugs to remove from site data.
+			 */
+			$remove_slugs = \apply_filters( 'git_remote_updater_remove_site_data', [] );
+			if ( ! empty( $remove_slugs ) ) {
+				$json = $this->remove_slugs_from_json( $json, $remove_slugs );
+			}
+
 			set_site_transient( 'git_remote_updater_repo_data', $json, 600 );
 		}
 
@@ -212,22 +223,14 @@ trait Webhooks {
 	 * Filter JSON data to remove specific slugs from updating.
 	 *
 	 * @param array $json Array of sites data.
+	 * @param array $remove_slugs Array of slugs to remove from updating.
 	 *
 	 * @return array
 	 */
-	private function remove_slugs_from_json( $json ) {
-		/**
-		 * Filter to add slugs to be removed from updating.
-		 *
-		 * @since x.x.x
-		 *
-		 * @param array Array of slugs to remove from site data.
-		 */
-		$arr = \apply_filters( 'git_remote_updater_remove_site_data', [] );
-
+	private function remove_slugs_from_json( $json, $remove_slugs ) {
 		foreach ( $json as $sites ) {
 			foreach ( $sites->sites->slugs as $key => $slug ) {
-				if ( in_array( $slug->slug, $arr, true ) ) {
+				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
 					unset( $sites->sites->slugs[ $key ] );
 				}
 			}
