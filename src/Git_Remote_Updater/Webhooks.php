@@ -152,6 +152,9 @@ trait Webhooks {
 		$parsed_sites = [];
 		$repos        = [];
 		foreach ( $config as $sites ) {
+			if ( empty( $sites ) ) {
+				return;
+			}
 			foreach ( $sites as $site ) {
 				foreach ( $site->slugs as $repo ) {
 					$repo_sites = [];
