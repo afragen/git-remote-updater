@@ -45,7 +45,7 @@ class Bootstrap {
 	/**
 	 * Constructor.
 	 *
-	 * @param  string $file Main plugin file.
+	 * @param string $file Main plugin file.
 	 *
 	 * @return void
 	 */
@@ -63,16 +63,13 @@ class Bootstrap {
 	public function run() {
 		add_action(
 			'init',
-			function() {
+			function () {
 				load_plugin_textdomain( 'git-remote-updater' );
 			}
 		);
 
 		define( 'GIT_REMOTE_UPDATER_DIR', $this->dir );
 		define( 'GIT_REMOTE_UPDATER_JSON_PATH', $this->storage );
-
-		// Load Autoloader.
-		require_once $this->dir . '/vendor/autoload.php';
 
 		// Check/create JSON storage location.
 		if ( ! wp_mkdir_p( $this->storage ) ) {
@@ -82,5 +79,4 @@ class Bootstrap {
 
 		( new Settings() )->load_hooks();
 	}
-
 }

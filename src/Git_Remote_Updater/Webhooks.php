@@ -225,7 +225,7 @@ trait Webhooks {
 	/**
 	 * Filter JSON data to remove specific slugs from updating.
 	 *
-	 * @param array $json Array of sites data.
+	 * @param array $json         Array of sites data.
 	 * @param array $remove_slugs Array of slugs to remove from updating.
 	 *
 	 * @return array
