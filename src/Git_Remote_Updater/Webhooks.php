@@ -108,6 +108,7 @@ trait Webhooks {
 	 */
 	public function get_site_data( \stdClass $config ) {
 		$json = get_site_transient( 'git_remote_updater_repo_data' );
+		$json = false;
 
 		if ( ! $json ) {
 			foreach ( $config as $sites ) {
