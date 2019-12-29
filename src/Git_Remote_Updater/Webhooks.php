@@ -126,7 +126,7 @@ trait Webhooks {
 			/**
 			 * Filter to add slugs to be removed from updating.
 			 *
-			 * @since x.x.x
+			 * @since 0.3.6
 			 *
 			 * @param array Array of slugs to remove from site data.
 			 */
