@@ -18,7 +18,6 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-
 /**
  * Class Actions
  */
@@ -95,11 +94,11 @@ class Settings {
 			echo '<div>';
 			echo '<h3>' . esc_html__( 'Update Feedback', 'git-remote-updater' ) . '</h3>';
 			foreach ( $feedback as $repo_feedback ) {
-					echo '<div><p>';
+				echo '<div><p>';
 				foreach ( $repo_feedback as $message ) {
 					echo wp_kses_post( $message ) . '<br>';
 				}
-					echo '</p></div>';
+				echo '</p></div>';
 			}
 			echo '</div>';
 		}
@@ -112,8 +111,7 @@ class Settings {
 		$options = [
 			'git-remote-updater-repo' => esc_html__( 'Show Repositories', 'git-remote-updater' ),
 			'git-remote-updater-site' => esc_html__( 'Show Sites', 'git-remote-updater' ),
-		];
-		?>
+		]; ?>
 		<label for="git-remote-updater">
 			<select id="git-remote-updater" name="git-remote-updater">
 				<?php foreach ( $options as $key => $value ) : ?>
@@ -152,11 +150,11 @@ class Settings {
 			add_action(
 				'admin_enqueue_scripts',
 				function () {
+					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion
 					wp_register_script( 'git-remote-updater-actions', plugins_url( basename( GIT_REMOTE_UPDATER_DIR ) . '/js/git-remote-updater-switcher.js' ), [], false, true );
 					wp_enqueue_script( 'git-remote-updater-actions' );
 				}
 			);
 		}
 	}
-
 }

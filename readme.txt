@@ -1,12 +1,15 @@
 # Git Remote Updater
 
- * Plugin Name:       Git Remote Updater
- * Plugin URI:        https://github.com/afragen/git-remote-updater
- * Author:            Andy Fragen
- * Author URI:        https://github.com/afragen
- * License:           MIT
- * Requires PHP:      7.1
- * Requires at least: 5.2
+Plugin Name:       Git Remote Updater
+Plugin URI:        https://github.com/afragen/git-remote-updater
+Donate link:       https://thefragens.com/github-updater-donate
+Author:            Andy Fragen
+Author URI:        https://github.com/afragen
+License:           MIT
+Stable tag:        master
+Requires PHP:      7.1
+Requires at least: 5.2
+Tested up to:      5.4
 
 ## Description
 

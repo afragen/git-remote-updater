@@ -123,6 +123,18 @@ trait Webhooks {
 
 				$json[ $sites->site->host ] = $response;
 			}
+			/**
+			 * Filter to add slugs to be removed from updating.
+			 *
+			 * @since 0.3.6
+			 *
+			 * @param array Array of slugs to remove from site data.
+			 */
+			$remove_slugs = \apply_filters( 'git_remote_updater_remove_site_data', [] );
+			if ( ! empty( $remove_slugs ) ) {
+				$json = $this->remove_slugs_from_json( $json, $remove_slugs );
+			}
+
 			set_site_transient( 'git_remote_updater_repo_data', $json, 600 );
 		}
 
@@ -140,6 +152,9 @@ trait Webhooks {
 		$parsed_sites = [];
 		$repos        = [];
 		foreach ( $config as $sites ) {
+			if ( empty( $sites ) ) {
+				return;
+			}
 			foreach ( $sites as $site ) {
 				foreach ( $site->slugs as $repo ) {
 					$repo_sites = [];
@@ -205,5 +220,25 @@ trait Webhooks {
 		}
 
 		$this->all_webhooks = $all_webhooks;
+	}
+
+	/**
+	 * Filter JSON data to remove specific slugs from updating.
+	 *
+	 * @param array $json         Array of sites data.
+	 * @param array $remove_slugs Array of slugs to remove from updating.
+	 *
+	 * @return array
+	 */
+	private function remove_slugs_from_json( $json, $remove_slugs ) {
+		foreach ( $json as $sites ) {
+			foreach ( $sites->sites->slugs as $key => $slug ) {
+				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
+					unset( $sites->sites->slugs[ $key ] );
+				}
+			}
+		}
+
+		return $json;
 	}
 }
