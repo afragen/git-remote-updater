@@ -6,18 +6,25 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit916525bb03247909b6809c3419155c61
 {
-    public static $classMap = array (
-        'Fragen\\Git_Remote_Updater\\Bootstrap' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Bootstrap.php',
-        'Fragen\\Git_Remote_Updater\\Settings' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Settings.php',
-        'Fragen\\Git_Remote_Updater\\Settings_Row' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Settings_Row.php',
-        'Fragen\\Git_Remote_Updater\\Updater' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Updater.php',
-        'Fragen\\Git_Remote_Updater\\Webhooks' => __DIR__ . '/../..' . '/src/Git_Remote_Updater/Webhooks.php',
+    public static $prefixLengthsPsr4 = array (
+        'F' => 
+        array (
+            'Fragen\\Git_Remote_Updater\\' => 26,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Fragen\\Git_Remote_Updater\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Git_Remote_Updater',
+        ),
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit916525bb03247909b6809c3419155c61::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit916525bb03247909b6809c3419155c61::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit916525bb03247909b6809c3419155c61::$prefixDirsPsr4;
 
         }, null, ClassLoader::class);
     }
