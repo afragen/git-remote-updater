@@ -32,9 +32,9 @@
         "php": ">=7.1"
     },
     "autoload": {
-        "classmap": [
-            "src/"
-        ]
+        "psr-4": {
+            "Fragen\\Git_Remote_Updater\\": "src/Git_Remote_Updater/"
+        }
     },
     "scripts": {
         "post-update-cmd": [
