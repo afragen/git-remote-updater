@@ -228,7 +228,7 @@ trait Webhooks {
 	 * @return array
 	 */
 	private function remove_slugs_from_json( $json, $remove_slugs ) {
-		foreach ( $json as $sites ) {
+		foreach ( (array) $json as $sites ) {
 			foreach ( $sites->sites->slugs as $key => $slug ) {
 				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
 					unset( $sites->sites->slugs[ $key ] );
