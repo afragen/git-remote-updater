@@ -1,23 +1,23 @@
-# Copyright (C) 2019 Andy Fragen
+# Copyright (C) 2020 Andy Fragen
 # This file is distributed under the same license as the Git Remote Updater plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Remote Updater 0.3.3\n"
+"Project-Id-Version: Git Remote Updater 0.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-remote-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2019-10-26T15:22:20+00:00\n"
+"POT-Creation-Date: 2020-01-14T21:39:50+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.3.0\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: git-remote-updater\n"
 
 #. Plugin Name of the plugin
-#: src/Git_Remote_Updater/Settings.php:51
-#: src/Git_Remote_Updater/Settings.php:52
-#: src/Git_Remote_Updater/Settings.php:66
+#: src/Git_Remote_Updater/Settings.php:53
+#: src/Git_Remote_Updater/Settings.php:54
+#: src/Git_Remote_Updater/Settings.php:102
 msgid "Git Remote Updater"
 msgstr ""
 
@@ -26,7 +26,7 @@ msgid "https://github.com/afragen/git-remote-updater"
 msgstr ""
 
 #. Description of the plugin
-msgid "Allows you to easily update GitHub Updater repositories in bulk via RESTful endpoint updating."
+msgid "Allows you to easily update GitHub Updater repositories in bulk via REST API endpoint updating."
 msgstr ""
 
 #. Author of the plugin
@@ -37,20 +37,32 @@ msgstr ""
 msgid "https://github.com/afragen"
 msgstr ""
 
-#: src/Git_Remote_Updater/Bootstrap.php:79
-msgid "Unable to create JSON storage folder for Git Remote Updater."
-msgstr ""
-
-#: src/Git_Remote_Updater/Settings.php:96
+#: src/Git_Remote_Updater/Actions.php:63
 msgid "Update Feedback"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:113
+#: src/Git_Remote_Updater/Actions.php:80
 msgid "Show Repositories"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:114
+#: src/Git_Remote_Updater/Actions.php:81
 msgid "Show Sites"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:68
+msgid "Actions"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:69
+msgid "Settings"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:116
+msgid "Add Site"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:256
+msgid "URI is case sensitive."
 msgstr ""
 
 #: src/Git_Remote_Updater/Settings_Row.php:42
@@ -58,6 +70,7 @@ msgid "Please add JSON config files to your JSON storage folder."
 msgstr ""
 
 #: src/Git_Remote_Updater/Settings_Row.php:54
+#: src/Git_Remote_Updater/Site_List_Table.php:161
 msgid "Site"
 msgstr ""
 
@@ -81,4 +94,12 @@ msgstr ""
 
 #: src/Git_Remote_Updater/Settings_Row.php:93
 msgid "Sites"
+msgstr ""
+
+#: src/Git_Remote_Updater/Site_List_Table.php:162
+msgid "REST API key"
+msgstr ""
+
+#: src/Git_Remote_Updater/Site_List_Table.php:207
+msgid "Delete"
 msgstr ""
