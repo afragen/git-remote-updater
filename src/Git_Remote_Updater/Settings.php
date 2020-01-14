@@ -22,6 +22,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Class Actions
  */
 class Settings {
+
 	/**
 	 * Load hooks.
 	 *
@@ -31,6 +32,8 @@ class Settings {
 		$this->load_js();
 		add_action( is_multisite() ? 'network_admin_menu' : 'admin_menu', [ $this, 'add_plugin_menu' ] );
 		add_action( 'admin_init', [ new Updater(), 'update' ] );
+		add_action( 'admin_init', [ $this, 'update_settings' ] );
+		add_action( 'network_admin_edit_git-remote-updater', [ $this, 'update_settings' ] );
 	}
 
 	/**
@@ -56,72 +59,113 @@ class Settings {
 	}
 
 	/**
+	 * Return settings tabs.
+	 *
+	 * @return array
+	 */
+	private function get_settings_tabs() {
+		$tabs = [
+			'git_remote_updater_actions'  => esc_html__( 'Actions', 'git-remote-updater' ),
+			'git_remote_updater_settings' => esc_html__( 'Settings', 'git-remote-updater' ),
+		];
+
+		return $tabs;
+	}
+
+	/**
+	 * Renders setting tabs.
+	 *
+	 * Walks through the object's tabs array and prints them one by one.
+	 * Provides the heading for the settings page.
+	 *
+	 * @access private
+	 */
+	private function settings_tabs() {
+		$tabs        = $this->get_settings_tabs();
+		$current_tab = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
+		echo '<nav class="nav-tab-wrapper" aria-label="Secondary menu">';
+		foreach ( $tabs as $key => $name ) {
+			$active = ( $current_tab === $key ) ? 'nav-tab-active' : '';
+			echo '<a class="nav-tab ' . $active . '" href="?page=git-remote-updater&tab=' . $key . '">' . $name . '</a>';
+		}
+		echo '</nav>';
+	}
+
+	/**
 	 * Options page callback.
 	 */
 	public function create_admin_page() {
 		$action = is_multisite() ? 'edit.php?action=git-remote-updater' : 'options.php';
+		$tab    = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
 
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Remote Updater', 'git-remote-updater' );
 		echo '</h2>';
 
-		$this->show_feedback();
-		$this->repo_or_site_selector();
+		$this->settings_tabs();
 
-		echo '<form method="post" action="' . esc_attr( $action ) . '">';
-		echo '<table class="form-table">';
-
-		echo '<tbody class="git-remote-updater-repo">';
-		( new Settings_Row() )->add_repo_rows();
-		echo '</tbody>';
-
-		echo '<tbody class="git-remote-updater-site">';
-		( new Settings_Row() )->add_site_rows();
-		echo '</tbody>';
-
-		echo '</table></div>';
-		echo '</form>';
-	}
-
-	/**
-	 * Display update feedback.
-	 *
-	 * @return void
-	 */
-	private function show_feedback() {
-		$feedback = get_site_transient( 'git_remote_updater_feedback' );
-		if ( $feedback ) {
-			echo '<div>';
-			echo '<h3>' . esc_html__( 'Update Feedback', 'git-remote-updater' ) . '</h3>';
-			foreach ( $feedback as $repo_feedback ) {
-				echo '<div><p>';
-				foreach ( $repo_feedback as $message ) {
-					echo wp_kses_post( $message ) . '<br>';
-				}
-				echo '</p></div>';
-			}
-			echo '</div>';
+		if ( 'git_remote_updater_actions' === $tab ) {
+			( new Actions() )->display( $action );
+		}
+		if ( 'git_remote_updater_settings' === $tab ) {
+			( new Site_List_Table() )->render_list_table();
+			$this->register_settings();
+			echo '<form class="settings" method="post" action="' . esc_attr__( $action ) . '">';
+			settings_fields( 'git_remote_updater' );
+			do_settings_sections( 'git_remote_updater' );
+			submit_button( esc_html__( 'Add Site', 'git-remote-updater' ) );
+			echo '</form>';
 		}
 	}
 
 	/**
-	 * Repo or Site option.
+	 * Update settings for single site or network activated.
+	 *
+	 * @link http://wordpress.stackexchange.com/questions/64968/settings-api-in-multisite-missing-update-message
+	 * @link http://benohead.com/wordpress-network-wide-plugin-settings/
 	 */
-	private function repo_or_site_selector() {
-		$options = [
-			'git-remote-updater-repo' => esc_html__( 'Show Repositories', 'git-remote-updater' ),
-			'git-remote-updater-site' => esc_html__( 'Show Sites', 'git-remote-updater' ),
-		]; ?>
-		<label for="git-remote-updater">
-			<select id="git-remote-updater" name="git-remote-updater">
-				<?php foreach ( $options as $key => $value ) : ?>
-						<option value="<?php esc_attr_e( $key ); ?>" <?php selected( $key ); ?> >
-							<?php esc_html_e( $value ); ?>
-						</option>
-				<?php endforeach ?>
-			</select>
-		</label>
-		<?php
+	public function update_settings() {
+		$options   = get_site_option( 'git_remote_updater', [] );
+		$duplicate = false;
+		if ( isset( $_POST['option_page'], $_POST['git_remote_updater_site'], $_POST['git_remote_updater_key'] ) &&
+			'git_remote_updater' === $_POST['option_page']
+		) {
+			$new_options = [
+				'site'    => $_POST['git_remote_updater_site'],
+				'api_key' => $_POST['git_remote_updater_key'],
+			];
+			$new_options = $this->sanitize( $new_options, $options );
+
+			foreach ( $options as $option ) {
+				$duplicate = in_array( $new_options[0]['ID'], $option, true );
+				if ( $duplicate ) {
+					continue;
+				}
+			}
+			if ( ! $duplicate ) {
+				$options = array_merge( $options, $new_options );
+				update_site_option( 'git_remote_updater', $options );
+			}
+			$this->redirect();
+		}
+	}
+
+	/**
+	 * Sanitize each setting field as needed.
+	 *
+	 * @param array $input Contains all settings fields as array keys.
+	 *
+	 * @return array
+	 */
+	public function sanitize( $input, $options ) {
+		$new_input = [];
+
+		foreach ( (array) $input as $key => $value ) {
+			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( $value ) ) : sanitize_text_field( $value );
+			$new_input[0]['ID']   = md5( $new_input[0]['site'] );
+		}
+
+		return $new_input;
 	}
 
 	/**
@@ -131,8 +175,16 @@ class Settings {
 	 */
 	public function redirect() {
 		$redirect_url = is_multisite() ? network_admin_url( 'settings.php' ) : admin_url( 'tools.php' );
-		$location     = add_query_arg(
-			[ 'page' => 'git-remote-updater' ],
+		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( $_POST['_wp_http_referer'], PHP_URL_QUERY ) : null;
+		parse_str( $query, $arr );
+		$arr['tab'] = ! empty( $arr['tab'] ) ? $arr['tab'] : 'git_remote_updater_settings';
+
+		$location = add_query_arg(
+			[
+				'page'    => $arr['page'],
+				'tab'     => $arr['tab'],
+				'updated' => true,
+			],
 			$redirect_url
 		);
 		wp_safe_redirect( $location );
@@ -157,4 +209,65 @@ class Settings {
 			);
 		}
 	}
+
+	/**
+	 * Add settings sections.
+	 */
+	public function register_settings() {
+		register_setting(
+			'git_remote_updater',
+			'git_remote_updater',
+			[ $this, 'sanitize' ]
+		);
+
+		add_settings_section(
+			'git_remote_updater',
+			esc_html__( 'Add Site Data', 'git_remote_updater' ),
+			[],
+			'git_remote_updater'
+		);
+
+		add_settings_field(
+			'site',
+			esc_html__( 'Site URL', 'git_remote_updater' ),
+			[ $this, 'get_site' ],
+			'git_remote_updater',
+			'git_remote_updater'
+		);
+
+		add_settings_field(
+			'api_key',
+			esc_html__( 'REST API key', 'git_remote_updater' ),
+			[ $this, 'get_api_key' ],
+			'git_remote_updater',
+			'git_remote_updater'
+		);
+	}
+
+	/**
+	 * Site setting.
+	 */
+	public function get_site() {
+		?>
+		<label for="git_remote_updater_site">
+			<input type="text" style="width:50%;" id="git_remote_updater_site" name="git_remote_updater_site" value="" autofocus>
+			<br>
+			<span class="description">
+				<?php esc_html_e( 'URI is case sensitive.', 'git-remote-updater' ); ?>
+			</span>
+		</label>
+		<?php
+	}
+
+	/**
+	 * API key setting.
+	 */
+	public function get_api_key() {
+		?>
+		<label for="git_remote_updater_key">
+			<input type="text" style="width:50%;" id="git_remote_updater_key" name="git_remote_updater_key" value="">
+		</label>
+		<?php
+	}
+
 }
