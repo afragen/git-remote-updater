@@ -107,6 +107,7 @@ trait Webhooks {
 		$json = get_site_transient( 'git_remote_updater_repo_data' );
 
 		if ( ! $json ) {
+			$json = [];
 			foreach ( $config as $sites ) {
 				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
 				$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
