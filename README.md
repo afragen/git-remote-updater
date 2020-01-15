@@ -20,6 +20,8 @@ Requires [GitHub Updater](https://github.com/afragen/github-updater) v.9.0.0 or 
 
 You can obtain the needed data from your `GitHub Updater > Remote Management` tab and then copy it into the `Settings > Add Site` form. You will only need to update data if your REST API key changes.
 
+![Git Remote Updater Settings](https://github.com/afragen/github-updater/raw/develop/wiki-assets/screenshot-14.png)
+
 Update feedback will show at the top of the page. If you have debug logging set on your site, it is also added to the `debug.log`.
 
 I recommend running Git Remote Updater from a local development environment installation of WordPress. It makes the collection and transfer of JSON files simpler, though you can run it from any WordPress site.
