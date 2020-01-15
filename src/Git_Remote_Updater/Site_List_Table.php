@@ -109,7 +109,7 @@ class Site_List_Table extends \WP_List_Table {
 
 		// Build row actions.
 		$actions = [
-			'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
+			// 'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
 			'delete' => sprintf( '<a href="%s&action=%s&site=%s">Delete</a>', $location, 'delete', $item['ID'] ),
 		];
 
