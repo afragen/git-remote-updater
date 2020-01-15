@@ -34,11 +34,11 @@ By using the `Site URL` and the `REST API key` you can add sites to the **Settin
 
 Once you have site data added, the **Actions** tab will present options for you to update repositories.
 
-You can update individual repositories across all the sites the exist on.
+You can update individual repositories across all the sites the repositories exist on.
 
 ![Update individual repos](./assets/screenshot-1.png)
 
-Or you can update all the repositories on an individual site at once.
+Or you can update all the repositories on an individual site all at once.
 
 ![Update whole site](./assets/screenshot-2.png)
 
