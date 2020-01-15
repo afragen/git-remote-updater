@@ -29,7 +29,6 @@ if ( ! class_exists( 'WP_List_Table' ) ) {
  * Class Site_List_Table
  */
 class Site_List_Table extends \WP_List_Table {
-
 	/**
 	 * Holds site options.
 	 *
@@ -48,13 +47,12 @@ class Site_List_Table extends \WP_List_Table {
 		// Set parent defaults.
 		parent::__construct(
 			[
-				'singular' => 'site',     // singular name of the listed records
-				'plural'   => 'sites',    // plural name of the listed records
+				'singular' => 'site',     // singular name of the listed records.
+				'plural'   => 'sites',    // plural name of the listed records.
 				'ajax'     => false,        // does this table support ajax?
 			]
 		);
 	}
-
 
 	/** ************************************************************************
 	 * Recommended. This method is called when the parent class can't find a method
@@ -73,8 +71,8 @@ class Site_List_Table extends \WP_List_Table {
 	 * For more detailed insight into how columns are handled, take a look at
 	 * WP_List_Table::single_row_columns()
 	 *
-	 * @param array $item A singular item (one full row's worth of data)
-	 * @param array $column_name The name/slug of the column to be processed
+	 * @param  array $item        A singular item (one full row's worth of data).
+	 * @param  array $column_name The name/slug of the column to be processed.
 	 * @return string Text or HTML to be placed inside the column <td>
 	 **************************************************************************/
 	public function column_default( $item, $column_name ) {
@@ -83,10 +81,9 @@ class Site_List_Table extends \WP_List_Table {
 			case 'api_key':
 				return $item[ $column_name ];
 			default:
-				return print_r( $item, true ); // Show the whole array for troubleshooting purposes
+				return print_r( $item, true ); // Show the whole array for troubleshooting purposes.
 		}
 	}
-
 
 	/** ************************************************************************
 	 * Recommended. This is a custom column method and is responsible for what
@@ -100,16 +97,16 @@ class Site_List_Table extends \WP_List_Table {
 	 * will need to generate the URLs yourself. You could even ensure the links
 	 *
 	 * @see WP_List_Table::::single_row_columns()
-	 * @param array $item A singular item (one full row's worth of data)
+	 * @param  array $item A singular item (one full row's worth of data).
 	 * @return string Text to be placed inside the column <td> (site title only)
 	 **************************************************************************/
 	public function column_site( $item ) {
-		$location = add_query_arg( 'page', $_REQUEST['page'], '' );
-		$location = add_query_arg( 'tab', $_REQUEST['tab'], $location );
+		$location = add_query_arg( 'page', 'git-remote-updater', '' );
+		$location = add_query_arg( 'tab', 'git_remote_updater_settings', $location );
 
 		// Build row actions.
 		$actions = [
-			'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
+			// 'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
 			'delete' => sprintf( '<a href="%s&action=%s&site=%s">Delete</a>', $location, 'delete', $item['ID'] ),
 		];
 
@@ -117,12 +114,14 @@ class Site_List_Table extends \WP_List_Table {
 		return sprintf(
 			/* translators: 1: title, 2: ID, 3: row actions */
 			'%1$s <span style="color:silver">(id:%2$s)</span>%3$s',
-			/*$1%s*/ $item['site'],
-			/*$2%s*/ $item['ID'],
-			/*$3%s*/ $this->row_actions( $actions )
+			/*$1%s*/
+			$item['site'],
+			/*$2%s*/
+			$item['ID'],
+			/*$3%s*/
+			$this->row_actions( $actions )
 		);
 	}
-
 
 	/** ************************************************************************
 	 * REQUIRED if displaying checkboxes or using bulk actions! The 'cb' column
@@ -130,17 +129,18 @@ class Site_List_Table extends \WP_List_Table {
 	 * have it's own method.
 	 *
 	 * @see WP_List_Table::::single_row_columns()
-	 * @param array $item A singular item (one full row's worth of data)
+	 * @param  array $item A singular item (one full row's worth of data).
 	 * @return string Text to be placed inside the column <td> (movie title only)
 	 **************************************************************************/
 	public function column_cb( $item ) {
 		return sprintf(
 			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
-			/*$1%s*/ $this->_args['singular'],  // Let's simply repurpose the table's singular label ("movie")
-			/*$2%s*/ $item['ID']                // The value of the checkbox should be the record's id
+			/*$1%s*/
+			$this->_args['singular'],  // Let's simply repurpose the table's singular label ("site").
+			/*$2%s*/
+			$item['ID']                // The value of the checkbox should be the record's id.
 		);
 	}
-
 
 	/** ************************************************************************
 	 * REQUIRED! This method dictates the table's columns and titles. This should
@@ -157,13 +157,13 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function get_columns() {
 		$columns = [
-			'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text
+			'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text.
 			'site'    => esc_html__( 'Site', 'git-remote-updater' ),
 			'api_key' => esc_html__( 'REST API key', 'git-remote-updater' ),
 		];
+
 		return $columns;
 	}
-
 
 	/** ************************************************************************
 	 * Optional. If you want one or more columns to be sortable (ASC/DESC toggle),
@@ -181,12 +181,12 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function get_sortable_columns() {
 		$sortable_columns = [
-			'site' => [ 'site', false ],     // true means it's already sorted
+			'site' => [ 'site', false ],     // true means it's already sorted.
 			// 'api_key' => [ 'api_key', false ],
 		];
+
 		return $sortable_columns;
 	}
-
 
 	/** ************************************************************************
 	 * Optional. If you need to include bulk actions in your list table, this is
@@ -206,9 +206,9 @@ class Site_List_Table extends \WP_List_Table {
 		$actions = [
 			'delete' => esc_html__( 'Delete', 'git-remote-updater' ),
 		];
+
 		return $actions;
 	}
-
 
 	/** ************************************************************************
 	 * Optional. You can handle your bulk actions anywhere or anyhow you prefer.
@@ -218,22 +218,23 @@ class Site_List_Table extends \WP_List_Table {
 	 * @see $this->prepare_items()
 	 **************************************************************************/
 	public function process_bulk_action() {
-
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
-			foreach ( self::$options as $key => $option ) {
-				if ( in_array( $_REQUEST['site'], $option, true ) ) {
-					unset( self::$options[ $key ] );
-					update_site_option( 'git_remote_updater', self::$options );
+			$sites = isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : null;
+			$sites = is_array( $sites ) ? $sites : (array) $sites;
+			foreach ( $sites as $site ) {
+				foreach ( self::$options as $key => $option ) {
+					if ( in_array( $site, $option, true ) ) {
+						unset( self::$options[ $key ] );
+						update_site_option( 'git_remote_updater', self::$options );
+					}
 				}
 			}
 		}
 		if ( 'edit' === $this->current_action() ) {
 			wp_die( 'Items would go to edit when we write that code.' );
 		}
-
 	}
-
 
 	/** ************************************************************************
 	 * REQUIRED! This is where you prepare your data for display. This method will
@@ -251,10 +252,10 @@ class Site_List_Table extends \WP_List_Table {
 	 * @uses $this->set_pagination_args()
 	 **************************************************************************/
 	public function prepare_items() {
-		global $wpdb; // This is used only if making any database queries
+		global $wpdb; // This is used only if making any database queries.
 
 		/**
-		 * First, lets decide how many records per page to show
+		 * First, lets decide how many records per page to show.
 		 */
 		$per_page = 5;
 
@@ -342,9 +343,9 @@ class Site_List_Table extends \WP_List_Table {
 		 */
 		$this->set_pagination_args(
 			[
-				'total_items' => $total_items,                  // WE have to calculate the total number of items
-				'per_page'    => $per_page,                     // WE have to determine how many items to show on a page
-				'total_pages' => ceil( $total_items / $per_page ),   // WE have to calculate the total number of pages
+				'total_items' => $total_items,  // WE have to calculate the total number of items.
+				'per_page'    => $per_page,  // WE have to determine how many items to show on a page.
+				'total_pages' => ceil( $total_items / $per_page ), // WE have to calculate the total number of pages.
 			]
 		);
 	}
@@ -360,8 +361,8 @@ class Site_List_Table extends \WP_List_Table {
 	public function usort_reorder( $a, $b ) {
 		$orderby = ( ! empty( $_REQUEST['orderby'] ) ) ? $_REQUEST['orderby'] : 'site'; // If no sort, default to site.
 		$order   = ( ! empty( $_REQUEST['order'] ) ) ? $_REQUEST['order'] : 'asc'; // If no order, default to asc.
-		$result  = strcmp( $a[ $orderby ], $b[ $orderby ] ); // Determine sort order
-		return ( $order === 'asc' ) ? $result : -$result; // Send final sort direction to usort.
+		$result  = strcmp( $a[ $orderby ], $b[ $orderby ] ); // Determine sort order.
+		return ( 'asc' === $order ) ? $result : -$result; // Send final sort direction to usort.
 	}
 
 	/**
@@ -373,18 +374,14 @@ class Site_List_Table extends \WP_List_Table {
 	 */
 	public function render_list_table() {
 		// Fetch, prepare, sort, and filter our data...
-		$this->prepare_items();
-
-		?>
+		$this->prepare_items(); ?>
 		<div class="wrap">
 			<h2>Site List Table</h2>
 
 			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 			<form id="sites-filter" method="get">
 				<!-- For plugins, we also need to ensure that the form posts back to our current page -->
-				<?php $location = $_REQUEST['page']; ?>
-				<?php $location = add_query_arg( 'tab', $_REQUEST['tab'], $location ); ?>
-				<input type="hidden" name="page" value="<?php echo $location; ?>" />
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
 				<!-- Now we can render the completed list table -->
 				<?php $this->display(); ?>
 			</form>
