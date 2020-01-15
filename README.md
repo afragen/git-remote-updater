@@ -51,3 +51,18 @@ If there is a timeout error in the update process, Git Remote Upater will contin
 Other errors will not attempt to retry the update an will display the appropriate error.
 
 Any site that is unreachable will not display any repository data in the **Actions** tab.
+
+## Filters and Hooks
+
+If you have specific repositories that you wish to exclude you can add them using the filter hook as follows.
+
+```php
+add_filter(
+	'git_remote_updater_remove_site_data',
+	function() {
+		return [ 'caldera-forms', 'github-updater' ];
+	}
+);
+```
+
+PRs are welcome against the `develop` branch.
