@@ -104,8 +104,8 @@ class Site_List_Table extends \WP_List_Table {
 	 * @return string Text to be placed inside the column <td> (site title only)
 	 **************************************************************************/
 	public function column_site( $item ) {
-		$location = add_query_arg( 'page', $_REQUEST['page'], '' );
-		$location = add_query_arg( 'tab', $_REQUEST['tab'], $location );
+		$location = add_query_arg( 'page', 'git-remote-updater', '' );
+		$location = add_query_arg( 'tab', 'git_remote_updater_settings', $location );
 
 		// Build row actions.
 		$actions = [
@@ -136,7 +136,7 @@ class Site_List_Table extends \WP_List_Table {
 	public function column_cb( $item ) {
 		return sprintf(
 			'<input type="checkbox" name="%1$s[]" value="%2$s" />',
-			/*$1%s*/ $this->_args['singular'],  // Let's simply repurpose the table's singular label ("movie")
+			/*$1%s*/ $this->_args['singular'],  // Let's simply repurpose the table's singular label ("site")
 			/*$2%s*/ $item['ID']                // The value of the checkbox should be the record's id
 		);
 	}
@@ -386,9 +386,7 @@ class Site_List_Table extends \WP_List_Table {
 			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 			<form id="sites-filter" method="get">
 				<!-- For plugins, we also need to ensure that the form posts back to our current page -->
-				<?php $location = $_REQUEST['page']; ?>
-				<?php $location = add_query_arg( 'tab', $_REQUEST['tab'], $location ); ?>
-				<input type="hidden" name="page" value="<?php echo $location; ?>" />
+				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
 				<!-- Now we can render the completed list table -->
 				<?php $this->display(); ?>
 			</form>

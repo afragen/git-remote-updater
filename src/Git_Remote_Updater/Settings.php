@@ -98,6 +98,11 @@ class Settings {
 		$action = is_multisite() ? 'edit.php?action=git-remote-updater' : 'options.php';
 		$tab    = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
 
+		// Kludge for "redirect" after WP_List_Table bulk actions.
+		if ( isset( $_REQUEST['_wp_http_referer'], $_REQUEST['_wpnonce'], $_REQUEST['action'], $_REQUEST['action2'] ) ) {
+			$tab = 'git_remote_updater_settings';
+		}
+
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Remote Updater', 'git-remote-updater' );
 		echo '</h2>';
