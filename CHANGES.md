@@ -12,3 +12,4 @@
 * keep retrying if remote response is WP_Error
 * added filter and function to remove slugs from appearing for updates
 * added a Settings tab to add site data, removed JSON storage directory
+* added nonce checks for WP_List_Table

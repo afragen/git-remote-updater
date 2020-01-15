@@ -99,7 +99,7 @@ class Settings {
 		$tab    = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
 
 		// Kludge for "redirect" after WP_List_Table bulk actions.
-		if ( isset( $_REQUEST['_wp_http_referer'], $_REQUEST['_wpnonce'], $_REQUEST['action'], $_REQUEST['action2'] ) ) {
+		if ( isset( $_REQUEST['_wp_http_referer'], $_REQUEST['_wpnonce_list'] ) ) {
 			$tab = 'git_remote_updater_settings';
 		}
 

@@ -107,7 +107,7 @@ class Site_List_Table extends \WP_List_Table {
 		// Build row actions.
 		$actions = [
 			// 'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
-			'delete' => sprintf( '<a href="%s&action=%s&site=%s">Delete</a>', $location, 'delete', $item['ID'] ),
+			'delete' => sprintf( '<a href="%s&action=%s&site=%s">Delete</a>', wp_nonce_url( $location, -1, '_wpnonce_row_action_delete' ), 'delete', $item['ID'] ),
 		];
 
 		// Return the title contents.
@@ -220,6 +220,7 @@ class Site_List_Table extends \WP_List_Table {
 	public function process_bulk_action() {
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
+			$this->check_process_action_nonce();
 			$sites = isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : null;
 			$sites = is_array( $sites ) ? $sites : (array) $sites;
 			foreach ( $sites as $site ) {
@@ -233,6 +234,31 @@ class Site_List_Table extends \WP_List_Table {
 		}
 		if ( 'edit' === $this->current_action() ) {
 			wp_die( 'Items would go to edit when we write that code.' );
+		}
+	}
+
+	/**
+	 * Check nonces.
+	 *
+	 * @return void
+	 */
+	private function check_process_action_nonce() {
+		$nonce_exists = false;
+		$nonces       = [
+			'_wpnonce_list'              => 'process-items',
+			'_wpnonce_row_action_delete' => -1,
+		];
+		foreach ( $nonces as $nonce => $action ) {
+			if ( array_key_exists( $nonce, $_REQUEST ) ) {
+				$nonce_exists = true;
+				break;
+			}
+		}
+		if ( ! $nonce_exists ) {
+			wp_die( esc_html__( 'A nonce was not properly set. Please report an issue.', 'git-remote-updater' ) );
+		}
+		if ( ! wp_verify_nonce( $_REQUEST[ $nonce ], $action ) ) {
+			wp_die( esc_html__( 'Your nonce did not verify.', 'git-remote-updater' ) );
 		}
 	}
 
@@ -373,13 +399,15 @@ class Site_List_Table extends \WP_List_Table {
 	 * @return void
 	 */
 	public function render_list_table() {
+
 		// Fetch, prepare, sort, and filter our data...
 		$this->prepare_items(); ?>
 		<div class="wrap">
 			<h2>Site List Table</h2>
 
 			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
-			<form id="sites-filter" method="get">
+			<form id="sites-list" method="get">
+			<?php wp_nonce_field( 'process-items', '_wpnonce_list' ); ?>
 				<!-- For plugins, we also need to ensure that the form posts back to our current page -->
 				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
 				<!-- Now we can render the completed list table -->
