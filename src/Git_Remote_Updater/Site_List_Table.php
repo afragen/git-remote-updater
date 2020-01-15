@@ -221,10 +221,14 @@ class Site_List_Table extends \WP_List_Table {
 
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
-			foreach ( self::$options as $key => $option ) {
-				if ( in_array( $_REQUEST['site'], $option, true ) ) {
-					unset( self::$options[ $key ] );
-					update_site_option( 'git_remote_updater', self::$options );
+			$sites = isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : null;
+			$sites = is_array( $sites ) ? $sites : (array) $sites;
+			foreach ( $sites as $site ) {
+				foreach ( self::$options as $key => $option ) {
+					if ( in_array( $site, $option, true ) ) {
+						unset( self::$options[ $key ] );
+						update_site_option( 'git_remote_updater', self::$options );
+					}
 				}
 			}
 		}
