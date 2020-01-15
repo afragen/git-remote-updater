@@ -26,7 +26,7 @@ class Actions {
 	/**
 	 * Display Actions page.
 	 *
-	 * @param string $action
+	 * @param string $action Form action.
 	 *
 	 * @return void
 	 */
