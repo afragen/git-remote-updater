@@ -39,7 +39,7 @@ class Settings_Row {
 	 */
 	private function can_run() {
 		if ( empty( $this->sites ) || empty( $this->repos ) ) {
-			wp_die( esc_html__( 'Please add JSON config files to your JSON storage folder.', 'git-remote-updater' ) );
+			wp_die( esc_html__( 'Please add a site config to your Settings.', 'git-remote-updater' ) );
 		}
 	}
 

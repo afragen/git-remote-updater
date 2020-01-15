@@ -36,13 +36,6 @@ class Bootstrap {
 	protected $dir;
 
 	/**
-	 * Holds JSON storage directory path.
-	 *
-	 * @var $storage
-	 */
-	protected $storage;
-
-	/**
 	 * Constructor.
 	 *
 	 * @param string $file Main plugin file.

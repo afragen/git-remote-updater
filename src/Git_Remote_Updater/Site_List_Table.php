@@ -379,7 +379,7 @@ class Site_List_Table extends \WP_List_Table {
 		<div class="wrap">
 			<h2>Site List Table</h2>
 
-			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like 	bulk actions -->
+			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
 			<form id="sites-filter" method="get">
 				<!-- For plugins, we also need to ensure that the form posts back to our current page -->
 				<?php $location = $_REQUEST['page']; ?>

@@ -108,6 +108,7 @@ trait Webhooks {
 		$json = false;
 
 		if ( ! $json ) {
+			$json = [];
 			foreach ( $config as $sites ) {
 				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
 				$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
@@ -229,6 +230,9 @@ trait Webhooks {
 	 * @return array
 	 */
 	private function remove_slugs_from_json( $json, $remove_slugs ) {
+		if ( ! $json ) {
+			return false;
+		}
 		foreach ( $json as $sites ) {
 			foreach ( $sites->sites->slugs as $key => $slug ) {
 				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
