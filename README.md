@@ -24,7 +24,7 @@ You can obtain the needed data from your `GitHub Updater > Remote Management` ta
 
 Update feedback will show at the top of the page. If you have debug logging set on your site, it is also added to the `debug.log`.
 
-I recommend running Git Remote Updater from a local development environment installation of WordPress. It makes the collection and transfer of JSON files simpler, though you can run it from any WordPress site.
+I recommend running Git Remote Updater from a local development environment installation of WordPress, though you can run it from any WordPress site.
 
 ## Usage
 
