@@ -28,11 +28,11 @@ I recommend running Git Remote Updater from a local development environment inst
 
 ## Usage
 
-By using the `Site URL` and the `REST API key` you can add sites to the **Settings** tab.
+By using the `Site URL` and the `REST API key` you can add sites to the **Settings** page.
 
 ![Settings](./assets/screenshot-3.png)
 
-Once you have site data added, the **Actions** tab will present options for you to update repositories.
+Once you have site data added, the **Update** page will present options for you to update repositories.
 
 You can update individual repositories across all the sites the repositories exist on.
 
@@ -50,7 +50,7 @@ If there is a timeout error in the update process, Git Remote Upater will contin
 
 Other errors will not attempt to retry the update an will display the appropriate error.
 
-Any site that is unreachable will not display any repository data in the **Actions** tab.
+Any site that is unreachable will not display any repository data in the **Update** page.
 
 ## Filters and Hooks
 

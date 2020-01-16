@@ -31,11 +31,11 @@ I recommend running Git Remote Updater from a local development environment inst
 
 ## Usage
 
-By using the `Site URL` and the `REST API key` you can add sites to the **Settings** tab.
+By using the `Site URL` and the `REST API key` you can add sites to the **Settings** page.
 
 ![Settings](./assets/screenshot-3.png)
 
-Once you have site data added, the **Actions** tab will present options for you to update repositories.
+Once you have site data added, the **Update** page will present options for you to update repositories.
 
 You can update individual repositories across all the sites the repositories exist on.
 
@@ -69,3 +69,10 @@ add_filter(
 ```
 
 PRs are welcome against the `develop` branch.
+
+## Screenshots
+
+1. Update by Repository
+2. Update by Site
+3. Settings
+4. Feedback
