@@ -101,8 +101,7 @@ class Site_List_Table extends \WP_List_Table {
 	 * @return string Text to be placed inside the column <td> (site title only)
 	 **************************************************************************/
 	public function column_site( $item ) {
-		$location = add_query_arg( 'page', 'git-remote-updater', '' );
-		$location = add_query_arg( 'tab', 'git_remote_updater_settings', $location );
+		$location = add_query_arg( 'page', $_REQUEST['page'], '' );
 
 		// Build row actions.
 		$actions = [
@@ -221,6 +220,7 @@ class Site_List_Table extends \WP_List_Table {
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
 			$this->check_process_action_nonce();
+			// phpcs:ignore WordPress.Security.NonceVerification
 			$sites = isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : null;
 			$sites = is_array( $sites ) ? $sites : (array) $sites;
 			foreach ( $sites as $site ) {
@@ -401,19 +401,20 @@ class Site_List_Table extends \WP_List_Table {
 	public function render_list_table() {
 
 		// Fetch, prepare, sort, and filter our data...
-		$this->prepare_items(); ?>
-		<div class="wrap">
-			<h2>Site List Table</h2>
+		$this->prepare_items();
+		echo '<div class="wrap">';
+		echo '<h2>' . esc_html__( 'Settings', 'git-remote-updater' ) . '</h2>';
 
-			<!-- Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions -->
-			<form id="sites-list" method="get">
-			<?php wp_nonce_field( 'process-items', '_wpnonce_list' ); ?>
-				<!-- For plugins, we also need to ensure that the form posts back to our current page -->
-				<input type="hidden" name="page" value="<?php echo $_REQUEST['page']; ?>" />
-				<!-- Now we can render the completed list table -->
-				<?php $this->display(); ?>
-			</form>
-		</div>
-		<?php
+		// Forms are NOT created automatically, so you need to wrap the table in one to use features like bulk actions.
+		echo '<form id="sites-list" method="get">';
+		wp_nonce_field( 'process-items', '_wpnonce_list' );
+
+		// For plugins, we also need to ensure that the form posts back to our current page.
+		echo '<input type="hidden" name="page" value="' . $_REQUEST['page'] . '" />';
+
+		// Now we can render the completed list table.
+		$this->display();
+		echo '</form>';
+		echo '</div>';
 	}
 }

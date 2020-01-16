@@ -45,50 +45,36 @@ class Settings {
 			return;
 		}
 
-		$parent     = is_multisite() ? 'settings.php' : 'tools.php';
 		$capability = is_multisite() ? 'manage_network' : 'manage_options';
 
-		add_submenu_page(
-			$parent,
+		add_menu_page(
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
 			$capability,
 			'git-remote-updater',
-			[ $this, 'create_admin_page' ]
+			[ $this, 'create_admin_page' ],
+			'dashicons-update',
+			null
 		);
-	}
 
-	/**
-	 * Return settings tabs.
-	 *
-	 * @return array
-	 */
-	private function get_settings_tabs() {
-		$tabs = [
-			'git_remote_updater_actions'  => esc_html__( 'Actions', 'git-remote-updater' ),
-			'git_remote_updater_settings' => esc_html__( 'Settings', 'git-remote-updater' ),
-		];
+		add_submenu_page(
+			'git-remote-updater',
+			esc_html__( 'Update', 'git-remote-updater' ),
+			esc_html__( 'Update', 'git-remote-updater' ),
+			$capability,
+			'git-remote-updater',
+			[ $this, 'create_admin_page' ],
+		);
 
-		return $tabs;
-	}
+		add_submenu_page(
+			'git-remote-updater',
+			esc_html__( 'Settings', 'git-remote-updater' ),
+			esc_html__( 'Settings', 'git-remote-updater' ),
+			$capability,
+			'git-remote-updater-settings',
+			[ $this, 'create_admin_page' ],
+		);
 
-	/**
-	 * Renders setting tabs.
-	 *
-	 * Walks through the object's tabs array and prints them one by one.
-	 * Provides the heading for the settings page.
-	 *
-	 * @access private
-	 */
-	private function settings_tabs() {
-		$tabs        = $this->get_settings_tabs();
-		$current_tab = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
-		echo '<nav class="nav-tab-wrapper" aria-label="Secondary menu">';
-		foreach ( $tabs as $key => $name ) {
-			$active = ( $current_tab === $key ) ? 'nav-tab-active' : '';
-			echo '<a class="nav-tab ' . $active . '" href="?page=git-remote-updater&tab=' . $key . '">' . $name . '</a>';
-		}
-		echo '</nav>';
 	}
 
 	/**
@@ -96,23 +82,21 @@ class Settings {
 	 */
 	public function create_admin_page() {
 		$action = is_multisite() ? 'edit.php?action=git-remote-updater' : 'options.php';
-		$tab    = isset( $_GET['tab'] ) ? esc_attr( $_GET['tab'] ) : 'git_remote_updater_actions';
+		$page   = isset( $_GET['page'] ) ? esc_attr( ( $_GET['page'] ) ) : 'git-remote-updater';
 
 		// Kludge for "redirect" after WP_List_Table bulk actions.
 		if ( isset( $_REQUEST['_wp_http_referer'], $_REQUEST['_wpnonce_list'] ) ) {
-			$tab = 'git_remote_updater_settings';
+			$page = 'git-remote-updater-settings';
 		}
 
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Remote Updater', 'git-remote-updater' );
 		echo '</h2>';
 
-		$this->settings_tabs();
-
-		if ( 'git_remote_updater_actions' === $tab ) {
+		if ( 'git-remote-updater' == $page ) {
 			( new Actions() )->display( $action );
 		}
-		if ( 'git_remote_updater_settings' === $tab ) {
+		if ( 'git-remote-updater-settings' === $page ) {
 			( new Site_List_Table() )->render_list_table();
 			$this->register_settings();
 			echo '<form class="settings" method="post" action="' . esc_attr__( $action ) . '">';
@@ -179,15 +163,13 @@ class Settings {
 	 * @return void
 	 */
 	public function redirect() {
-		$redirect_url = is_multisite() ? network_admin_url( 'settings.php' ) : admin_url( 'tools.php' );
+		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
 		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( $_POST['_wp_http_referer'], PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
-		$arr['tab'] = ! empty( $arr['tab'] ) ? $arr['tab'] : 'git_remote_updater_settings';
 
 		$location = add_query_arg(
 			[
 				'page'    => $arr['page'],
-				'tab'     => $arr['tab'],
 				'updated' => true,
 			],
 			$redirect_url
