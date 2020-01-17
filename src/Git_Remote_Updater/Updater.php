@@ -30,38 +30,36 @@ class Updater {
 	 * @return void
 	 */
 	public function update() {
-		if ( isset( $_POST['git_remote_updater_nonce'] ) ) {
-			if ( ! check_admin_referer( 'git_remote_updater_nonce', 'git_remote_updater_nonce' ) ) {
-				return;
-			}
-			$this->init();
-			$message  = null;
-			$webhooks = [];
-			$update   = array_search( 'Update', $_POST, true );
-			$type     = false !== strpos( $update, 'plugin_' ) ? 'plugin' : null;
-			$type     = false !== strpos( $update, 'theme_' ) ? 'theme' : $type;
-			$update   = 'plugin' === $type ? str_replace( 'plugin_', '', $update ) : $update;
-			$update   = 'theme' === $type ? str_replace( 'theme_', '', $update ) : $update;
-			$site     = null === $type ? str_replace( '_', '.', $update ) : null;
-			$webhooks = null !== $site ? $this->all_webhooks[ $site ] : $webhooks;
-			if ( null === $site ) {
-				foreach ( $this->repos[ $update ]['urls'] as $url ) {
-					$webhooks[] = $url;
-				}
-			}
-
-			// Try again if response is WP_Error.
-			foreach ( $webhooks as $webhook ) {
-				do {
-					$response  = wp_remote_get( $webhook );
-					$message[] = $this->parse_response( $response, $webhook );
-				} while ( is_wp_error( $response ) );
-			}
-			if ( null !== $message ) {
-				set_site_transient( 'git_remote_updater_feedback', $message, 10 );
-			}
-			( new Settings() )->redirect();
+		if ( ! ( isset( $_POST['git_remote_updater_nonce'] ) && check_admin_referer( 'git_remote_updater_nonce', 'git_remote_updater_nonce' ) ) ) {
+			return;
 		}
+		$this->init();
+		$message  = null;
+		$webhooks = [];
+		$update   = array_search( 'Update', $_POST, true );
+		$type     = false !== strpos( $update, 'plugin_' ) ? 'plugin' : null;
+		$type     = false !== strpos( $update, 'theme_' ) ? 'theme' : $type;
+		$update   = 'plugin' === $type ? str_replace( 'plugin_', '', $update ) : $update;
+		$update   = 'theme' === $type ? str_replace( 'theme_', '', $update ) : $update;
+		$site     = null === $type ? str_replace( '_', '.', $update ) : null;
+		$webhooks = null !== $site ? $this->all_webhooks[ $site ] : $webhooks;
+		if ( null === $site ) {
+			foreach ( $this->repos[ $update ]['urls'] as $url ) {
+				$webhooks[] = $url;
+			}
+		}
+
+		// Try again if response is WP_Error.
+		foreach ( $webhooks as $webhook ) {
+			do {
+				$response  = wp_remote_get( $webhook );
+				$message[] = $this->parse_response( $response, $webhook );
+			} while ( is_wp_error( $response ) );
+		}
+		if ( null !== $message ) {
+			set_site_transient( 'git_remote_updater_feedback', $message, 10 );
+		}
+		( new Settings() )->redirect();
 	}
 
 	/**
