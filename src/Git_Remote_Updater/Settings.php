@@ -80,7 +80,7 @@ class Settings {
 		$page   = isset( $_GET['page'] ) ? esc_attr( ( $_GET['page'] ) ) : 'git-remote-updater';
 
 		// Kludge for "redirect" after WP_List_Table bulk actions.
-		if ( isset( $_REQUEST['_wp_http_referer'], $_REQUEST['_wpnonce_list'] ) ) {
+		if ( isset( $_REQUEST['_wpnonce_list'] ) ) {
 			$page = 'git-remote-updater-settings';
 		}
 
