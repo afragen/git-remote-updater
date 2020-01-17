@@ -40,11 +40,6 @@ class Settings {
 	 * Add options page.
 	 */
 	public function add_plugin_menu() {
-		global $_registered_pages;
-		if ( isset( $_registered_pages['settings_page_git-remote-updater'] ) ) {
-			return;
-		}
-
 		$capability = is_multisite() ? 'manage_network' : 'manage_options';
 
 		add_menu_page(
