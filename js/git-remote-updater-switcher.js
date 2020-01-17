@@ -7,7 +7,7 @@
 
 (function () {
 
-	// Hide non-default (Bitbucket & GitLab) settings on page load.
+	// Hide non-default settings on page load.
 	let nonDefault = ['git-remote-updater-site'];
 
 	nonDefault.forEach(function (item) {

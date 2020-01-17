@@ -36,13 +36,6 @@ class Bootstrap {
 	protected $dir;
 
 	/**
-	 * Holds JSON storage directory path.
-	 *
-	 * @var $storage
-	 */
-	protected $storage;
-
-	/**
 	 * Constructor.
 	 *
 	 * @param string $file Main plugin file.
@@ -50,9 +43,8 @@ class Bootstrap {
 	 * @return void
 	 */
 	public function __construct( $file ) {
-		$this->file    = $file;
-		$this->dir     = dirname( $file );
-		$this->storage = WP_CONTENT_DIR . '/uploads/git-remote-updater';
+		$this->file = $file;
+		$this->dir  = dirname( $file );
 	}
 
 	/**
@@ -69,13 +61,6 @@ class Bootstrap {
 		);
 
 		define( 'GIT_REMOTE_UPDATER_DIR', $this->dir );
-		define( 'GIT_REMOTE_UPDATER_JSON_PATH', $this->storage );
-
-		// Check/create JSON storage location.
-		if ( ! wp_mkdir_p( $this->storage ) ) {
-			$error = __( 'Unable to create JSON storage folder for Git Remote Updater.', 'git-remote-updater' );
-			wp_die( esc_html( $error ) );
-		}
 
 		( new Settings() )->load_hooks();
 	}

@@ -49,38 +49,35 @@ trait Webhooks {
 	 * @return void
 	 */
 	public function init() {
-		$config = $this->process_json( GIT_REMOTE_UPDATER_JSON_PATH );
-		$config = $this->get_site_data( $config );
+		$options = get_site_option( 'git_remote_updater', [] );
+		$config  = $this->process_options( $options );
+		$config  = $this->get_site_data( $config );
 		$this->get_webhooks( $config );
 		$this->get_all_webhooks();
 	}
 
 	/**
-	 * Process bulk-updates.json.
+	 * Process options for config object.
 	 *
-	 * @param string $dir Directory path.
+	 * @param array $options Site options.
 	 *
-	 * @return \stdClass $configs
+	 * @return \stdClass
 	 */
-	public function process_json( string $dir ) {
-		$jsons        = $this->list_directory( $dir );
-		$configs      = new \stdClass();
-		$site_configs = [];
+	private function process_options( $options ) {
+		$config    = [];
+		$namespace = 'github-updater/v1';
+		$route     = 'repos';
 
-		foreach ( $jsons as $json ) {
-			$config = null;
-			if ( file_exists( "{$dir}/{$json}" ) ) {
-				$config = file_get_contents( "{$dir}/{$json}" );
-				if ( empty( $config ) ||
-				null === ( $config = json_decode( $config ) )
-				) {
-					continue;
-				}
-			}
-			$site_configs[] = $config;
+		foreach ( $options as $option ) {
+			$site                             = new \stdClass();
+			$site->site                       = new \stdClass();
+			$site->site->host                 = $option['site'];
+			$site->site->rest_namespace_route = "$namespace/$route/";
+			$site->site->rest_api_key         = $option['api_key'];
+			$config[]                         = $site;
 		}
 
-		return (object) $site_configs;
+		return (object) $config;
 	}
 
 	/**
@@ -110,6 +107,7 @@ trait Webhooks {
 		$json = get_site_transient( 'git_remote_updater_repo_data' );
 
 		if ( ! $json ) {
+			$json = [];
 			foreach ( $config as $sites ) {
 				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
 				$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
@@ -231,6 +229,9 @@ trait Webhooks {
 	 * @return array
 	 */
 	private function remove_slugs_from_json( $json, $remove_slugs ) {
+		if ( ! $json ) {
+			return false;
+		}
 		foreach ( $json as $sites ) {
 			foreach ( $sites->sites->slugs as $key => $slug ) {
 				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
