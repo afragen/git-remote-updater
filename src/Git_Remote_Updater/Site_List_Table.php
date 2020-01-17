@@ -219,7 +219,7 @@ class Site_List_Table extends \WP_List_Table {
 	public function process_bulk_action() {
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
-			$this->check_process_action_nonce();
+			$this->check_nonce();
 			// phpcs:ignore WordPress.Security.NonceVerification
 			$sites = isset( $_REQUEST['site'] ) ? $_REQUEST['site'] : null;
 			$sites = is_array( $sites ) ? $sites : (array) $sites;
@@ -242,7 +242,7 @@ class Site_List_Table extends \WP_List_Table {
 	 *
 	 * @return void
 	 */
-	private function check_process_action_nonce() {
+	private function check_nonce() {
 		$nonce_exists = false;
 		$nonces       = [
 			'_wpnonce_list'              => 'process-items',
