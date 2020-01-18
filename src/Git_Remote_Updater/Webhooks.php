@@ -105,9 +105,17 @@ trait Webhooks {
 	 */
 	public function get_site_data( \stdClass $config ) {
 		$json = get_site_transient( 'git_remote_updater_repo_data' );
-		$json = false;
 
-		if ( ! $json ) {
+		/**
+		 * Filter whether we use the repo data cache or always check API.
+		 * Useful for testing. Default is to use cached data.
+		 *
+		 * @since 0.4.5
+		 * @return bool
+		 */
+		$cache = \apply_filters( 'git_remote_updater_repo_cache', true );
+
+		if ( ! $json || ! $cache ) {
 			$json = [];
 			foreach ( $config as $sites ) {
 				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
