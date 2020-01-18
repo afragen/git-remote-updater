@@ -123,7 +123,7 @@ class Settings {
 			foreach ( $options as $option ) {
 				$duplicate = in_array( $new_options[0]['ID'], $option, true );
 				if ( $duplicate ) {
-					continue;
+					break;
 				}
 			}
 			if ( ! $duplicate ) {
