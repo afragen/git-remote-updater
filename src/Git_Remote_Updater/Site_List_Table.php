@@ -233,7 +233,7 @@ class Site_List_Table extends \WP_List_Table {
 			}
 		}
 		if ( 'edit' === $this->current_action() ) {
-			wp_die( 'Items would go to edit when we write that code.' );
+			wp_die( esc_html__( 'Items would go to edit when we write that code.', 'git-remote-updater' ) );
 		}
 	}
 
