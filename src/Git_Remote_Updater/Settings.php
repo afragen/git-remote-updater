@@ -88,7 +88,7 @@ class Settings {
 		esc_html_e( 'Git Remote Updater', 'git-remote-updater' );
 		echo '</h2>';
 
-		if ( 'git-remote-updater' == $page ) {
+		if ( 'git-remote-updater' === $page ) {
 			( new Actions() )->display( $action );
 		}
 		if ( 'git-remote-updater-settings' === $page ) {
