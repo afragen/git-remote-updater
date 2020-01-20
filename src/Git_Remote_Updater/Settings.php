@@ -119,6 +119,7 @@ class Settings {
 				'api_key' => $_POST['git_remote_updater_key'],
 			];
 			$new_options = $this->sanitize( $new_options, $options );
+			$empty_add   = empty( $_POST['git_remote_updater_site'] );
 
 			foreach ( $options as $option ) {
 				$duplicate = in_array( $new_options[0]['ID'], $option, true );
@@ -126,7 +127,7 @@ class Settings {
 					break;
 				}
 			}
-			if ( ! $duplicate ) {
+			if ( ! $duplicate && ! $empty_add ) {
 				$options = array_merge( $options, $new_options );
 				update_site_option( 'git_remote_updater', $options );
 			}
