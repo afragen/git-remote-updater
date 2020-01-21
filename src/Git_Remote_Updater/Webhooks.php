@@ -106,16 +106,7 @@ trait Webhooks {
 	public function get_site_data( \stdClass $config ) {
 		$json = get_site_transient( 'git_remote_updater_repo_data' );
 
-		/**
-		 * Filter whether we use the repo data cache or always check API.
-		 * Useful for testing. Default is to use cached data.
-		 *
-		 * @since 0.4.5
-		 * @return bool
-		 */
-		$cache = \apply_filters( 'git_remote_updater_repo_cache', true );
-
-		if ( ! $json || ! $cache ) {
+		if ( ! $json ) {
 			$json = [];
 			foreach ( $config as $sites ) {
 				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
@@ -142,7 +133,15 @@ trait Webhooks {
 				$json = $this->remove_slugs_from_json( $json, $remove_slugs );
 			}
 
-			set_site_transient( 'git_remote_updater_repo_data', $json, 600 );
+			/**
+			 * Filter the transient timeout.
+			 * Useful for testing. Default is 600 seconds.
+			 *
+			 * @since 0.4.7
+			 * @return int
+			 */
+			$timeout = \apply_filters( 'git_remote_updater_repo_transient_timeout', 600 );
+			set_site_transient( 'git_remote_updater_repo_data', $json, $timeout );
 		}
 
 		return (object) $json;
