@@ -14,3 +14,4 @@
 * added a Settings tab to add site data, removed JSON storage directory
 * added nonce checks for WP_List_Table
 * move Git Remote Updater a top level menu
+* added `git_remote_updater_repo_transient_timeout` to set transient timeout, returns int with default of 600 seconds. I use this for testing.

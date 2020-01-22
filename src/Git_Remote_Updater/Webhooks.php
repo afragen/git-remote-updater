@@ -133,7 +133,15 @@ trait Webhooks {
 				$json = $this->remove_slugs_from_json( $json, $remove_slugs );
 			}
 
-			set_site_transient( 'git_remote_updater_repo_data', $json, 600 );
+			/**
+			 * Filter the transient timeout.
+			 * Useful for testing. Default is 600 seconds.
+			 *
+			 * @since 0.4.7
+			 * @return int
+			 */
+			$timeout = \apply_filters( 'git_remote_updater_repo_transient_timeout', 600 );
+			set_site_transient( 'git_remote_updater_repo_data', $json, $timeout );
 		}
 
 		return (object) $json;
