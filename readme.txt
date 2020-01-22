@@ -68,6 +68,17 @@ add_filter(
 );
 ```
 
+If you wish to modify the transient timeout for repo data; return the number of seconds, as an integer, to the following filter. Default is 600 seconds. Less is better for testing.
+
+```php
+add_filter(
+	'git_remote_updater_repo_transient_timeout',
+	function() {
+		return 5;
+	}
+);
+```
+
 PRs are welcome against the `develop` branch.
 
 ## Screenshots
