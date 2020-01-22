@@ -44,7 +44,7 @@ class Settings {
 
 		add_menu_page(
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
-			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
+			esc_html_x( 'Git Remote Updater', 'Menu item', 'git-remote-updater' ),
 			$capability,
 			'git-remote-updater',
 			[ $this, 'create_admin_page' ],
