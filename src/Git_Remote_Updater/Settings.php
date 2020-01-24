@@ -146,7 +146,7 @@ class Settings {
 		$new_input = [];
 
 		foreach ( (array) $input as $key => $value ) {
-			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( $value ) ) : sanitize_text_field( $value );
+			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( trim( $value ) ) ) : sanitize_text_field( $value );
 			$new_input[0]['ID']   = md5( $new_input[0]['site'] );
 		}
 
