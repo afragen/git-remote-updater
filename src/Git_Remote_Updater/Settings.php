@@ -44,7 +44,7 @@ class Settings {
 
 		add_menu_page(
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
-			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
+			esc_html_x( 'Git Remote Updater', 'Menu item', 'git-remote-updater' ),
 			$capability,
 			'git-remote-updater',
 			[ $this, 'create_admin_page' ],
@@ -146,7 +146,7 @@ class Settings {
 		$new_input = [];
 
 		foreach ( (array) $input as $key => $value ) {
-			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( $value ) ) : sanitize_text_field( $value );
+			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( trim( $value ) ) ) : sanitize_text_field( $value );
 			$new_input[0]['ID']   = md5( $new_input[0]['site'] );
 		}
 
