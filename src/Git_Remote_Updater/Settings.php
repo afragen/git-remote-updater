@@ -118,7 +118,7 @@ class Settings {
 				'site'    => $_POST['git_remote_updater_site'],
 				'api_key' => $_POST['git_remote_updater_key'],
 			];
-			$new_options = $this->sanitize( $new_options, $options );
+			$new_options = $this->sanitize( $new_options );
 			$empty_add   = empty( $_POST['git_remote_updater_site'] );
 
 			foreach ( $options as $option ) {
@@ -142,7 +142,7 @@ class Settings {
 	 *
 	 * @return array
 	 */
-	public function sanitize( $input, $options ) {
+	public function sanitize( $input ) {
 		$new_input = [];
 
 		foreach ( (array) $input as $key => $value ) {
