@@ -40,7 +40,7 @@ class Settings {
 	 * Add options page.
 	 */
 	public function add_plugin_menu() {
-		$capability = is_multisite() ? 'manage_network' : 'manage_options';
+		$capability = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 		add_menu_page(
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
