@@ -40,7 +40,7 @@ class Settings {
 	 * Add options page.
 	 */
 	public function add_plugin_menu() {
-		$capability = is_multisite() ? 'manage_network' : 'manage_options';
+		$capability = is_multisite() ? 'manage_network_options' : 'manage_options';
 
 		add_menu_page(
 			esc_html__( 'Git Remote Updater', 'git-remote-updater' ),
@@ -205,14 +205,14 @@ class Settings {
 
 		add_settings_section(
 			'git_remote_updater',
-			esc_html__( 'Add Site Data', 'git_remote_updater' ),
+			esc_html__( 'Add Site Data', 'git-remote-updater' ),
 			[],
 			'git_remote_updater'
 		);
 
 		add_settings_field(
 			'site',
-			esc_html__( 'Site URL', 'git_remote_updater' ),
+			esc_html__( 'Site URL', 'git-remote-updater' ),
 			[ $this, 'get_site' ],
 			'git_remote_updater',
 			'git_remote_updater'
@@ -220,7 +220,7 @@ class Settings {
 
 		add_settings_field(
 			'api_key',
-			esc_html__( 'REST API key', 'git_remote_updater' ),
+			esc_html__( 'REST API key', 'git-remote-updater' ),
 			[ $this, 'get_api_key' ],
 			'git_remote_updater',
 			'git_remote_updater'
