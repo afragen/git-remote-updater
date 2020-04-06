@@ -77,9 +77,11 @@ class Settings {
 	 */
 	public function create_admin_page() {
 		$action = is_multisite() ? 'edit.php?action=git-remote-updater' : 'options.php';
-		$page   = isset( $_GET['page'] ) ? esc_attr( ( $_GET['page'] ) ) : 'git-remote-updater';
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$page = isset( $_GET['page'] ) ? sanitize_file_name( wp_unslash( $_GET['page'] ) ) : 'git-remote-updater';
 
 		// Kludge for "redirect" after WP_List_Table bulk actions.
+		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		if ( isset( $_REQUEST['_wpnonce_list'] ) ) {
 			$page = 'git-remote-updater-settings';
 		}
@@ -111,15 +113,17 @@ class Settings {
 	public function update_settings() {
 		$options   = get_site_option( 'git_remote_updater', [] );
 		$duplicate = false;
+		// phpcs:disable WordPress.Security.NonceVerification.Missing
 		if ( isset( $_POST['option_page'], $_POST['git_remote_updater_site'], $_POST['git_remote_updater_key'] ) &&
 			'git_remote_updater' === $_POST['option_page']
 		) {
 			$new_options = [
-				'site'    => $_POST['git_remote_updater_site'],
-				'api_key' => $_POST['git_remote_updater_key'],
+				'site'    => sanitize_file_name( wp_unslash( $_POST['git_remote_updater_site'] ) ),
+				'api_key' => sanitize_key( wp_unslash( $_POST['git_remote_updater_key'] ) ),
 			];
 			$new_options = $this->sanitize( $new_options );
 			$empty_add   = empty( $_POST['git_remote_updater_site'] );
+			// phpcs:enable
 
 			foreach ( $options as $option ) {
 				$duplicate = in_array( $new_options[0]['ID'], $option, true );
@@ -160,7 +164,8 @@ class Settings {
 	 */
 	public function redirect() {
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
-		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( $_POST['_wp_http_referer'], PHP_URL_QUERY ) : null;
+		// phpcs:ignore WordPress.Security.NonceVerification.Missing
+		$query = isset( $_POST['_wp_http_referer'] ) ? parse_url( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ), PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
 
 		$location = add_query_arg(
