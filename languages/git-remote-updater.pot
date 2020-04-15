@@ -2,22 +2,21 @@
 # This file is distributed under the same license as the Git Remote Updater plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Remote Updater 0.4.4\n"
+"Project-Id-Version: Git Remote Updater 0.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-remote-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-01-17T18:12:29+00:00\n"
+"POT-Creation-Date: 2020-04-15T16:07:26+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: git-remote-updater\n"
 
 #. Plugin Name of the plugin
 #: src/Git_Remote_Updater/Settings.php:46
-#: src/Git_Remote_Updater/Settings.php:47
-#: src/Git_Remote_Updater/Settings.php:88
+#: src/Git_Remote_Updater/Settings.php:90
 msgid "Git Remote Updater"
 msgstr ""
 
@@ -49,6 +48,11 @@ msgstr ""
 msgid "Show Sites"
 msgstr ""
 
+#: src/Git_Remote_Updater/Settings.php:47
+msgctxt "Menu item"
+msgid "Git Remote Updater"
+msgstr ""
+
 #: src/Git_Remote_Updater/Settings.php:57
 #: src/Git_Remote_Updater/Settings.php:58
 #: src/Git_Remote_Updater/Settings_Row.php:77
@@ -58,15 +62,28 @@ msgstr ""
 
 #: src/Git_Remote_Updater/Settings.php:66
 #: src/Git_Remote_Updater/Settings.php:67
-#: src/Git_Remote_Updater/Site_List_Table.php:406
+#: src/Git_Remote_Updater/Site_List_Table.php:415
 msgid "Settings"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:100
+#: src/Git_Remote_Updater/Settings.php:102
 msgid "Add Site"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:238
+#: src/Git_Remote_Updater/Settings.php:213
+msgid "Add Site Data"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:220
+msgid "Site URL"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:228
+#: src/Git_Remote_Updater/Site_List_Table.php:163
+msgid "REST API key"
+msgstr ""
+
+#: src/Git_Remote_Updater/Settings.php:244
 msgid "URI is case sensitive."
 msgstr ""
 
@@ -75,7 +92,7 @@ msgid "Please add a site config to your Settings."
 msgstr ""
 
 #: src/Git_Remote_Updater/Settings_Row.php:54
-#: src/Git_Remote_Updater/Site_List_Table.php:160
+#: src/Git_Remote_Updater/Site_List_Table.php:162
 msgid "Site"
 msgstr ""
 
@@ -96,18 +113,18 @@ msgstr ""
 msgid "Sites"
 msgstr ""
 
-#: src/Git_Remote_Updater/Site_List_Table.php:161
-msgid "REST API key"
-msgstr ""
-
-#: src/Git_Remote_Updater/Site_List_Table.php:206
+#: src/Git_Remote_Updater/Site_List_Table.php:208
 msgid "Delete"
 msgstr ""
 
-#: src/Git_Remote_Updater/Site_List_Table.php:258
+#: src/Git_Remote_Updater/Site_List_Table.php:238
+msgid "Items would go to edit when we write that code."
+msgstr ""
+
+#: src/Git_Remote_Updater/Site_List_Table.php:260
 msgid "A nonce was not properly set. Please report an issue."
 msgstr ""
 
-#: src/Git_Remote_Updater/Site_List_Table.php:261
+#: src/Git_Remote_Updater/Site_List_Table.php:263
 msgid "Your nonce did not verify."
 msgstr ""

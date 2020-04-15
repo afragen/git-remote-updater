@@ -222,10 +222,8 @@ class Site_List_Table extends \WP_List_Table {
 		// Detect when a bulk action is being triggered...
 		if ( 'delete' === $this->current_action() ) {
 			$this->check_nonce();
-			// phpcs:disable WordPress.Security.NonceVerification.Recommended
-			// phpcs:disable WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
-			$sites = isset( $_REQUEST['site'] ) ? wp_unslash( $_REQUEST['site'] ) : null;
-			// phpcs:enable
+			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			$sites = isset( $_REQUEST['site'] ) ? sanitize_key( wp_unslash( $_REQUEST['site'] ) ) : null;
 			$sites = is_array( $sites ) ? $sites : (array) $sites;
 			foreach ( $sites as $site ) {
 				foreach ( self::$options as $key => $option ) {
