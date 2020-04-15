@@ -223,7 +223,7 @@ class Site_List_Table extends \WP_List_Table {
 		if ( 'delete' === $this->current_action() ) {
 			$this->check_nonce();
 			// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			$sites = isset( $_REQUEST['site'] ) ? sanitize_file_name( wp_unslash( $_REQUEST['site'] ) ) : null;
+			$sites = isset( $_REQUEST['site'] ) ? sanitize_key( wp_unslash( $_REQUEST['site'] ) ) : null;
 			$sites = is_array( $sites ) ? $sites : (array) $sites;
 			foreach ( $sites as $site ) {
 				foreach ( self::$options as $key => $option ) {
