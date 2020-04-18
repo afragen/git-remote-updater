@@ -170,7 +170,7 @@ class Settings {
 
 		$location = add_query_arg(
 			[
-				'page'    => $arr['page'],
+				'page'    => isset( $arr['page'] ) ? $arr['page'] : 'git-remote-updater',
 				'updated' => true,
 			],
 			$redirect_url

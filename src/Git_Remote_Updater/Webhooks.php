@@ -104,7 +104,8 @@ trait Webhooks {
 	 * @return \stdClass
 	 */
 	public function get_site_data( \stdClass $config ) {
-		$json = get_site_transient( 'git_remote_updater_repo_data' );
+		$json    = get_site_transient( 'git_remote_updater_repo_data' );
+		$message = null;
 
 		if ( ! $json ) {
 			$json = [];
@@ -118,6 +119,11 @@ trait Webhooks {
 				}
 				$response = wp_remote_retrieve_body( $response );
 				$response = json_decode( $response );
+
+				if ( \property_exists( $response, 'error' ) ) {
+					$message[] = "{$sites->site->host}<br>{$response->error}";
+					continue;
+				}
 
 				$json[ $sites->site->host ] = $response;
 			}
@@ -142,6 +148,15 @@ trait Webhooks {
 			 */
 			$timeout = \apply_filters( 'git_remote_updater_repo_transient_timeout', 600 );
 			set_site_transient( 'git_remote_updater_repo_data', $json, $timeout );
+
+			// Display error feedback.
+			if ( null !== $message ) {
+				echo '<div class="error notice is-dismissible"><p>';
+				foreach ( $message as $feedback ) {
+					echo wp_kses_post( $feedback ) . '<br>';
+				}
+				echo '</p></div>';
+			}
 		}
 
 		return (object) $json;
