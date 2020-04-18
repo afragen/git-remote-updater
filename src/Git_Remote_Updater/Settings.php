@@ -118,7 +118,7 @@ class Settings {
 			'git_remote_updater' === $_POST['option_page']
 		) {
 			$new_options = [
-				'site'    => sanitize_file_name( wp_unslash( $_POST['git_remote_updater_site'] ) ),
+				'site'    => esc_url_raw( wp_unslash( $_POST['git_remote_updater_site'] ) ),
 				'api_key' => sanitize_key( wp_unslash( $_POST['git_remote_updater_key'] ) ),
 			];
 			$new_options = $this->sanitize( $new_options );
