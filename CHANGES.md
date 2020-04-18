@@ -17,3 +17,4 @@
 * added `git_remote_updater_repo_transient_timeout` to set transient timeout, returns int with default of 600 seconds. I use this for testing.
 * escape, sanitize & ignore
 * add error messaging when getting repo data
+* increase `wp_remote_get` timeout for updating, helps to avoid a timeout loop
