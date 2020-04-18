@@ -51,8 +51,9 @@ class Updater {
 
 		// Try again if response is WP_Error.
 		foreach ( $webhooks as $webhook ) {
+			$args['timeout'] = 10;
 			do {
-				$response  = wp_remote_get( $webhook );
+				$response  = wp_remote_get( $webhook, $args );
 				$message[] = $this->parse_response( $response, $webhook );
 			} while ( is_wp_error( $response ) );
 		}
