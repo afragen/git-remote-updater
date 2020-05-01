@@ -58,7 +58,7 @@ class Settings {
 			esc_html__( 'Update', 'git-remote-updater' ),
 			$capability,
 			'git-remote-updater',
-			[ $this, 'create_admin_page' ],
+			[ $this, 'create_admin_page' ]
 		);
 
 		add_submenu_page(
@@ -67,7 +67,7 @@ class Settings {
 			esc_html__( 'Settings', 'git-remote-updater' ),
 			$capability,
 			'git-remote-updater-settings',
-			[ $this, 'create_admin_page' ],
+			[ $this, 'create_admin_page' ]
 		);
 
 	}
