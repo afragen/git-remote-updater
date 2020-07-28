@@ -18,3 +18,4 @@
 * escape, sanitize & ignore
 * add error messaging when getting repo data
 * increase `wp_remote_get` timeout for updating, helps to avoid a timeout loop
+* with GitHub Updater v 9.7.2 or later, repos with tags and set to primary branch will use tag for remote update
