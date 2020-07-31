@@ -222,8 +222,8 @@ trait Webhooks {
 			&& $repo->primary_branch === $repo->branch
 			&& $repo->tag
 		) {
-			$endpoint = add_query_arg( 'tag', $repo->tag, $endpoint );
 			$endpoint = remove_query_arg( 'branch', $endpoint );
+			$endpoint = add_query_arg( 'tag', $repo->tag, $endpoint );
 		}
 		$endpoint = add_query_arg( 'override', true, $endpoint );
 
