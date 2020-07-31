@@ -81,6 +81,7 @@ class Site_List_Table extends \WP_List_Table {
 			case 'api_key':
 				return $item[ $column_name ];
 			default:
+				// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 				return print_r( $item, true ); // Show the whole array for troubleshooting purposes.
 		}
 	}

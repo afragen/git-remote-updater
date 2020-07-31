@@ -1,4 +1,6 @@
 #### [unreleased]
+
+#### 1.0.0 / 2020-07-31 - 💥
 * initial pass
 * add rows for both update entire site or update all sites with specific repository
 * add ability to use multiple JSON files.
@@ -18,3 +20,4 @@
 * escape, sanitize & ignore
 * add error messaging when getting repo data
 * increase `wp_remote_get` timeout for updating, helps to avoid a timeout loop
+* with GitHub Updater v 9.7.2 or later, repos with tags and set to primary branch will use tag for remote update
