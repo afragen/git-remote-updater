@@ -1,4 +1,5 @@
 #### [unreleased]
+* add some error checking
 
 #### 1.0.0 / 2020-07-31 - 💥
 * initial pass
