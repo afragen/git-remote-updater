@@ -120,7 +120,7 @@ trait Webhooks {
 				$response = wp_remote_retrieve_body( $response );
 				$response = json_decode( $response );
 
-				if ( \property_exists( $response, 'error' ) ) {
+				if ( is_object( $response ) && \property_exists( $response, 'error' ) ) {
 					$message[] = "{$sites->site->host}<br>{$response->error}";
 					continue;
 				}
@@ -263,9 +263,11 @@ trait Webhooks {
 			return false;
 		}
 		foreach ( $json as $sites ) {
-			foreach ( $sites->sites->slugs as $key => $slug ) {
-				if ( in_array( $slug->slug, $remove_slugs, true ) ) {
-					unset( $sites->sites->slugs[ $key ] );
+			if ( is_object( $sites ) && \property_exists( $sites, 'sites' ) ) {
+				foreach ( $sites->sites->slugs as $key => $slug ) {
+					if ( in_array( $slug->slug, $remove_slugs, true ) ) {
+						unset( $sites->sites->slugs[ $key ] );
+					}
 				}
 			}
 		}

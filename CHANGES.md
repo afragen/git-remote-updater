@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.0.1 / 2020-08-07
+* add some error checking
+
 #### 1.0.0 / 2020-07-31 - 💥
 * initial pass
 * add rows for both update entire site or update all sites with specific repository
