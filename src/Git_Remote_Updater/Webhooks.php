@@ -263,7 +263,7 @@ trait Webhooks {
 			return false;
 		}
 		foreach ( $json as $sites ) {
-			if ( \property_exists( $sites, 'sites' ) ) {
+			if ( is_object( $sites ) && \property_exists( $sites, 'sites' ) ) {
 				foreach ( $sites->sites->slugs as $key => $slug ) {
 					if ( in_array( $slug->slug, $remove_slugs, true ) ) {
 						unset( $sites->sites->slugs[ $key ] );
