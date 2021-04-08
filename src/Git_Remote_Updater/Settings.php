@@ -165,7 +165,7 @@ class Settings {
 	public function redirect() {
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
 		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$query = isset( $_POST['_wp_http_referer'] ) ? parse_url( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ), PHP_URL_QUERY ) : null;
+		$query = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
 
 		$location = add_query_arg(
