@@ -11,10 +11,10 @@
 /**
  * Plugin Name:       Git Remote Updater
  * Plugin URI:        https://github.com/afragen/git-remote-updater
- * Description:       Allows you to easily update GitHub Updater repositories in bulk via REST API endpoint updating.
+ * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           1.0.1
+ * Version:           1.0.1.1
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
