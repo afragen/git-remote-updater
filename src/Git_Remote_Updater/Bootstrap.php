@@ -22,32 +22,6 @@ if ( ! defined( 'WPINC' ) ) {
  */
 class Bootstrap {
 	/**
-	 * Holds main plugin file.
-	 *
-	 * @var $file
-	 */
-	protected $file;
-
-	/**
-	 * Holds main plugin directory.
-	 *
-	 * @var $dir
-	 */
-	protected $dir;
-
-	/**
-	 * Constructor.
-	 *
-	 * @param string $file Main plugin file.
-	 *
-	 * @return void
-	 */
-	public function __construct( $file ) {
-		$this->file = $file;
-		$this->dir  = dirname( $file );
-	}
-
-	/**
 	 * Run the bootstrap.
 	 *
 	 * @return void
@@ -59,8 +33,6 @@ class Bootstrap {
 				load_plugin_textdomain( 'git-remote-updater' );
 			}
 		);
-
-		define( 'GIT_REMOTE_UPDATER_DIR', $this->dir );
 
 		( new Settings() )->load_hooks();
 	}

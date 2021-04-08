@@ -37,4 +37,4 @@ if ( ! defined( 'WPINC' ) ) {
 // Load Autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
 
-( new Bootstrap( __FILE__ ) )->run();
+( new Bootstrap() )->run();
