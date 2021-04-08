@@ -96,7 +96,7 @@ trait Webhooks {
 			$response = wp_remote_retrieve_body( $response );
 			$response = json_decode( $response );
 		}
-		$namespace = \property_exists( $response, 'namespace' ) ? $response->namespace : 'github-updater/v1';
+		$namespace = isset( $response->namespace ) ? $response->namespace : 'github-updater/v1';
 
 		return $namespace;
 	}
