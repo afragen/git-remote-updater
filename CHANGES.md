@@ -1,4 +1,6 @@
 #### [unreleased]
+
+#### 2.0.0 / 2021-04-15
 * get REST namespace from site
 * fix settings page site query
 * remove constant and require PHP 7+
