@@ -2,24 +2,24 @@
 
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Donate link:       https://thefragens.com/github-updater-donate
+ * Donate link:       https://thefragens.com/git-updater-donate
  * License:           MIT
  * Requires PHP:      7.1
  * Requires at least: 5.2
 
 ## Description
 
-Allows you to easily update GitHub Updater repositories in bulk via [REST API endpoint updating](https://github.com/afragen/github-updater/wiki/Remote-Management---RESTful-Endpoints).
+Allows you to easily update Git Updater repositories in bulk via [REST API endpoint updating](https://github.com/afragen/git-updater/wiki/Remote-Management---RESTful-Endpoints).
 
 The **Git Remote Updater** page allows updating via repository or site.
 
 ## Setup
 
-Requires [GitHub Updater](https://github.com/afragen/github-updater) v.9.0.0 or higher running on the sites you use with Git Remote Updater.
+Requires [Git Updater](https://github.com/afragen/git-updater) v10.0.0 or higher and Git Updater PRO v1.0.0 or higher running on the sites you use with Git Remote Updater.
 
-You can obtain the needed data from your `GitHub Updater > Remote Management` tab and then copy it into the `Settings > Add Site` form. You will only need to update data if your REST API key changes.
+You can obtain the needed data from your `Git Updater > Remote Management` tab and then copy it into the `Settings > Add Site` form. You will only need to update data if your REST API key changes.
 
-![Git Remote Updater Settings](https://github.com/afragen/github-updater/raw/develop/wiki-assets/screenshot-14.png)
+![Git Remote Updater Settings](https://github.com/afragen/git-updater/raw/develop/wiki-assets/screenshot-14.png)
 
 Update feedback will show at the top of the page. If you have debug logging set on your site, it is also added to the `debug.log`.
 

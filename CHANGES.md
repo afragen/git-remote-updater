@@ -1,5 +1,11 @@
 #### [unreleased]
 
+#### 2.0.0 / 2021-04-15
+* get REST namespace from site
+* fix settings page site query
+* remove constant and require PHP 7+
+* requires Git Updater v10+ **and** Git Updater PRO
+
 #### 1.0.1 / 2020-08-07
 * add some error checking
 

@@ -66,8 +66,8 @@ class Updater {
 	/**
 	 * Parse wp_remote_get() response for feedback reporting.
 	 *
-	 * @param string $response JSON response to wp_remote_get().
-	 * @param string $webhook  URL of webhook.
+	 * @param \stdClass $response JSON response to wp_remote_get().
+	 * @param string    $webhook  URL of webhook.
 	 *
 	 * @return array $message
 	 */

@@ -64,20 +64,41 @@ trait Webhooks {
 	 * @return \stdClass
 	 */
 	private function process_options( $options ) {
-		$config    = [];
-		$namespace = 'github-updater/v1';
-		$route     = 'repos';
+		$config = [];
 
 		foreach ( $options as $option ) {
-			$site                             = new \stdClass();
-			$site->site                       = new \stdClass();
-			$site->site->host                 = $option['site'];
-			$site->site->rest_namespace_route = "$namespace/$route/";
-			$site->site->rest_api_key         = $option['api_key'];
-			$config[]                         = $site;
+			$site                     = new \stdClass();
+			$site->site               = new \stdClass();
+			$site->site->host         = $option['site'];
+			$site->site->rest_api_key = $option['api_key'];
+			$config[]                 = $site;
 		}
 
 		return (object) $config;
+	}
+
+	/**
+	 * Get remote REST namespace.
+	 *
+	 * @param string $site    Site URL.
+	 * @param string $api_key REST API key.
+	 *
+	 * @return string
+	 */
+	private function get_namespace( $site, $api_key ) {
+		$namespace = 'git-updater';
+		$route     = 'namespace';
+		$url       = "$site/wp-json/$namespace/$route";
+		$url       = \add_query_arg( 'key', $api_key, $url );
+		$response  = wp_remote_get( $url );
+		$code      = wp_remote_retrieve_response_code( $response );
+		if ( 200 === $code ) {
+			$response = wp_remote_retrieve_body( $response );
+			$response = json_decode( $response );
+		}
+		$namespace = isset( $response->namespace ) ? $response->namespace : 'github-updater/v1';
+
+		return $namespace;
 	}
 
 	/**
@@ -110,7 +131,10 @@ trait Webhooks {
 		if ( ! $json ) {
 			$json = [];
 			foreach ( $config as $sites ) {
-				$rest_url = $sites->site->host . '/wp-json/' . $sites->site->rest_namespace_route;
+				$namespace       = $this->get_namespace( $sites->site->host, $sites->site->rest_api_key );
+				$namespace_route = "$namespace/repos";
+
+				$rest_url = $sites->site->host . '/wp-json/' . $namespace_route;
 				$rest_url = add_query_arg( [ 'key' => $sites->site->rest_api_key ], $rest_url );
 				$response = wp_remote_get( $rest_url );
 				$code     = wp_remote_retrieve_response_code( $response );
