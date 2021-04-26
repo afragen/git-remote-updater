@@ -19,7 +19,7 @@ The **Git Remote Updater** page allows updating via repository or site.
 
 ## Setup
 
-Requires [Git Updater](https://github.com/afragen/git-updater) v10.0.0 or higher and Git Updater PRO v1.0.0 or higher running on the sites you use with Git Remote Updater.
+Requires [Git Updater](https://github.com/afragen/git-updater) v10.0.0 or higher and an active license running on the sites you use with Git Remote Updater.
 
 You can obtain the needed data from your `Git Updater > Remote Management` tab and then copy it into the `Settings > Add Site` form. You will only need to update data if your REST API key changes.
 
