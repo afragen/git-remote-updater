@@ -1,4 +1,5 @@
 #### [unreleased]
+* add Freemius integration
 
 #### 2.0.0 / 2021-04-15
 * get REST namespace from site

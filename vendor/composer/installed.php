@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '111d5cff4ec56e22e97c76070f11500d2f1472ad',
+    'reference' => 'df38ada66807af0d824f1c5aae09bfc8c8a6c629',
     'name' => 'afragen/git-remote-updater',
   ),
   'versions' => 
@@ -18,7 +18,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '111d5cff4ec56e22e97c76070f11500d2f1472ad',
+      'reference' => 'df38ada66807af0d824f1c5aae09bfc8c8a6c629',
+    ),
+    'freemius/wordpress-sdk' => 
+    array (
+      'pretty_version' => '2.4.2',
+      'version' => '2.4.2.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '84a9be4717effd7697a217e0d931f48ae0d2ecc6',
     ),
   ),
 );

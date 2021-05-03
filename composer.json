@@ -29,12 +29,16 @@
     },
     "prefer-stable": true,
     "require": {
-        "php": ">=7.1"
+        "php": ">=7.1",
+        "freemius/wordpress-sdk": "*"
     },
     "autoload": {
         "psr-4": {
             "Fragen\\Git_Remote_Updater\\": "src/Git_Remote_Updater/"
-        }
+        },
+        "files": [
+          "./vendor/freemius/wordpress-sdk/start.php"
+        ]
     },
     "scripts": {
         "post-update-cmd": [
