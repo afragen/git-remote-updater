@@ -14,7 +14,7 @@
  * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           2.0.0.1
+ * Version:           2.1.0
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
