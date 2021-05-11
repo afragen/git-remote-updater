@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '845a2c7ad96998243e27d44d91be7e2837d810bb',
+    'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
     'name' => 'afragen/git-remote-updater',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '845a2c7ad96998243e27d44d91be7e2837d810bb',
+      'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
     ),
     'freemius/wordpress-sdk' => 
     array (
