@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 2.2.0 / 2021-05-11
+* update assets
+
 #### 2.1.0 / 2021-05-03
 * add Freemius integration
 
