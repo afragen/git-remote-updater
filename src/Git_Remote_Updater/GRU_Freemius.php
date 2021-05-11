@@ -58,6 +58,7 @@ class GRU_Freemius {
 							],
 							'menu'             => [
 								'first-path' => 'plugins.php',
+								'contact'    => false,
 								'support'    => false,
 							],
 						]
