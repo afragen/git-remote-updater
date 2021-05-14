@@ -57,9 +57,9 @@ class GRU_Freemius {
 								'is_require_payment' => true,
 							],
 							'menu'             => [
-								'first-path' => 'plugins.php',
-								'contact'    => false,
-								'support'    => false,
+								'slug'    => 'git-remote-updater',
+								'contact' => false,
+								'support' => false,
 							],
 						]
 					);
