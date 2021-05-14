@@ -43,7 +43,7 @@ class GRU_Freemius {
 					$gru_fs = fs_dynamic_init(
 						[
 							'id'               => '8312',
-							'slug'             => 'git-updater-remote',
+							'slug'             => 'git-remote-updater',
 							'premium_slug'     => 'git-remote-updater',
 							'type'             => 'plugin',
 							'public_key'       => 'pk_c108f4c4bc31d332d1dce40c1e653',
