@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 2.2.2 / 2021-05-18
+* ensure custom icon shows in update notice from Freemius
+
 #### 2.2.0 / 2021-05-11
 * update assets
 
