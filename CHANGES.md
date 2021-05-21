@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 2.2.3 / 2021-05-21
+* add language pack updating
+
 #### 2.2.2 / 2021-05-18
 * ensure custom icon shows in update notice from Freemius
 
