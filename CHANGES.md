@@ -1,4 +1,6 @@
 #### [unreleased]
+* add filter to skip updating from Git Updater
+* add filter to display this plugin in GitHub subtab without errors
 
 #### 2.2.3 / 2021-05-21
 * add language pack updating
