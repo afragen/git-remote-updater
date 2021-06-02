@@ -56,12 +56,14 @@ class Bootstrap {
 	 */
 	public function load_hooks() {
 		add_filter(
-			'gu_github_api_no_check',
-			function( $false, $repo ) {
-				return 'git-remote-updater/git-remote-updater.php' === $repo->file;
+			'gu_config_pre_process',
+			function( $config ) {
+				unset( $config['git-remote-updater'] );
+
+				return $config;
 			},
 			10,
-			2
+			1
 		);
 
 		add_filter(
