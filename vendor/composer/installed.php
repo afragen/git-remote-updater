@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
+    'reference' => 'e75ed576417cbba0f466b61bf3e4f73808ad7822',
     'name' => 'afragen/git-remote-updater',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
+      'reference' => 'e75ed576417cbba0f466b61bf3e4f73808ad7822',
     ),
     'freemius/wordpress-sdk' => 
     array (

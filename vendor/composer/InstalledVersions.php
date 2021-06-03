@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
+    'reference' => 'e75ed576417cbba0f466b61bf3e4f73808ad7822',
     'name' => 'afragen/git-remote-updater',
   ),
   'versions' => 
@@ -44,7 +44,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '3edb842cffbd667684ba57cf1eb10aa9c2041b48',
+      'reference' => 'e75ed576417cbba0f466b61bf3e4f73808ad7822',
     ),
     'freemius/wordpress-sdk' => 
     array (
@@ -236,9 +236,23 @@ return $installed[0]['root'];
 
 
 
+
 public static function getRawData()
 {
+@trigger_error('getRawData only returns the first dataset loaded, which may not be what you expect. Use getAllRawData() instead which returns all datasets for all autoloaders present in the process.', E_USER_DEPRECATED);
+
 return self::$installed;
+}
+
+
+
+
+
+
+
+public static function getAllRawData()
+{
+return self::getInstalled();
 }
 
 
