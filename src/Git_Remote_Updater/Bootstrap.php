@@ -67,17 +67,6 @@ class Bootstrap {
 		);
 
 		add_filter(
-			'gu_github_api_no_wait',
-			function( $repos ) {
-				unset( $repos['git-remote-updater'] );
-
-				return $repos;
-			},
-			10,
-			1
-		);
-
-		add_filter(
 			'gu_display_repos',
 			function( $type_repos ) {
 				if ( isset( $type_repos['git-remote-updater'] ) ) {
