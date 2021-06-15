@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 2.3.1 / 2021-06-14
+* utilize new `class Ignore` in Git Updater
+
 #### 2.3.0 / 2021-06-02
 * add filter to skip updating from Git Updater
 * add filter to display this plugin in GitHub subtab without errors

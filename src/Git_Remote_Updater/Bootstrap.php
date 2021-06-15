@@ -10,6 +10,8 @@
 
 namespace Fragen\Git_Remote_Updater;
 
+use Fragen\Git_Updater\Ignore;
+
 /*
  * Exit if called directly.
  */
@@ -44,8 +46,12 @@ class Bootstrap {
 		 *
 		 * @since Git Updater 10.2.0
 		 */
-		if ( ! \apply_filters( 'gu_test_premium_plugins', false ) ) {
-			$this->load_hooks();
+		if ( ! apply_filters( 'gu_test_premium_plugins', false ) ) {
+			if ( class_exists( 'Fragen\Git_Updater\Ignore' ) ) {
+				new Ignore( 'git-remote-updater', 'git-remote-updater/git-remote-updater.php' );
+			} else {
+				$this->load_hooks();
+			}
 		}
 	}
 
@@ -61,17 +67,6 @@ class Bootstrap {
 				unset( $config['git-remote-updater'] );
 
 				return $config;
-			},
-			10,
-			1
-		);
-
-		add_filter(
-			'gu_github_api_no_wait',
-			function( $repos ) {
-				unset( $repos['git-remote-updater'] );
-
-				return $repos;
 			},
 			10,
 			1
