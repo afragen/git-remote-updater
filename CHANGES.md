@@ -1,4 +1,5 @@
 #### [unreleased]
+* utilize new `class Ignore` in Git Updater
 
 #### 2.3.0 / 2021-06-02
 * add filter to skip updating from Git Updater
