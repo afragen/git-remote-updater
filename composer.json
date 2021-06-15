@@ -35,10 +35,7 @@
     "autoload": {
         "psr-4": {
             "Fragen\\Git_Remote_Updater\\": "src/Git_Remote_Updater/"
-        },
-        "files": [
-          "./vendor/freemius/wordpress-sdk/start.php"
-        ]
+        }
     },
     "scripts": {
         "post-update-cmd": [
