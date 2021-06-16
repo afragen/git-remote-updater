@@ -29,8 +29,6 @@ class GRU_Freemius {
 	 * @return array|void
 	 */
 	public function init() {
-		require_once dirname( __DIR__, 2 ) . '/vendor/freemius/wordpress-sdk/start.php';
-
 		if ( ! function_exists( 'gru_fs' ) ) {
 
 			/**
@@ -42,6 +40,10 @@ class GRU_Freemius {
 				global $gru_fs;
 
 				if ( ! isset( $gru_fs ) ) {
+
+					// Init Freemius SDK.
+					require_once dirname( __DIR__, 2 ) . '/vendor/freemius/wordpress-sdk/start.php';
+
 					$gru_fs = fs_dynamic_init(
 						[
 							'id'               => '8312',
