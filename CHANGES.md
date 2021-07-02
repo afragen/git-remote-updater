@@ -1,5 +1,6 @@
 #### [unreleased]
 * remove Freemius from the autoloader
+* utilize new `class Ignore` from Git Updater
 
 #### 2.3.1 / 2021-06-14
 * utilize new `class Ignore` in Git Updater
