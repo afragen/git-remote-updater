@@ -4,7 +4,7 @@
  * Author URI:        https://github.com/afragen
  * Donate link:       https://thefragens.com/git-updater-donate
  * License:           MIT
- * Requires PHP:      7.1
+ * Requires PHP:      5.6
  * Requires at least: 5.2
 
 ## Description

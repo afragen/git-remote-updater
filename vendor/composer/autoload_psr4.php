@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Fragen\\Git_Updater\\' => array($baseDir . '/src/Git_Updater'),
     'Fragen\\Git_Remote_Updater\\' => array($baseDir . '/src/Git_Remote_Updater'),
 );

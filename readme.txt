@@ -7,7 +7,7 @@ Author URI:        https://github.com/afragen
 Donate link:       https://thefragens.com/github-updater-donate
 License:           MIT
 Stable tag:        master
-Requires PHP:      7.1
+Requires PHP:      5.6
 Requires at least: 5.2
 Tested up to:      5.8
 

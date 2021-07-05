@@ -6,18 +6,19 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit916525bb03247909b6809c3419155c61
 {
-    public static $files = array (
-        '0f49b444879f22cd43cd66c87abaa5e1' => __DIR__ . '/..' . '/freemius/wordpress-sdk/start.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
+            'Fragen\\Git_Updater\\' => 19,
             'Fragen\\Git_Remote_Updater\\' => 26,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Fragen\\Git_Updater\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Git_Updater',
+        ),
         'Fragen\\Git_Remote_Updater\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Git_Remote_Updater',
