@@ -9,11 +9,16 @@ class ComposerStaticInit916525bb03247909b6809c3419155c61
     public static $prefixLengthsPsr4 = array (
         'F' => 
         array (
+            'Fragen\\Git_Updater\\' => 19,
             'Fragen\\Git_Remote_Updater\\' => 26,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
+        'Fragen\\Git_Updater\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Git_Updater',
+        ),
         'Fragen\\Git_Remote_Updater\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src/Git_Remote_Updater',

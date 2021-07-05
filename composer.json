@@ -34,7 +34,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Fragen\\Git_Remote_Updater\\": "src/Git_Remote_Updater/"
+            "Fragen\\Git_Remote_Updater\\": "src/Git_Remote_Updater/",
+            "Fragen\\Git_Updater\\": "src/Git_Updater"
         }
     },
     "scripts": {
