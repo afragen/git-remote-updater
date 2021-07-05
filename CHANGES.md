@@ -1,6 +1,7 @@
 #### [unreleased]
 * remove Freemius from the autoloader
 * utilize new `class Ignore` from Git Updater
+* uses new `class Fragen\Git_Updater\Shim` for PHP 5.6 compatibility, will remove when WP core changes minimum requirement
 
 #### 2.3.1 / 2021-06-14
 * utilize new `class Ignore` in Git Updater

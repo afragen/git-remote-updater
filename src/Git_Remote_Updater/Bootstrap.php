@@ -10,8 +10,6 @@
 
 namespace Fragen\Git_Remote_Updater;
 
-use Fragen\Git_Updater\Ignore;
-
 /*
  * Exit if called directly.
  */

@@ -5,7 +5,7 @@
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '2facc94613a6d348ddf6ba1b564380c23150c13d',
+        'reference' => 'f9e16a61126cfa770364d19b0666ced1a6a20c27',
         'name' => 'afragen/git-remote-updater',
         'dev' => false,
     ),
@@ -16,7 +16,7 @@
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '2facc94613a6d348ddf6ba1b564380c23150c13d',
+            'reference' => 'f9e16a61126cfa770364d19b0666ced1a6a20c27',
             'dev_requirement' => false,
         ),
         'freemius/wordpress-sdk' => array(
