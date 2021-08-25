@@ -1,4 +1,5 @@
 #### [unreleased]
+* remove checkbox from Settings List table
 
 #### 2.4.0 / 2021-07-05
 * remove Freemius from the autoloader

@@ -159,7 +159,7 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function get_columns() {
 		$columns = [
-			'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text.
+			// 'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text.
 			'site'    => esc_html__( 'Site', 'git-remote-updater' ),
 			'api_key' => esc_html__( 'REST API key', 'git-remote-updater' ),
 		];
