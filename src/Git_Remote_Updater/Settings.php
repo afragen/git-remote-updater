@@ -80,7 +80,7 @@ class Settings {
 	public function create_admin_page() {
 		$action = is_multisite() ? 'edit.php?action=git-remote-updater' : 'options.php';
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page = isset( $_GET['page'] ) ? sanitize_file_name( wp_unslash( $_GET['page'] ) ) : 'git-remote-updater';
+		$page = isset( $_GET['page'] ) ? sanitize_title_with_dashes( wp_unslash( $_GET['page'] ) ) : 'git-remote-updater';
 
 		// Kludge for "redirect" after WP_List_Table bulk actions.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended

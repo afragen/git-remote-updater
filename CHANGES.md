@@ -1,5 +1,6 @@
 #### [unreleased]
 * remove checkbox from Settings List table
+* use `sanitize_title_with_dashes()` as `sanitize_file_name()` maybe have attached filter that changes output
 
 #### 2.4.0 / 2021-07-05
 * remove Freemius from the autoloader
