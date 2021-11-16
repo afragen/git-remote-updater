@@ -1,4 +1,6 @@
 #### [unreleased]
+
+#### 2.4.1 / 2021-11-16
 * remove checkbox from Settings List table
 * use `sanitize_title_with_dashes()` as `sanitize_file_name()` maybe have attached filter that changes output
 
