@@ -103,7 +103,7 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function column_site( $item ) {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$page     = isset( $_REQUEST['page'] ) ? sanitize_file_name( wp_unslash( $_REQUEST['page'] ) ) : null;
+		$page     = isset( $_REQUEST['page'] ) ? sanitize_title_with_dashes( wp_unslash( $_REQUEST['page'] ) ) : null;
 		$location = add_query_arg( 'page', $page, '' );
 
 		// Build row actions.
@@ -159,7 +159,7 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function get_columns() {
 		$columns = [
-			'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text.
+			// 'cb'      => '<input type="checkbox" />', // Render a checkbox instead of text.
 			'site'    => esc_html__( 'Site', 'git-remote-updater' ),
 			'api_key' => esc_html__( 'REST API key', 'git-remote-updater' ),
 		];
@@ -421,7 +421,7 @@ class Site_List_Table extends \WP_List_Table {
 
 		// For plugins, we also need to ensure that the form posts back to our current page.
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		$current_page = isset( $_REQUEST['page'] ) ? sanitize_file_name( wp_unslash( $_REQUEST['page'] ) ) : null;
+		$current_page = isset( $_REQUEST['page'] ) ? sanitize_title_with_dashes( wp_unslash( $_REQUEST['page'] ) ) : null;
 		echo '<input type="hidden" name="page" value="' . esc_attr( $current_page ) . '" />';
 
 		// Now we can render the completed list table.

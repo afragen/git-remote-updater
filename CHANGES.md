@@ -1,5 +1,9 @@
 #### [unreleased]
 
+#### 2.4.1 / 2021-11-16
+* remove checkbox from Settings List table
+* use `sanitize_title_with_dashes()` as `sanitize_file_name()` maybe have attached filter that changes output
+
 #### 2.4.0 / 2021-07-05
 * remove Freemius from the autoloader
 * utilize new `class Ignore` from Git Updater
