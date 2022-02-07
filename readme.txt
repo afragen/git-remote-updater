@@ -9,7 +9,7 @@ License:           MIT
 Stable tag:        master
 Requires PHP:      5.6
 Requires at least: 5.2
-Tested up to:      5.8
+Tested up to:      trunk
 
 ## Description
 
