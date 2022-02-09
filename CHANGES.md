@@ -1,4 +1,5 @@
 #### [unreleased]
+* update `class Site_List_Table` and `Settings` nonces
 
 #### 2.4.1 / 2021-11-16
 * remove checkbox from Settings List table
