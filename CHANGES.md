@@ -1,6 +1,5 @@
 #### [unreleased]
 * update `class Site_List_Table` and `Settings` nonces
-* update nonce check on `Settings::redirect()`
 * move check for Git Updater to hook
 
 #### 2.4.1 / 2021-11-16
