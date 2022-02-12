@@ -1,5 +1,6 @@
 #### [unreleased]
 * update `class Site_List_Table` and `Settings` nonces
+* update nonce check on `Settings::redirect()`
 
 #### 2.4.1 / 2021-11-16
 * remove checkbox from Settings List table

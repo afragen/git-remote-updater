@@ -162,9 +162,14 @@ class Settings {
 	 * @return void
 	 */
 	public function redirect() {
-		if ( ! isset( $_POST['_wpnonce'] ) || ! \wp_verify_nonce( \sanitize_key( \wp_unslash( $_POST['_wpnonce'] ) ), 'git_remote_updater-options' ) ) {
+		if ( ! ( ( isset( $_POST['git_remote_updater_nonce'] )
+				&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['git_remote_updater_nonce'] ) ), 'git_remote_updater_nonce' ) )
+			|| ( isset( $_POST['_wpnonce'] )
+				&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'git_remote_updater-options' ) ) )
+		) {
 			return;
 		}
+
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
 		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
