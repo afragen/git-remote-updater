@@ -38,19 +38,13 @@ if ( ! defined( 'WPINC' ) ) {
 // Load Autoloader.
 require_once __DIR__ . '/vendor/autoload.php';
 
-// Make sure `is_plugin_active()` is available.
-if ( ! function_exists( 'is_plugin_active' ) ) {
-	require_once ABSPATH . '/wp-admin/includes/plugin.php';
-}
-
-// Don't load if Git Updater not running.
-if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
-	return;
-}
-
 add_action(
 	'plugins_loaded',
 	function() {
+		// Don't load if Git Updater not running.
+		if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
+			return;
+		}
 		( new GRU_Freemius() )->init();
 		( new Bootstrap() )->run();
 	}
