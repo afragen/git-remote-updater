@@ -32,7 +32,7 @@ trait Webhooks {
 	/**
 	 * Holds data for repositories.
 	 *
-	 * @var \stdClass
+	 * @var array
 	 */
 	public $repos;
 

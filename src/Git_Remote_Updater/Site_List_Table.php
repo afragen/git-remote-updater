@@ -109,7 +109,7 @@ class Site_List_Table extends \WP_List_Table {
 		// Build row actions.
 		$actions = [
 			// 'edit'   => sprintf( '<a href="%s&action=%s&site=%s">Edit</a>', $location, 'edit', $item['ID'] ),
-			'delete' => sprintf( '<a href="%s&action=%s&site=%s">Delete</a>', wp_nonce_url( $location, -1, '_wpnonce_row_action_delete' ), 'delete', $item['ID'] ),
+			'delete' => sprintf( '<a href="%s&action=%s&slug=%s">Delete</a>', wp_nonce_url( $location, 'delete_row_item', '_wpnonce_row_action_delete' ), 'delete_row_item', $item['ID'] ),
 		];
 
 		// Return the title contents.
@@ -221,47 +221,23 @@ class Site_List_Table extends \WP_List_Table {
 	 **************************************************************************/
 	public function process_bulk_action() {
 		// Detect when a bulk action is being triggered...
-		if ( 'delete' === $this->current_action() ) {
-			$this->check_nonce();
-			// phpcs:ignore WordPress.Security
-			$sites = isset( $_REQUEST['site'] ) ? wp_unslash( $_REQUEST['site'] ) : null;
-			$sites = is_array( $sites ) ? $sites : (array) $sites;
-			foreach ( $sites as $site ) {
-				foreach ( self::$options as $key => $option ) {
-					if ( in_array( $site, $option, true ) ) {
-						unset( self::$options[ $key ] );
-						update_site_option( 'git_remote_updater', self::$options );
-					}
+		if ( ! isset( $_REQUEST['_wpnonce_row_action_delete'] )
+				|| ! \wp_verify_nonce( \sanitize_key( \wp_unslash( $_REQUEST['_wpnonce_row_action_delete'] ) ), 'delete_row_item' )
+			) {
+			return;
+		}
+		$slugs = isset( $_REQUEST['slug'] ) ? sanitize_key( wp_unslash( $_REQUEST['slug'] ) ) : null;
+		$slugs = is_array( $slugs ) ? $slugs : (array) $slugs;
+		foreach ( $slugs as $slug ) {
+			foreach ( self::$options as $key => $option ) {
+				if ( in_array( $slug, $option, true ) ) {
+					unset( self::$options[ $key ] );
+					update_site_option( 'git_remote_updater', self::$options );
 				}
 			}
 		}
 		if ( 'edit' === $this->current_action() ) {
 			wp_die( esc_html__( 'Items would go to edit when we write that code.', 'git-remote-updater' ) );
-		}
-	}
-
-	/**
-	 * Check nonces.
-	 *
-	 * @return void
-	 */
-	private function check_nonce() {
-		$nonce_exists = false;
-		$nonces       = [
-			'_wpnonce_list'              => 'process-items',
-			'_wpnonce_row_action_delete' => -1,
-		];
-		foreach ( $nonces as $nonce => $action ) {
-			if ( array_key_exists( $nonce, $_REQUEST ) ) {
-				$nonce_exists = true;
-				break;
-			}
-		}
-		if ( ! $nonce_exists ) {
-			wp_die( esc_html__( 'A nonce was not properly set. Please report an issue.', 'git-remote-updater' ) );
-		}
-		if ( ! wp_verify_nonce( sanitize_key( wp_unslash( $_REQUEST[ $nonce ] ) ), $action ) ) {
-			wp_die( esc_html__( 'Your nonce did not verify.', 'git-remote-updater' ) );
 		}
 	}
 
@@ -394,8 +370,8 @@ class Site_List_Table extends \WP_List_Table {
 	 */
 	public function usort_reorder( $a, $b ) {
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended
-		$orderby = ( ! empty( $_REQUEST['orderby'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['orderby'] ) ) : 'site'; // If no sort, default to site.
-		$order   = ( ! empty( $_REQUEST['order'] ) ) ? sanitize_text_field( wp_unslash( $_REQUEST['order'] ) ) : 'asc'; // If no order, default to asc.
+		$orderby = ( ! empty( $_REQUEST['orderby'] ) ) ? sanitize_key( wp_unslash( $_REQUEST['orderby'] ) ) : 'site'; // If no sort, default to site.
+		$order   = ( ! empty( $_REQUEST['order'] ) ) ? sanitize_key( wp_unslash( $_REQUEST['order'] ) ) : 'asc'; // If no order, default to asc.
 		// phpcs:enable
 		$result = strcmp( $a[ $orderby ], $b[ $orderby ] ); // Determine sort order.
 		return ( 'asc' === $order ) ? $result : -$result; // Send final sort direction to usort.

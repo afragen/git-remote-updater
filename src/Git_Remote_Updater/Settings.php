@@ -82,12 +82,6 @@ class Settings {
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
 		$page = isset( $_GET['page'] ) ? sanitize_title_with_dashes( wp_unslash( $_GET['page'] ) ) : 'git-remote-updater';
 
-		// Kludge for "redirect" after WP_List_Table bulk actions.
-		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( isset( $_REQUEST['_wpnonce_list'] ) ) {
-			$page = 'git-remote-updater-settings';
-		}
-
 		echo '<div class="wrap"><h2>';
 		esc_html_e( 'Git Remote Updater', 'git-remote-updater' );
 		echo '</h2>';
@@ -115,9 +109,13 @@ class Settings {
 	public function update_settings() {
 		$options   = get_site_option( 'git_remote_updater', [] );
 		$duplicate = false;
-		// phpcs:disable WordPress.Security.NonceVerification.Missing
-		if ( isset( $_POST['option_page'], $_POST['git_remote_updater_site'], $_POST['git_remote_updater_key'] ) &&
-			'git_remote_updater' === $_POST['option_page']
+
+		if ( ! isset( $_POST['_wpnonce'] ) || ! \wp_verify_nonce( \sanitize_key( \wp_unslash( $_POST['_wpnonce'] ) ), 'git_remote_updater-options' ) ) {
+			return;
+		}
+
+		if ( isset( $_POST['option_page'], $_POST['git_remote_updater_site'], $_POST['git_remote_updater_key'] )
+			&& 'git_remote_updater' === $_POST['option_page']
 		) {
 			$new_options = [
 				'site'    => esc_url_raw( wp_unslash( $_POST['git_remote_updater_site'] ) ),
@@ -125,7 +123,6 @@ class Settings {
 			];
 			$new_options = $this->sanitize( $new_options );
 			$empty_add   = empty( $_POST['git_remote_updater_site'] );
-			// phpcs:enable
 
 			foreach ( $options as $option ) {
 				$duplicate = in_array( $new_options[0]['ID'], $option, true );
@@ -165,9 +162,16 @@ class Settings {
 	 * @return void
 	 */
 	public function redirect() {
+		if ( ! ( ( isset( $_POST['git_remote_updater_nonce'] )
+				&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['git_remote_updater_nonce'] ) ), 'git_remote_updater_nonce' ) )
+			|| ( isset( $_POST['_wpnonce'] )
+				&& wp_verify_nonce( sanitize_key( wp_unslash( $_POST['_wpnonce'] ) ), 'git_remote_updater-options' ) ) )
+		) {
+			return;
+		}
+
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
-		// phpcs:ignore WordPress.Security.NonceVerification.Missing
-		$query = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
+		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
 
 		$location = add_query_arg(

@@ -1,5 +1,10 @@
 #### [unreleased]
 
+#### 2.4.2 / 2022-03-02
+* update `class Site_List_Table` and `Settings` nonces
+* move check for Git Updater to hook
+* update Freemius/wordpress-sdk to 2.4.3
+
 #### 2.4.1 / 2021-11-16
 * remove checkbox from Settings List table
 * use `sanitize_title_with_dashes()` as `sanitize_file_name()` maybe have attached filter that changes output
