@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 2.4.3 / 2022-03-10
+* composer update
+
 #### 2.4.2 / 2022-03-02
 * update `class Site_List_Table` and `Settings` nonces
 * move check for Git Updater to hook
