@@ -1,4 +1,5 @@
 #### [unreleased]
+* require PHP7.2+
 
 #### 2.4.3 / 2022-03-10
 * composer update

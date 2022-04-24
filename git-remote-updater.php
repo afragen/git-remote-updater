@@ -21,7 +21,7 @@
  * Text Domain:       git-remote-updater
  * GitHub Plugin URI: https://github.com/afragen/git-remote-updater
  * GitHub Languages:  https://github.com/afragen/git-remote-updater-translations
- * Requires PHP:      5.6
+ * Requires PHP:      7.2
  * Requires at least: 5.2
  */
 
