@@ -14,14 +14,14 @@
  * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           2.4.3
+ * Version:           3.0.0
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
  * Text Domain:       git-remote-updater
  * GitHub Plugin URI: https://github.com/afragen/git-remote-updater
  * GitHub Languages:  https://github.com/afragen/git-remote-updater-translations
- * Requires PHP:      5.6
+ * Requires PHP:      7.2
  * Requires at least: 5.2
  */
 

@@ -2,21 +2,21 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Git Remote Updater 2.4.2\n"
+"Project-Id-Version: Git Remote Updater 3.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/git-remote-updater\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-03-03T20:55:29+00:00\n"
+"POT-Creation-Date: 2022-04-25T05:46:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.6.0\n"
 "X-Domain: git-remote-updater\n"
 
 #. Plugin Name of the plugin
-#: src/Git_Remote_Updater/Settings.php:48
-#: src/Git_Remote_Updater/Settings.php:86
+#: src/Git_Remote_Updater/Settings.php:46
+#: src/Git_Remote_Updater/Settings.php:84
 msgid "Git Remote Updater"
 msgstr ""
 
@@ -48,42 +48,42 @@ msgstr ""
 msgid "Show Sites"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:49
+#: src/Git_Remote_Updater/Settings.php:47
 msgctxt "Menu item"
 msgid "Git Remote Updater"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:59
-#: src/Git_Remote_Updater/Settings.php:60
+#: src/Git_Remote_Updater/Settings.php:57
+#: src/Git_Remote_Updater/Settings.php:58
 #: src/Git_Remote_Updater/Settings_Row.php:77
 #: src/Git_Remote_Updater/Settings_Row.php:116
 msgid "Update"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:68
-#: src/Git_Remote_Updater/Settings.php:69
+#: src/Git_Remote_Updater/Settings.php:66
+#: src/Git_Remote_Updater/Settings.php:67
 #: src/Git_Remote_Updater/Site_List_Table.php:392
 msgid "Settings"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:98
+#: src/Git_Remote_Updater/Settings.php:96
 msgid "Add Site"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:219
+#: src/Git_Remote_Updater/Settings.php:217
 msgid "Add Site Data"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:226
+#: src/Git_Remote_Updater/Settings.php:224
 msgid "Site URL"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:234
+#: src/Git_Remote_Updater/Settings.php:232
 #: src/Git_Remote_Updater/Site_List_Table.php:164
 msgid "REST API key"
 msgstr ""
 
-#: src/Git_Remote_Updater/Settings.php:250
+#: src/Git_Remote_Updater/Settings.php:248
 msgid "URI is case sensitive."
 msgstr ""
 

@@ -10,8 +10,6 @@
 
 namespace Fragen\Git_Remote_Updater;
 
-use Fragen\Git_Updater\Shim;
-
 /*
  * Exit if called directly.
  * PHP version check and exit.
@@ -197,7 +195,7 @@ class Settings {
 				'admin_enqueue_scripts',
 				function () {
 					// phpcs:ignore WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion
-					wp_register_script( 'git-remote-updater-actions', plugins_url( basename( Shim::dirname( __DIR__, 2 ) ) . '/js/git-remote-updater-switcher.js' ), [], false, true );
+					wp_register_script( 'git-remote-updater-actions', plugins_url( basename( dirname( __DIR__, 2 ) ) . '/js/git-remote-updater-switcher.js' ), [], false, true );
 					wp_enqueue_script( 'git-remote-updater-actions' );
 				}
 			);
