@@ -116,7 +116,7 @@ class Settings {
 			&& 'git_remote_updater' === $_POST['option_page']
 		) {
 			$new_options = [
-				'site'    => esc_url_raw( wp_unslash( $_POST['git_remote_updater_site'] ) ),
+				'site'    => sanitize_url( wp_unslash( $_POST['git_remote_updater_site'] ) ),
 				'api_key' => sanitize_key( wp_unslash( $_POST['git_remote_updater_key'] ) ),
 			];
 			$new_options = $this->sanitize( $new_options );
@@ -147,7 +147,7 @@ class Settings {
 		$new_input = [];
 
 		foreach ( (array) $input as $key => $value ) {
-			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( esc_url_raw( trim( $value ) ) ) : sanitize_text_field( $value );
+			$new_input[0][ $key ] = 'site' === $key ? untrailingslashit( sanitize_url( trim( $value ) ) ) : sanitize_text_field( $value );
 			$new_input[0]['ID']   = md5( $new_input[0]['site'] );
 		}
 
@@ -169,7 +169,7 @@ class Settings {
 		}
 
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
-		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( esc_url_raw( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
+		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( sanitize_url( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
 		parse_str( $query, $arr );
 
 		$location = add_query_arg(
