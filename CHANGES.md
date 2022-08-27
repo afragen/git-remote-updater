@@ -1,4 +1,6 @@
 #### [unreleased]
+
+#### 3.0.1 / 2022-08-27
 * update Freemius/wordpress-sdk
 
 #### 3.0.0 / 2022-04-24
