@@ -22,7 +22,7 @@
  * GitHub Plugin URI: https://github.com/afragen/git-remote-updater
  * GitHub Languages:  https://github.com/afragen/git-remote-updater-translations
  * Requires PHP:      7.2
- * Requires WP:       5.9
+ * Requires at least: 5.9
  */
 
 namespace Fragen\Git_Remote_Updater;
