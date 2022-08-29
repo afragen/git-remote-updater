@@ -8,7 +8,7 @@ Donate link:       https://thefragens.com/github-updater-donate
 License:           MIT
 Stable tag:        master
 Requires PHP:      7.2
-Requires at least: 5.2
+Requires at least: 5.9
 Tested up to:      trunk
 
 ## Description

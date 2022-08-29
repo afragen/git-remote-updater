@@ -5,7 +5,7 @@
  * Donate link:       https://thefragens.com/git-updater-donate
  * License:           MIT
  * Requires PHP:      7.2
- * Requires at least: 5.2
+ * Requires at least: 5.9
 
 ## Description
 
