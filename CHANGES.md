@@ -1,4 +1,5 @@
 #### [unreleased]
+* check for `is_plugins_active` function and load `wp-admin/includes/plugin.php` if needed
 
 #### 3.0.1 / 2022-08-27
 * update Freemius/wordpress-sdk
