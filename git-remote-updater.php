@@ -14,7 +14,7 @@
  * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           3.0.1.1
+ * Version:           3.1.0
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
@@ -49,7 +49,6 @@ add_action(
 		if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
 			return;
 		}
-		( new GRU_Freemius() )->init();
 		( new Bootstrap() )->run();
 	}
 );

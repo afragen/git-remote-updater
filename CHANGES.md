@@ -1,6 +1,9 @@
 #### [unreleased]
+
+#### 3.1.0 / 2022-10-24
 * require WP 5.9+
 * check for `is_plugins_active` function and load `wp-admin/includes/plugin.php` if needed
+* remove Freemius SDK
 
 #### 3.0.1 / 2022-08-27
 * update Freemius/wordpress-sdk
