@@ -29,8 +29,7 @@
     },
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2",
-        "freemius/wordpress-sdk": "*"
+        "php": ">=7.2"
     },
     "autoload": {
         "psr-4": {

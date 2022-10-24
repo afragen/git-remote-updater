@@ -14,7 +14,7 @@
  * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           3.0.1
+ * Version:           3.1.0
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
@@ -22,7 +22,7 @@
  * GitHub Plugin URI: https://github.com/afragen/git-remote-updater
  * GitHub Languages:  https://github.com/afragen/git-remote-updater-translations
  * Requires PHP:      7.2
- * Requires at least: 5.2
+ * Requires at least: 5.9
  */
 
 namespace Fragen\Git_Remote_Updater;
@@ -41,11 +41,14 @@ require_once __DIR__ . '/vendor/autoload.php';
 add_action(
 	'plugins_loaded',
 	function() {
+		// Make sure `is_plugin_active()` is available.
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			require_once ABSPATH . '/wp-admin/includes/plugin.php';
+		}
 		// Don't load if Git Updater not running.
 		if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
 			return;
 		}
-		( new GRU_Freemius() )->init();
 		( new Bootstrap() )->run();
 	}
 );

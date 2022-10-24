@@ -27,9 +27,6 @@ class Bootstrap {
 	 * @return void
 	 */
 	public function run() {
-		if ( ! gru_fs()->can_use_premium_code() ) {
-			return;
-		}
 		add_action(
 			'init',
 			function () {
