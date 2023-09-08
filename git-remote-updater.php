@@ -40,7 +40,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 add_action(
 	'plugins_loaded',
-	function() {
+	function () {
 		// Make sure `is_plugin_active()` is available.
 		if ( ! function_exists( 'is_plugin_active' ) ) {
 			require_once ABSPATH . '/wp-admin/includes/plugin.php';
