@@ -69,7 +69,6 @@ class Settings {
 			'git-remote-updater-settings',
 			[ $this, 'create_admin_page' ]
 		);
-
 	}
 
 	/**
@@ -169,8 +168,8 @@ class Settings {
 		}
 
 		$redirect_url = is_multisite() ? network_admin_url( 'admin.php' ) : admin_url( 'admin.php' );
-		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( sanitize_url( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : null;
-		parse_str( $query, $arr );
+		$query        = isset( $_POST['_wp_http_referer'] ) ? parse_url( html_entity_decode( sanitize_url( wp_unslash( $_POST['_wp_http_referer'] ) ) ), PHP_URL_QUERY ) : '';
+		parse_str( (string) $query, $arr );
 
 		$location = add_query_arg(
 			[
@@ -261,5 +260,4 @@ class Settings {
 		</label>
 		<?php
 	}
-
 }

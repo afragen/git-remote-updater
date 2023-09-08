@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 3.1.1 / 2023-09-08
+* update to WPCS 3.0.0
+
 #### 3.1.0 / 2022-10-24
 * require WP 5.9+
 * check for `is_plugins_active` function and load `wp-admin/includes/plugin.php` if needed
