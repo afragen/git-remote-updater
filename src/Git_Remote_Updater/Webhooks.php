@@ -48,7 +48,7 @@ trait Webhooks {
 	 *
 	 * @return void
 	 */
-	public function init() {
+	final public function init() {
 		$options = get_site_option( 'git_remote_updater', [] );
 		$config  = $this->process_options( $options );
 		$config  = $this->get_site_data( $config );
@@ -124,7 +124,7 @@ trait Webhooks {
 	 *
 	 * @return \stdClass
 	 */
-	public function get_site_data( \stdClass $config ) {
+	final public function get_site_data( \stdClass $config ) {
 		$json    = get_site_transient( 'git_remote_updater_repo_data' );
 		$message = null;
 
@@ -193,7 +193,7 @@ trait Webhooks {
 	 *
 	 * @return void
 	 */
-	public function get_webhooks( \stdClass $config ) {
+	final public function get_webhooks( \stdClass $config ) {
 		$parsed_sites = [];
 		$repos        = [];
 		foreach ( $config as $sites ) {
@@ -259,7 +259,7 @@ trait Webhooks {
 	 *
 	 * @return void
 	 */
-	public function get_all_webhooks() {
+	final public function get_all_webhooks() {
 		$parsed          = null;
 		$all_webhooks    = null;
 		$parsed_webhooks = null;

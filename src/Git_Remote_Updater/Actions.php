@@ -91,5 +91,4 @@ class Actions {
 		</label>
 		<?php
 	}
-
 }
