@@ -120,7 +120,7 @@ trait Webhooks {
 	/**
 	 * Get remote site repo data via REST API endpoint.
 	 *
-	 * @param \stdClass $config Parsed JSON file created from GitHub Updater.
+	 * @param \stdClass $config Parsed JSON file created from Git Updater.
 	 *
 	 * @return \stdClass
 	 */

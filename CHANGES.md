@@ -54,7 +54,7 @@
 * get REST namespace from site
 * fix settings page site query
 * remove constant and require PHP 7+
-* requires Git Updater v10+ **and** Git Updater PRO
+* requires Git Updater v10+ **and** Git Updater PRO, now just Git Updater v12+
 
 #### 1.0.1 / 2020-08-07
 * add some error checking
