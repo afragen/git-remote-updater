@@ -46,9 +46,6 @@
         "wp-coding-standards/wpcs": "^3.0.0"
     },
     "scripts": {
-        "make-pot": [
-            "wp i18n make-pot . languages/git-remote-updater.pot"
-        ],
         "wpcs": [
             "vendor/bin/phpcbf .; vendor/bin/phpcs ."
         ]

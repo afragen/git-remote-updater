@@ -1,4 +1,6 @@
 #### [unreleased]
+* add GA to generate POT
+* add GA to add release asset
 
 #### 3.1.1 / 2023-09-08
 * update to WPCS 3.0.0
