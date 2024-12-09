@@ -14,7 +14,7 @@
  * Description:       Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating. Requires Git Updater PRO.
  * Author:            Andy Fragen
  * Author URI:        https://github.com/afragen
- * Version:           3.1.1
+ * Version:           3.1.1.1
  * License:           MIT
  * Network:           true
  * Domain Path:       /languages
@@ -39,7 +39,7 @@ if ( ! defined( 'WPINC' ) ) {
 require_once __DIR__ . '/vendor/autoload.php';
 
 add_action(
-	'plugins_loaded',
+	'init',
 	function () {
 		// Make sure `is_plugin_active()` is available.
 		if ( ! function_exists( 'is_plugin_active' ) ) {
