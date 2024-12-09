@@ -4,16 +4,17 @@ on:
   push:
     branches:
       - master
-    tags:
-      - "**"
+      - main
 
 jobs:
   WP_POT_Generator:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@master
       - name: WordPress POT Generator
-        uses: varunsridharan/action-wp-pot-generator@^2
+        uses: varunsridharan/action-wp-pot-generator@2.0
         with:
           save_path: "./languages"
           item_slug: "${{ github.event.repository.name }}"
