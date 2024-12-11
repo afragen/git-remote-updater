@@ -1,5 +1,11 @@
 #### [unreleased]
 
+#### 3.2.0 / 2024-12-11
+* add GA to generate POT
+* add GA to add release asset
+* load in `init` for `_load_textdomain_just_in_time`
+* remove Bootstrap.php
+
 #### 3.1.1 / 2023-09-08
 * update to WPCS 3.0.0
 
@@ -54,7 +60,7 @@
 * get REST namespace from site
 * fix settings page site query
 * remove constant and require PHP 7+
-* requires Git Updater v10+ **and** Git Updater PRO
+* requires Git Updater v10+ **and** Git Updater PRO, now just Git Updater v12+
 
 #### 1.0.1 / 2020-08-07
 * add some error checking

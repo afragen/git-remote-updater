@@ -1,9 +1,9 @@
 {
     "name": "afragen/git-remote-updater",
-    "description": "Allows you to easily update GitHub Updater repositories in bulk via REST API endpoint updating.",
+    "description": "Allows you to easily update Git Updater repositories in bulk via REST API endpoint updating.",
     "type": "wordpress-plugin",
     "keywords": [
-        "github-updater",
+        "git-updater",
         "bulk",
         "update",
         "webhook"
@@ -46,9 +46,6 @@
         "wp-coding-standards/wpcs": "^3.0.0"
     },
     "scripts": {
-        "make-pot": [
-            "wp i18n make-pot . languages/git-remote-updater.pot"
-        ],
         "wpcs": [
             "vendor/bin/phpcbf .; vendor/bin/phpcs ."
         ]
