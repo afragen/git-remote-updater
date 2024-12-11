@@ -1,4 +1,6 @@
 #### [unreleased]
+
+#### 3.2.0 / 2024-12-11
 * add GA to generate POT
 * add GA to add release asset
 * load in `init` for `_load_textdomain_just_in_time`
