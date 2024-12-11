@@ -2,6 +2,7 @@
 * add GA to generate POT
 * add GA to add release asset
 * load in `init` for `_load_textdomain_just_in_time`
+* remove Bootstrap.php
 
 #### 3.1.1 / 2023-09-08
 * update to WPCS 3.0.0

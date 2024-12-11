@@ -49,6 +49,7 @@ add_action(
 		if ( ! is_plugin_active( 'git-updater/git-updater.php' ) ) {
 			return;
 		}
-		( new Bootstrap() )->run();
+
+		( new Settings() )->load_hooks();
 	}
 );
